@@ -1,0 +1,1205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Spiritus Systems</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400;500&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --ink: #05070f;
+  --deep: #080b18;
+  --blue: #1a4fff;
+  --blue-bright: #3d6bff;
+  --blue-dim: #0d2baa;
+  --blue-ghost: rgba(26,79,255,0.08);
+  --silver: #6b738f;
+  --silver-light: #9aa0b8;
+  --rule: rgba(255,255,255,0.07);
+  --surface: #0c0f1e;
+  --surface2: #111528;
+  --text: #c8ccda;
+  --text-bright: #e8eaf2;
+  --mono: 'DM Mono', monospace;
+  --serif: 'Cormorant Garamond', Georgia, serif;
+  --sans: 'Syne', sans-serif;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--ink);
+  color: var(--text);
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
+  cursor: none;
+}
+
+/* CUSTOM CURSOR */
+.cursor {
+  position: fixed;
+  width: 8px; height: 8px;
+  background: var(--blue-bright);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: transform 0.1s, width 0.2s, height 0.2s, background 0.2s;
+}
+.cursor-ring {
+  position: fixed;
+  width: 36px; height: 36px;
+  border: 1px solid rgba(61,107,255,0.4);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9998;
+  transform: translate(-50%, -50%);
+  transition: transform 0.12s ease-out, width 0.25s, height 0.25s, border-color 0.2s;
+}
+body:has(a:hover) .cursor, body:has(button:hover) .cursor { width: 14px; height: 14px; background: #fff; }
+body:has(a:hover) .cursor-ring, body:has(button:hover) .cursor-ring { width: 52px; height: 52px; border-color: rgba(61,107,255,0.7); }
+
+/* NOISE OVERLAY */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1000;
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 128px;
+}
+
+/* NAV */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 500;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 22px 56px;
+  background: rgba(5,7,15,0.85);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--rule);
+}
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+}
+.nav-logo-mark {
+  width: 32px; height: 32px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.nav-logo-mark svg { width: 32px; height: 32px; }
+.nav-logo-text {
+  font-family: var(--sans);
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-bright);
+}
+.nav-logo-text span { color: var(--blue-bright); }
+.nav-links {
+  display: flex;
+  gap: 40px;
+  list-style: none;
+  align-items: center;
+}
+.nav-links a {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--silver);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--text-bright); }
+.nav-cta {
+  background: var(--blue) !important;
+  color: #fff !important;
+  padding: 10px 22px;
+  font-family: var(--mono) !important;
+  font-size: 10px !important;
+  letter-spacing: 0.15em !important;
+  transition: background 0.2s !important;
+}
+.nav-cta:hover { background: var(--blue-bright) !important; }
+
+/* ANIMATIONS */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes lineGrow {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+@keyframes floatGrid {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-12px); }
+}
+@keyframes scanline {
+  from { transform: translateY(-100%); }
+  to   { transform: translateY(100vh); }
+}
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+@keyframes counter {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.anim-up { animation: fadeUp 0.8s cubic-bezier(0.22,1,0.36,1) both; }
+.d1 { animation-delay: 0.1s; }
+.d2 { animation-delay: 0.25s; }
+.d3 { animation-delay: 0.4s; }
+.d4 { animation-delay: 0.55s; }
+.d5 { animation-delay: 0.7s; }
+
+/* HERO */
+#hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 120px 56px 80px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.hero-grid-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.035;
+}
+.hero-glow {
+  position: absolute;
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(26,79,255,0.18) 0%, transparent 70%);
+  top: 10%; left: -100px;
+  animation: floatGrid 8s ease-in-out infinite;
+}
+.hero-glow2 {
+  position: absolute;
+  width: 400px; height: 400px;
+  background: radial-gradient(circle, rgba(26,79,255,0.1) 0%, transparent 70%);
+  bottom: 10%; right: 5%;
+  animation: floatGrid 11s ease-in-out infinite reverse;
+}
+.scanline {
+  position: absolute;
+  left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(to right, transparent, rgba(26,79,255,0.15), transparent);
+  animation: scanline 6s linear infinite;
+  pointer-events: none;
+}
+
+.hero-inner {
+  position: relative;
+  z-index: 2;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.hero-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--blue-bright);
+  margin-bottom: 36px;
+}
+.hero-tag-dot {
+  width: 6px; height: 6px;
+  background: var(--blue-bright);
+  border-radius: 50%;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.hero-headline {
+  font-family: var(--serif);
+  font-size: clamp(58px, 8.5vw, 122px);
+  font-weight: 300;
+  line-height: 0.9;
+  letter-spacing: -0.02em;
+  color: var(--text-bright);
+  margin-bottom: 44px;
+}
+.hero-headline em {
+  font-style: italic;
+  color: var(--blue-bright);
+}
+.hero-headline .line2 {
+  display: block;
+  padding-left: 120px;
+}
+
+.hero-sub {
+  font-size: 17px;
+  font-weight: 400;
+  color: var(--silver-light);
+  max-width: 500px;
+  line-height: 1.75;
+  margin-bottom: 52px;
+}
+
+.hero-actions {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--blue);
+  color: #fff;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 16px 36px;
+  text-decoration: none;
+  border: none;
+  cursor: none;
+  transition: background 0.25s, transform 0.2s;
+}
+.btn-primary:hover { background: var(--blue-bright); transform: translateY(-1px); }
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--silver-light);
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: none;
+  background: none;
+  cursor: none;
+  transition: color 0.2s;
+}
+.btn-ghost:hover { color: var(--text-bright); }
+
+.hero-scroll {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--silver);
+}
+.scroll-line {
+  width: 1px;
+  height: 48px;
+  background: linear-gradient(to bottom, var(--blue-bright), transparent);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+/* STATS STRIP */
+.stats-strip {
+  background: var(--surface);
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+}
+.stats-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 56px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+.stat-item {
+  padding: 44px 0;
+  border-right: 1px solid var(--rule);
+  padding-right: 40px;
+  padding-left: 40px;
+}
+.stat-item:first-child { padding-left: 0; }
+.stat-item:last-child { border-right: none; }
+.stat-num {
+  font-family: var(--serif);
+  font-size: 48px;
+  font-weight: 300;
+  color: var(--text-bright);
+  line-height: 1;
+  margin-bottom: 8px;
+}
+.stat-num span { color: var(--blue-bright); }
+.stat-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--silver);
+}
+
+/* SECTION WRAPPER */
+.section {
+  padding: 120px 56px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.section-label {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--blue-bright);
+  margin-bottom: 28px;
+}
+.section-label::before {
+  content: '';
+  display: block;
+  width: 32px;
+  height: 1px;
+  background: var(--blue-bright);
+  transform-origin: left;
+  animation: lineGrow 0.6s ease both;
+}
+
+h2 {
+  font-family: var(--serif);
+  font-size: clamp(36px, 4.5vw, 62px);
+  font-weight: 300;
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+  color: var(--text-bright);
+  margin-bottom: 24px;
+}
+h2 em { font-style: italic; color: var(--blue-bright); }
+
+h3 {
+  font-family: var(--sans);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-bright);
+  margin-bottom: 10px;
+}
+
+p { color: var(--text); line-height: 1.8; margin-bottom: 14px; }
+p:last-child { margin-bottom: 0; }
+
+/* ABOUT */
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 100px;
+  align-items: start;
+  margin-top: 60px;
+}
+.about-left p { font-size: 17px; line-height: 1.85; color: var(--silver-light); }
+.about-right { }
+.value-row {
+  display: grid;
+  grid-template-columns: 36px 1fr;
+  gap: 20px;
+  padding: 28px 0;
+  border-top: 1px solid var(--rule);
+  align-items: start;
+}
+.value-row:last-child { border-bottom: 1px solid var(--rule); }
+.value-idx {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--blue-bright);
+  padding-top: 2px;
+}
+
+/* SERVICES */
+.services-section {
+  background: var(--surface);
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+}
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  margin-top: 64px;
+}
+.service-card {
+  background: var(--deep);
+  padding: 44px 40px;
+  position: relative;
+  overflow: hidden;
+  transition: background 0.3s;
+}
+.service-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: var(--blue);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s cubic-bezier(0.22,1,0.36,1);
+}
+.service-card:hover { background: var(--surface2); }
+.service-card:hover::before { transform: scaleX(1); }
+.service-icon {
+  width: 44px; height: 44px;
+  border: 1px solid rgba(26,79,255,0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 28px;
+  color: var(--blue-bright);
+}
+.service-icon svg { width: 20px; height: 20px; }
+.service-tag {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--blue-bright);
+  margin-top: 24px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.service-tag::after {
+  content: '';
+  display: block;
+  flex: 1;
+  height: 1px;
+  background: var(--rule);
+}
+
+/* APPROACH */
+.approach-list {
+  margin-top: 64px;
+  display: flex;
+  flex-direction: column;
+}
+.approach-item {
+  display: grid;
+  grid-template-columns: 80px 1fr 1fr;
+  gap: 48px;
+  padding: 44px 0;
+  border-top: 1px solid var(--rule);
+  align-items: start;
+}
+.approach-item:last-child { border-bottom: 1px solid var(--rule); }
+.approach-num {
+  font-family: var(--serif);
+  font-size: 52px;
+  font-weight: 300;
+  color: rgba(26,79,255,0.2);
+  line-height: 1;
+}
+.approach-title {
+  font-family: var(--serif);
+  font-size: 26px;
+  font-weight: 300;
+  color: var(--text-bright);
+  line-height: 1.2;
+  padding-top: 6px;
+}
+.approach-title em { font-style: italic; color: var(--blue-bright); }
+
+/* SECTORS */
+.sectors-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2px;
+  margin-top: 64px;
+}
+.sector-card {
+  background: var(--surface);
+  padding: 36px 32px;
+  border: 1px solid var(--rule);
+  transition: border-color 0.25s, background 0.25s;
+  position: relative;
+}
+.sector-card:hover {
+  border-color: rgba(26,79,255,0.3);
+  background: var(--surface2);
+}
+.sector-num {
+  font-family: var(--mono);
+  font-size: 9px;
+  color: var(--silver);
+  letter-spacing: 0.15em;
+  margin-bottom: 20px;
+}
+.sector-name {
+  font-family: var(--serif);
+  font-size: 22px;
+  font-weight: 300;
+  color: var(--text-bright);
+  line-height: 1.2;
+  margin-bottom: 12px;
+}
+.sector-name em { font-style: italic; }
+.sector-desc {
+  font-size: 13px;
+  color: var(--silver);
+  line-height: 1.7;
+  margin: 0;
+}
+
+/* MANIFESTO */
+.manifesto-section {
+  background: var(--blue-dim);
+  border-top: 1px solid rgba(255,255,255,0.08);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  position: relative;
+  overflow: hidden;
+}
+.manifesto-section::before {
+  content: 'SPIRITUS';
+  position: absolute;
+  right: -40px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: var(--serif);
+  font-size: 240px;
+  font-weight: 300;
+  font-style: italic;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(255,255,255,0.06);
+  pointer-events: none;
+  user-select: none;
+  white-space: nowrap;
+}
+.manifesto-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 120px 56px;
+  position: relative;
+  z-index: 2;
+}
+.manifesto-inner .section-label { color: rgba(255,255,255,0.5); }
+.manifesto-inner .section-label::before { background: rgba(255,255,255,0.5); }
+.manifesto-inner h2 { color: #fff; max-width: 700px; }
+.manifesto-inner h2 em { color: rgba(255,255,255,0.6); }
+.manifesto-inner p { color: rgba(255,255,255,0.65); max-width: 600px; font-size: 17px; line-height: 1.85; }
+.manifesto-quote {
+  font-family: var(--serif);
+  font-size: clamp(22px, 3vw, 34px);
+  font-weight: 300;
+  font-style: italic;
+  color: rgba(255,255,255,0.85);
+  line-height: 1.4;
+  max-width: 740px;
+  margin-top: 48px;
+  border-left: 2px solid rgba(255,255,255,0.3);
+  padding-left: 32px;
+}
+
+/* CONTACT */
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 100px;
+  align-items: start;
+  margin-top: 64px;
+}
+.contact-info { display: flex; flex-direction: column; gap: 32px; }
+.contact-block { }
+.contact-tag {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--silver);
+  margin-bottom: 6px;
+}
+.contact-val {
+  font-family: var(--serif);
+  font-size: 20px;
+  font-weight: 300;
+  color: var(--text-bright);
+}
+.contact-form { display: flex; flex-direction: column; gap: 20px; }
+.form-field { display: flex; flex-direction: column; gap: 8px; }
+.form-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--silver);
+}
+.form-input, .form-textarea {
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  color: var(--text-bright);
+  font-family: var(--mono);
+  font-size: 13px;
+  padding: 14px 18px;
+  outline: none;
+  transition: border-color 0.2s;
+  resize: none;
+}
+.form-input:focus, .form-textarea:focus {
+  border-color: rgba(26,79,255,0.5);
+}
+.form-textarea { height: 120px; }
+.form-submit {
+  background: var(--blue);
+  color: #fff;
+  border: none;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 16px 36px;
+  cursor: none;
+  align-self: flex-start;
+  transition: background 0.25s;
+}
+.form-submit:hover { background: var(--blue-bright); }
+
+/* FOOTER */
+footer {
+  background: var(--deep);
+  border-top: 1px solid var(--rule);
+  padding: 56px;
+}
+.footer-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.footer-logo {
+  font-family: var(--sans);
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--silver);
+}
+.footer-logo span { color: var(--blue-bright); }
+.footer-copy {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  color: var(--silver);
+}
+.footer-links {
+  display: flex;
+  gap: 32px;
+  list-style: none;
+}
+.footer-links a {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--silver);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.footer-links a:hover { color: var(--text-bright); }
+
+/* FULL BG SECTIONS */
+.bg-surface { background: var(--surface); }
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  nav { padding: 18px 24px; }
+  nav .nav-links { display: none; }
+  #hero { padding: 100px 24px 60px; }
+  .hero-headline .line2 { padding-left: 0; }
+  .stats-inner { grid-template-columns: 1fr 1fr; padding: 0 24px; }
+  .stat-item { border-right: none; border-bottom: 1px solid var(--rule); }
+  .section { padding: 80px 24px; }
+  .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 48px; }
+  .services-grid { grid-template-columns: 1fr; }
+  .approach-item { grid-template-columns: 48px 1fr; }
+  .approach-item p { display: none; }
+  .sectors-grid { grid-template-columns: 1fr 1fr; }
+  .manifesto-inner { padding: 80px 24px; }
+  footer { padding: 40px 24px; }
+  .footer-inner { flex-direction: column; gap: 24px; text-align: center; }
+}
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">
+    <div class="nav-logo-mark">
+      <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="1" y="1" width="30" height="30" stroke="#1a4fff" stroke-width="1"/>
+        <line x1="1" y1="16" x2="31" y2="16" stroke="#1a4fff" stroke-width="0.5" opacity="0.4"/>
+        <circle cx="16" cy="16" r="5" stroke="#3d6bff" stroke-width="1"/>
+        <circle cx="16" cy="16" r="1.5" fill="#3d6bff"/>
+        <line x1="16" y1="1" x2="16" y2="11" stroke="#3d6bff" stroke-width="1"/>
+        <line x1="16" y1="21" x2="16" y2="31" stroke="#3d6bff" stroke-width="1"/>
+      </svg>
+    </div>
+    <span class="nav-logo-text">SPIRITUS<span> SYSTEMS</span></span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#approach">Approach</a></li>
+    <li><a href="#sectors">Sectors</a></li>
+    <li><a href="#contact" class="nav-cta">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg">
+    <svg class="hero-grid-svg" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <pattern id="grid" width="60" height="60" patternUnits="userSpaceOnUse">
+          <path d="M 60 0 L 0 0 0 60" fill="none" stroke="#3d6bff" stroke-width="0.5"/>
+        </pattern>
+      </defs>
+      <rect width="100%" height="100%" fill="url(#grid)"/>
+    </svg>
+    <div class="hero-glow"></div>
+    <div class="hero-glow2"></div>
+    <div class="scanline"></div>
+  </div>
+
+  <div class="hero-inner">
+    <div class="hero-tag anim-up d1">
+      <div class="hero-tag-dot"></div>
+      Global Technology & Systems Company
+    </div>
+    <h1 class="hero-headline anim-up d2">
+      Intelligence<br>
+      <em class="line2">by design.</em>
+    </h1>
+    <p class="hero-sub anim-up d3">
+      Spiritus Systems builds the technology infrastructure, software platforms, and AI frameworks that let organisations operate at a level they could not reach before.
+    </p>
+    <div class="hero-actions anim-up d4">
+      <a href="#services" class="btn-primary">
+        What we build
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7H12M8 3L12 7L8 11" stroke="currentColor" stroke-width="1.5"/></svg>
+      </a>
+      <a href="#about" class="btn-ghost">
+        Our story
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 2L7 12M3 8L7 12L11 8" stroke="currentColor" stroke-width="1.5"/></svg>
+      </a>
+    </div>
+  </div>
+
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+    <span>scroll</span>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-strip">
+  <div class="stats-inner">
+    <div class="stat-item">
+      <div class="stat-num">12<span>+</span></div>
+      <div class="stat-label">Industries served</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">40<span>+</span></div>
+      <div class="stat-label">Platforms deployed</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">6</div>
+      <div class="stat-label">Continents active</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">100<span>%</span></div>
+      <div class="stat-label">Client retention</div>
+    </div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<div id="about">
+  <div class="section">
+    <div class="section-label">About</div>
+    <h2>Built to think.<br><em>Built to last.</em></h2>
+    <div class="about-grid">
+      <div class="about-left">
+        <p>Spiritus Systems is a global technology company that designs, builds, and deploys intelligent systems for enterprises, governments, SMEs, and startups. We work across software, AI, engineering integration, and business strategy.</p>
+        <p>We started with a simple conviction: technology should actually solve the problem in front of you, not the problem someone else had three years ago. That belief shapes every system we build and every client relationship we commit to.</p>
+        <p>Our teams operate across multiple time zones with one common standard: precision. Every line of code, every system architecture, every strategic recommendation we put forward has been stress-tested against real operating conditions.</p>
+      </div>
+      <div class="about-right">
+        <div class="value-row">
+          <div class="value-idx">01</div>
+          <div>
+            <h3>Precision first</h3>
+            <p>We do not guess. We measure, model, and verify before we ship. Good intentions do not compensate for sloppy execution.</p>
+          </div>
+        </div>
+        <div class="value-row">
+          <div class="value-idx">02</div>
+          <div>
+            <h3>Systems thinking</h3>
+            <p>Every component we build is aware of what surrounds it. We design for integration, not isolation.</p>
+          </div>
+        </div>
+        <div class="value-row">
+          <div class="value-idx">03</div>
+          <div>
+            <h3>Honest counsel</h3>
+            <p>We tell clients what they need to hear. The technology that wins your brief is not always the most expensive one.</p>
+          </div>
+        </div>
+        <div class="value-row">
+          <div class="value-idx">04</div>
+          <div>
+            <h3>Long view</h3>
+            <p>We build things that scale. Short-term patches and technical debt cost more over time than getting it right the first time.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<div id="services" class="bg-surface" style="border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);">
+  <div class="section">
+    <div class="section-label">Services</div>
+    <h2>What we <em>build</em></h2>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-icon">
+          <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
+            <rect x="2" y="2" width="16" height="16" rx="1"/>
+            <path d="M6 10L9 13L14 7"/>
+          </svg>
+        </div>
+        <h3>SaaS & Platform Development</h3>
+        <p>Full-stack software products built for scale. We design, architect, and ship web-based platforms that handle real-world load, complex workflows, and multi-tenant environments.</p>
+        <div class="service-tag">Next.js / PostgreSQL / Cloud</div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">
+          <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
+            <circle cx="10" cy="10" r="3"/>
+            <path d="M10 2V5M10 15V18M2 10H5M15 10H18"/>
+            <path d="M4.93 4.93L7.05 7.05M12.95 12.95L15.07 15.07M15.07 4.93L12.95 7.05M7.05 12.95L4.93 15.07"/>
+          </svg>
+        </div>
+        <h3>AI & Automation Systems</h3>
+        <p>Workflow automation, intelligent agents, and AI-augmented operations. We integrate large language models and machine learning pipelines into processes that actually need them.</p>
+        <div class="service-tag">LLM integration / AI workflows</div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">
+          <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
+            <rect x="2" y="6" width="7" height="12"/>
+            <rect x="11" y="2" width="7" height="16"/>
+            <path d="M2 10H9"/>
+          </svg>
+        </div>
+        <h3>CRM & ERP Solutions</h3>
+        <p>Enterprise resource and customer management systems tailored to how your organisation actually operates, not how a generic vendor assumes you do.</p>
+        <div class="service-tag">Odoo / Custom builds</div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">
+          <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M3 17L7 11L11 14L15 8L18 11"/>
+            <path d="M3 3V17H18"/>
+          </svg>
+        </div>
+        <h3>Systems Integration</h3>
+        <p>Connecting disparate technology stacks into coherent, reliable infrastructure. APIs, data pipelines, legacy system bridges, and real-time sync across platforms.</p>
+        <div class="service-tag">API design / Data pipelines</div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">
+          <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M10 2L3 7V18H8V13H12V18H17V7L10 2Z"/>
+          </svg>
+        </div>
+        <h3>Digital Strategy</h3>
+        <p>Technology audits, digital transformation roadmaps, and go-to-market strategy for technology products. We advise on where to invest and, just as importantly, where not to.</p>
+        <div class="service-tag">Roadmaps / GTM strategy</div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">
+          <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">
+            <circle cx="10" cy="7" r="4"/>
+            <path d="M3 18C3 14.686 6.134 12 10 12C13.866 12 17 14.686 17 18"/>
+          </svg>
+        </div>
+        <h3>Branding & Product Design</h3>
+        <p>Brand identity, UI/UX design, and product experience work for technology companies that want to look as good as they perform.</p>
+        <div class="service-tag">Brand systems / UI/UX</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- APPROACH -->
+<div id="approach">
+  <div class="section">
+    <div class="section-label">How we work</div>
+    <h2>The <em>Spiritus</em> method</h2>
+    <div class="approach-list">
+      <div class="approach-item">
+        <div class="approach-num">01</div>
+        <div class="approach-title">Understand <em>the real problem</em></div>
+        <p>Most briefs describe symptoms, not causes. We spend the first phase pulling the problem apart before writing a single line of code. You get better outcomes when you know exactly what you are solving.</p>
+      </div>
+      <div class="approach-item">
+        <div class="approach-num">02</div>
+        <div class="approach-title">Design for <em>actual use</em></div>
+        <p>We build for the person sitting at the keyboard at 8am on a Monday, not the person who signed the contract. Systems that fit real workflows get used. Systems that do not, get abandoned.</p>
+      </div>
+      <div class="approach-item">
+        <div class="approach-num">03</div>
+        <div class="approach-title">Ship with <em>precision</em></div>
+        <p>We deliver against specifications. Timeline commitments are real commitments. If something changes, we tell you early, not after the deadline passes.</p>
+      </div>
+      <div class="approach-item">
+        <div class="approach-num">04</div>
+        <div class="approach-title">Stay for the <em>long run</em></div>
+        <p>We do not hand over a system and disappear. The software environments our clients operate in keep changing, and we keep pace with them. Our goal is a relationship, not a transaction.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SECTORS -->
+<div id="sectors" class="bg-surface" style="border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);">
+  <div class="section">
+    <div class="section-label">Sectors</div>
+    <h2>Who we <em>serve</em></h2>
+    <div class="sectors-grid">
+      <div class="sector-card">
+        <div class="sector-num">01</div>
+        <div class="sector-name">Financial <em>Services</em></div>
+        <p class="sector-desc">Core banking systems, payment infrastructure, compliance tools, and audit-grade reporting platforms.</p>
+      </div>
+      <div class="sector-card">
+        <div class="sector-num">02</div>
+        <div class="sector-name">Government <em>& Public</em></div>
+        <p class="sector-desc">Citizen-facing digital services, regulatory compliance systems, and operational platforms for public institutions.</p>
+      </div>
+      <div class="sector-card">
+        <div class="sector-num">03</div>
+        <div class="sector-name">Real <em>Estate</em></div>
+        <p class="sector-desc">Property management, diaspora payment portals, listing platforms, and CRM systems for agencies and developers.</p>
+      </div>
+      <div class="sector-card">
+        <div class="sector-num">04</div>
+        <div class="sector-name">Retail <em>& FMCG</em></div>
+        <p class="sector-desc">POS systems, inventory management, brand management portals, and field sales platforms for consumer goods operations.</p>
+      </div>
+      <div class="sector-card">
+        <div class="sector-num">05</div>
+        <div class="sector-name">Energy <em>& Utilities</em></div>
+        <p class="sector-desc">Field service management, compliance certification, and operations tracking for energy and utility providers.</p>
+      </div>
+      <div class="sector-card">
+        <div class="sector-num">06</div>
+        <div class="sector-name">Health <em>& Education</em></div>
+        <p class="sector-desc">School management systems, patient record platforms, and administrative tools for healthcare and education providers.</p>
+      </div>
+      <div class="sector-card">
+        <div class="sector-num">07</div>
+        <div class="sector-name">Logistics <em>& Trade</em></div>
+        <p class="sector-desc">Freight management, customs documentation, supply chain visibility, and cross-border commerce platforms.</p>
+      </div>
+      <div class="sector-card">
+        <div class="sector-num">08</div>
+        <div class="sector-name">Startups <em>& Scale-ups</em></div>
+        <p class="sector-desc">Full stack product development, technical co-founding, MVP builds, and growth infrastructure for early-stage ventures.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MANIFESTO -->
+<div class="manifesto-section">
+  <div class="manifesto-inner">
+    <div class="section-label">Our position</div>
+    <h2>Technology that<br><em>earns its place</em></h2>
+    <p>There is no shortage of technology companies. There is a shortage of companies that understand the environments their clients operate in and build accordingly. Spiritus Systems exists to close that gap.</p>
+    <p>We work globally because the problems we solve do not stop at borders. We stay precise because imprecision compounds. We stay honest because our clients have too much riding on these systems to hear anything less.</p>
+    <div class="manifesto-quote">
+      "The right system, built properly, does not just solve a problem. It changes what is possible."
+    </div>
+  </div>
+</div>
+
+<!-- CONTACT -->
+<div id="contact">
+  <div class="section">
+    <div class="section-label">Contact</div>
+    <h2>Start a <em>conversation</em></h2>
+    <div class="contact-grid">
+      <div class="contact-info">
+        <p style="font-size:17px;color:var(--silver-light);line-height:1.85;">We take on a limited number of new engagements each quarter. If you have a real problem that needs a precise solution, we want to hear about it.</p>
+        <div class="contact-block">
+          <div class="contact-tag">Email</div>
+          <div class="contact-val">hello@spiritussystems.com</div>
+        </div>
+        <div class="contact-block">
+          <div class="contact-tag">Headquarters</div>
+          <div class="contact-val">Harare, Zimbabwe</div>
+        </div>
+        <div class="contact-block">
+          <div class="contact-tag">Operations</div>
+          <div class="contact-val">Global</div>
+        </div>
+        <div class="contact-block">
+          <div class="contact-tag">Response time</div>
+          <div class="contact-val">Within 24 hours</div>
+        </div>
+      </div>
+      <div class="contact-form">
+        <div class="form-field">
+          <label class="form-label">Full name</label>
+          <input type="text" class="form-input" placeholder="Your name">
+        </div>
+        <div class="form-field">
+          <label class="form-label">Organisation</label>
+          <input type="text" class="form-input" placeholder="Company or institution">
+        </div>
+        <div class="form-field">
+          <label class="form-label">Email</label>
+          <input type="email" class="form-input" placeholder="you@company.com">
+        </div>
+        <div class="form-field">
+          <label class="form-label">What are you building?</label>
+          <textarea class="form-textarea" placeholder="Tell us what you are working on and what you need."></textarea>
+        </div>
+        <button class="form-submit">Send message</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">SPIRITUS<span> SYSTEMS</span></div>
+    <div class="footer-copy">© 2026 Spiritus Systems. All rights reserved.</div>
+    <ul class="footer-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</footer>
+
+<script>
+  // Custom cursor
+  const cursor = document.getElementById('cursor');
+  const ring = document.getElementById('cursorRing');
+  let mx = 0, my = 0, rx = 0, ry = 0;
+  document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+  function animCursor() {
+    cursor.style.left = mx + 'px';
+    cursor.style.top = my + 'px';
+    rx += (mx - rx) * 0.12;
+    ry += (my - ry) * 0.12;
+    ring.style.left = rx + 'px';
+    ring.style.top = ry + 'px';
+    requestAnimationFrame(animCursor);
+  }
+  animCursor();
+
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.service-card, .sector-card, .approach-item, .value-row, .stat-item').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(24px)';
+    el.style.transition = 'opacity 0.7s cubic-bezier(0.22,1,0.36,1), transform 0.7s cubic-bezier(0.22,1,0.36,1)';
+    observer.observe(el);
+  });
+
+  // Counter animation
+  function animateCounters() {
+    document.querySelectorAll('.stat-num').forEach(el => {
+      const text = el.textContent;
+      const num = parseInt(text);
+      if (isNaN(num)) return;
+      const suffix = text.replace(/[0-9]/g, '');
+      let start = 0;
+      const duration = 1400;
+      const step = timestamp => {
+        if (!start) start = timestamp;
+        const progress = Math.min((timestamp - start) / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        el.innerHTML = Math.floor(eased * num) + '<span>' + suffix + '</span>';
+        if (progress < 1) requestAnimationFrame(step);
+      };
+      requestAnimationFrame(step);
+    });
+  }
+
+  const statsObserver = new IntersectionObserver(entries => {
+    if (entries[0].isIntersecting) { animateCounters(); statsObserver.disconnect(); }
+  }, { threshold: 0.5 });
+  const strip = document.querySelector('.stats-strip');
+  if (strip) statsObserver.observe(strip);
+</script>
+</body>
+</html>

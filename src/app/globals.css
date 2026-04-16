@@ -1,26 +1,140 @@
 @import "tailwindcss";
 
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --ink: #05070f;
+  --deep: #080b18;
+  --blue: #1a4fff;
+  --blue-bright: #3d6bff;
+  --blue-dim: #0d2baa;
+  --blue-ghost: rgba(26,79,255,0.08);
+  --silver: #6b738f;
+  --silver-light: #9aa0b8;
+  --rule: rgba(255,255,255,0.07);
+  --surface: #0c0f1e;
+  --surface2: #111528;
+  --text: #c8ccda;
+  --text-bright: #e8eaf2;
+  --font-mono: 'DM Mono', monospace;
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-sans: 'Inter', sans-serif;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+html { scroll-behavior: smooth; }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--ink);
+  color: var(--text);
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
+  cursor: none;
+}
+
+/* NOISE OVERLAY */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1000;
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 128px;
+}
+
+/* ANIMATIONS */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes lineGrow {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+@keyframes floatGrid {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-12px); }
+}
+@keyframes scanline {
+  from { transform: translateY(-100%); }
+  to   { transform: translateY(100vh); }
+}
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.anim-up { animation: fadeUp 0.8s cubic-bezier(0.22,1,0.36,1) both; }
+.d1 { animation-delay: 0.1s; }
+.d2 { animation-delay: 0.25s; }
+.d3 { animation-delay: 0.4s; }
+.d4 { animation-delay: 0.55s; }
+.d5 { animation-delay: 0.7s; }
+
+/* CURSOR HOVER EFFECTS */
+body:has(a:hover) .cursor-dot,
+body:has(button:hover) .cursor-dot {
+  width: 14px;
+  height: 14px;
+  background: #fff;
+}
+body:has(a:hover) .cursor-ring,
+body:has(button:hover) .cursor-ring {
+  width: 52px;
+  height: 52px;
+  border-color: rgba(61,107,255,0.7);
+}
+
+/* SECTION LABEL */
+.section-label {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--blue-bright);
+  margin-bottom: 28px;
+}
+.section-label::before {
+  content: '';
+  display: block;
+  width: 32px;
+  height: 1px;
+  background: var(--blue-bright);
+  transform-origin: left;
+  animation: lineGrow 0.6s ease both;
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .nav-links-list { display: none !important; }
+  .hero-section { padding: 100px 24px 60px !important; }
+  .hero-headline .line2 { padding-left: 0 !important; }
+  .stats-inner { grid-template-columns: 1fr 1fr !important; }
+  .stat-item { border-right: none !important; border-bottom: 1px solid var(--rule) !important; }
+  .section-wrap { padding: 80px 24px !important; }
+  .about-grid { grid-template-columns: 1fr !important; gap: 48px !important; }
+  .contact-grid { grid-template-columns: 1fr !important; gap: 48px !important; }
+  .services-grid { grid-template-columns: 1fr !important; }
+  .approach-item { grid-template-columns: 48px 1fr !important; }
+  .approach-desc { display: none !important; }
+  .sectors-grid { grid-template-columns: 1fr 1fr !important; }
+  .manifesto-inner { padding: 80px 24px !important; }
+  .footer-wrap { padding: 40px 24px !important; }
+  .footer-inner { flex-direction: column !important; gap: 24px !important; text-align: center !important; }
+  nav { padding: 18px 24px !important; }
 }

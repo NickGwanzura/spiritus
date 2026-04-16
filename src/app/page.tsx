@@ -1,65 +1,175 @@
-import Image from "next/image";
+import Link from "next/link";
+import Hero from "@/components/Hero";
+import Stats from "@/components/Stats";
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+    <>
+      <Hero />
+      <Stats />
+
+      {/* Brief teasers linking to full pages */}
+      <div style={{ padding: "120px 56px", maxWidth: 1200, margin: "0 auto" }}>
+        <div className="section-label">About</div>
+        <h2
+          style={{
+            fontFamily: "var(--font-serif)",
+            fontSize: "clamp(36px, 4.5vw, 62px)",
+            fontWeight: 300,
+            lineHeight: 1.05,
+            color: "var(--text-bright)",
+            marginBottom: 24,
+          }}
+        >
+          Built to think.{" "}
+          <em style={{ fontStyle: "italic", color: "var(--blue-bright)" }}>Built to last.</em>
+        </h2>
+        <p
+          style={{
+            fontSize: 17,
+            lineHeight: 1.85,
+            color: "var(--silver-light)",
+            maxWidth: 600,
+            marginBottom: 40,
+          }}
+        >
+          Spiritus Systems is a global technology company that designs, builds, and deploys
+          intelligent systems for enterprises, governments, SMEs, and startups.
+        </p>
+        <Link
+          href="/about"
+          style={{
+            display: "inline-flex",
+            alignItems: "center",
+            gap: 12,
+            fontFamily: "var(--font-mono)",
+            fontSize: 11,
+            letterSpacing: "0.15em",
+            textTransform: "uppercase",
+            color: "var(--blue-bright)",
+            textDecoration: "none",
+            transition: "color 0.2s",
+          }}
+        >
+          Learn more about us
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+            <path d="M2 7H12M8 3L12 7L8 11" stroke="currentColor" strokeWidth="1.5" />
+          </svg>
+        </Link>
+      </div>
+
+      {/* Services teaser */}
+      <div
+        style={{
+          background: "var(--surface)",
+          borderTop: "1px solid var(--rule)",
+          borderBottom: "1px solid var(--rule)",
+        }}
+      >
+        <div className="section-wrap" style={{ padding: "120px 56px", maxWidth: 1200, margin: "0 auto" }}>
+          <div className="section-label">Services</div>
+          <h2
+            style={{
+              fontFamily: "var(--font-serif)",
+              fontSize: "clamp(36px, 4.5vw, 62px)",
+              fontWeight: 300,
+              lineHeight: 1.05,
+              color: "var(--text-bright)",
+              marginBottom: 24,
+            }}
+          >
+            What we <em style={{ fontStyle: "italic", color: "var(--blue-bright)" }}>build</em>
+          </h2>
+          <p
+            style={{
+              fontSize: 17,
+              lineHeight: 1.85,
+              color: "var(--silver-light)",
+              maxWidth: 600,
+              marginBottom: 40,
+            }}
+          >
+            From SaaS platforms and AI systems to enterprise integration and digital strategy — we
+            build technology that solves the problem in front of you.
           </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+          <Link
+            href="/services"
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              gap: 12,
+              fontFamily: "var(--font-mono)",
+              fontSize: 11,
+              letterSpacing: "0.15em",
+              textTransform: "uppercase",
+              color: "var(--blue-bright)",
+              textDecoration: "none",
+            }}
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+            Explore our services
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+              <path d="M2 7H12M8 3L12 7L8 11" stroke="currentColor" strokeWidth="1.5" />
+            </svg>
+          </Link>
         </div>
-      </main>
-    </div>
+      </div>
+
+      {/* Manifesto strip */}
+      <div
+        style={{
+          background: "var(--blue-dim)",
+          borderTop: "1px solid rgba(255,255,255,0.08)",
+          borderBottom: "1px solid rgba(255,255,255,0.08)",
+          position: "relative",
+          overflow: "hidden",
+        }}
+      >
+        <span
+          style={{
+            position: "absolute",
+            right: -40,
+            top: "50%",
+            transform: "translateY(-50%)",
+            fontFamily: "var(--font-serif)",
+            fontSize: 240,
+            fontWeight: 300,
+            fontStyle: "italic",
+            color: "transparent",
+            WebkitTextStroke: "1px rgba(255,255,255,0.06)",
+            pointerEvents: "none",
+            userSelect: "none",
+            whiteSpace: "nowrap",
+          }}
+        >
+          SPIRITUS
+        </span>
+        <div
+          style={{
+            maxWidth: 1200,
+            margin: "0 auto",
+            padding: "100px 56px",
+            position: "relative",
+            zIndex: 2,
+            textAlign: "center",
+          }}
+        >
+          <div
+            style={{
+              fontFamily: "var(--font-serif)",
+              fontSize: "clamp(22px, 3vw, 34px)",
+              fontWeight: 300,
+              fontStyle: "italic",
+              color: "rgba(255,255,255,0.85)",
+              lineHeight: 1.4,
+              maxWidth: 740,
+              margin: "0 auto",
+            }}
+          >
+            &ldquo;The right system, built properly, does not just solve a problem. It changes what
+            is possible.&rdquo;
+          </div>
+        </div>
+      </div>
+    </>
   );
 }
