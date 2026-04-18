@@ -1,16 +1,15 @@
 import About from "@/components/About";
-import Manifesto from "@/components/Manifesto";
 
 export const metadata = {
-  title: "About — Spiritus Systems",
-  description: "Built to think. Built to last. Learn about Spiritus Systems.",
+  title: "About | Spiritus Systems",
+  description:
+    "Spiritus Systems is a Zimbabwean technology company building SaaS platforms, AI systems, and infrastructure for organisations across Zimbabwe. Based in Harare.",
 };
 
 export default function AboutPage() {
   return (
-    <div style={{ paddingTop: 80 }}>
+    <div style={{ paddingTop: 88 }}>
       <About />
-      <Manifesto />
     </div>
   );
 }

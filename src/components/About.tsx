@@ -2,7 +2,7 @@ const values = [
   {
     idx: "01",
     title: "Precision first",
-    desc: "We do not guess. We measure, model, and verify before we ship. Good intentions do not compensate for sloppy execution.",
+    desc: "We measure, model, and verify before we ship. Good intentions do not compensate for sloppy execution.",
   },
   {
     idx: "02",
@@ -23,28 +23,27 @@ const values = [
 
 export default function About() {
   return (
-    <div id="about">
+    <div id="about" style={{ background: "var(--bg)", borderBottom: "1px solid var(--border)" }}>
       <div
         className="section-wrap"
-        style={{ padding: "120px 56px", maxWidth: 1200, margin: "0 auto" }}
+        style={{ padding: "120px 56px", maxWidth: 1080, margin: "0 auto" }}
       >
         <div className="section-label">About</div>
         <h2
           style={{
-            fontFamily: "var(--font-serif)",
-            fontSize: "clamp(36px, 4.5vw, 62px)",
-            fontWeight: 300,
+            fontFamily: "var(--font-sans)",
+            fontSize: "clamp(32px, 4vw, 48px)",
+            fontWeight: 600,
             lineHeight: 1.05,
-            letterSpacing: "-0.01em",
-            color: "var(--text-bright)",
-            marginBottom: 24,
+            letterSpacing: "-0.03em",
+            color: "var(--fg)",
+            marginBottom: 16,
+            maxWidth: 720,
           }}
         >
           Built to think.
           <br />
-          <em style={{ fontStyle: "italic", color: "var(--blue-bright)" }}>
-            Built to last.
-          </em>
+          <span style={{ color: "var(--fg-subtle)" }}>Built to last.</span>
         </h2>
 
         <div
@@ -52,24 +51,23 @@ export default function About() {
           style={{
             display: "grid",
             gridTemplateColumns: "1fr 1fr",
-            gap: 100,
+            gap: 80,
             alignItems: "start",
-            marginTop: 60,
+            marginTop: 48,
           }}
         >
-          <div>
+          <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
             {[
-              "Spiritus Systems is a global technology company that designs, builds, and deploys intelligent systems for enterprises, governments, SMEs, and startups. We work across software, AI, engineering integration, and business strategy.",
-              "We started with a simple conviction: technology should actually solve the problem in front of you, not the problem someone else had three years ago. That belief shapes every system we build and every client relationship we commit to.",
-              "Our teams operate across multiple time zones with one common standard: precision. Every line of code, every system architecture, every strategic recommendation we put forward has been stress-tested against real operating conditions.",
+              "Spiritus Systems is a Zimbabwean technology company that designs, builds, and deploys intelligent systems for enterprises, government institutions, SMEs, and startups across Zimbabwe. We work across software, AI, engineering integration, and business strategy.",
+              "We started with a simple conviction: technology should actually solve the problem in front of you, not the problem someone else had three years ago in a different market. That belief shapes every system we build and every client relationship we commit to.",
+              "Our Harare team operates to a single standard: precision. Every line of code, every system architecture, every strategic recommendation has been stress-tested against real Zimbabwean operating conditions: load-shedding, offline-first requirements, multi-currency flows, and local payment rails.",
             ].map((text, i) => (
               <p
                 key={i}
                 style={{
-                  fontSize: 17,
-                  lineHeight: 1.85,
-                  color: "var(--silver-light)",
-                  marginBottom: 14,
+                  fontSize: 15,
+                  lineHeight: 1.65,
+                  color: "var(--fg-muted)",
                 }}
               >
                 {text}
@@ -77,28 +75,28 @@ export default function About() {
             ))}
           </div>
 
-          <div>
+          <div style={{ display: "flex", flexDirection: "column", gap: 0 }}>
             {values.map((v, i) => (
               <div
                 key={i}
                 style={{
                   display: "grid",
                   gridTemplateColumns: "36px 1fr",
-                  gap: 20,
-                  padding: "28px 0",
-                  borderTop: "1px solid var(--rule)",
+                  gap: 16,
+                  padding: "20px 0",
+                  borderTop: "1px solid var(--border)",
                   alignItems: "start",
                   ...(i === values.length - 1
-                    ? { borderBottom: "1px solid var(--rule)" }
+                    ? { borderBottom: "1px solid var(--border)" }
                     : {}),
                 }}
               >
                 <div
                   style={{
                     fontFamily: "var(--font-mono)",
-                    fontSize: 10,
-                    color: "var(--blue-bright)",
-                    paddingTop: 2,
+                    fontSize: 11,
+                    color: "var(--accent)",
+                    paddingTop: 3,
                   }}
                 >
                   {v.idx}
@@ -107,17 +105,16 @@ export default function About() {
                   <h3
                     style={{
                       fontFamily: "var(--font-sans)",
-                      fontSize: 12,
-                      fontWeight: 700,
-                      letterSpacing: "0.1em",
-                      textTransform: "uppercase",
-                      color: "var(--text-bright)",
-                      marginBottom: 10,
+                      fontSize: 15,
+                      fontWeight: 600,
+                      letterSpacing: "-0.01em",
+                      color: "var(--fg)",
+                      marginBottom: 6,
                     }}
                   >
                     {v.title}
                   </h3>
-                  <p style={{ color: "var(--text)", lineHeight: 1.8 }}>
+                  <p style={{ color: "var(--fg-muted)", lineHeight: 1.6, fontSize: 14 }}>
                     {v.desc}
                   </p>
                 </div>

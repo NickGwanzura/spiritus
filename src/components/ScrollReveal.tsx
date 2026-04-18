@@ -1,35 +1,67 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 
-export default function ScrollReveal() {
+type Props = {
+  children: React.ReactNode;
+  as?: keyof React.JSX.IntrinsicElements;
+  className?: string;
+  style?: React.CSSProperties;
+  delay?: number;
+  threshold?: number;
+};
+
+export default function ScrollReveal({
+  children,
+  as = "div",
+  className = "",
+  style,
+  delay = 0,
+  threshold = 0.12,
+}: Props) {
+  const ref = useRef<HTMLElement | null>(null);
+
   useEffect(() => {
-    const observer = new IntersectionObserver(
+    const el = ref.current;
+    if (!el) return;
+
+    if (
+      typeof window !== "undefined" &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    ) {
+      el.classList.add("is-visible");
+      return;
+    }
+
+    const io = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            entry.target.setAttribute(
-              "style",
-              entry.target.getAttribute("style")?.replace("opacity: 0", "opacity: 1").replace("translateY(24px)", "translateY(0)") || ""
-            );
+            const target = entry.target as HTMLElement;
+            if (delay) {
+              window.setTimeout(() => target.classList.add("is-visible"), delay);
+            } else {
+              target.classList.add("is-visible");
+            }
+            io.unobserve(target);
           }
         });
       },
-      { threshold: 0.1 }
+      { threshold, rootMargin: "0px 0px -60px 0px" }
     );
 
-    const els = document.querySelectorAll("[data-reveal]");
-    els.forEach((el) => {
-      const htmlEl = el as HTMLElement;
-      htmlEl.style.opacity = "0";
-      htmlEl.style.transform = "translateY(24px)";
-      htmlEl.style.transition =
-        "opacity 0.7s cubic-bezier(0.22,1,0.36,1), transform 0.7s cubic-bezier(0.22,1,0.36,1)";
-      observer.observe(el);
-    });
+    io.observe(el);
+    return () => io.disconnect();
+  }, [delay, threshold]);
 
-    return () => observer.disconnect();
-  }, []);
-
-  return null;
+  const Tag = as as React.ElementType;
+  return (
+    <Tag
+      ref={ref as React.RefObject<HTMLElement>}
+      className={`reveal ${className}`}
+      style={style}
+    >
+      {children}
+    </Tag>
+  );
 }

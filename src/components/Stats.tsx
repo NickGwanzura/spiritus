@@ -3,9 +3,9 @@
 import { useEffect, useRef, useState } from "react";
 
 const stats = [
+  { num: 40, suffix: "+", label: "Platforms in production" },
   { num: 12, suffix: "+", label: "Industries served" },
-  { num: 40, suffix: "+", label: "Platforms deployed" },
-  { num: 6, suffix: "", label: "Continents active" },
+  { num: 4, suffix: "", label: "Payment rails integrated" },
   { num: 100, suffix: "%", label: "Client retention" },
 ];
 
@@ -23,16 +23,14 @@ function AnimatedNumber({
 
   useEffect(() => {
     if (!animate) return;
-    const duration = 1400;
+    const duration = 1200;
     let start: number | null = null;
     const step = (timestamp: number) => {
       if (!start) start = timestamp;
       const progress = Math.min((timestamp - start) / duration, 1);
       const eased = 1 - Math.pow(1 - progress, 3);
       setValue(Math.floor(eased * target));
-      if (progress < 1) {
-        frameRef.current = requestAnimationFrame(step);
-      }
+      if (progress < 1) frameRef.current = requestAnimationFrame(step);
     };
     frameRef.current = requestAnimationFrame(step);
     return () => cancelAnimationFrame(frameRef.current);
@@ -41,16 +39,17 @@ function AnimatedNumber({
   return (
     <div
       style={{
-        fontFamily: "var(--font-serif)",
-        fontSize: 48,
-        fontWeight: 300,
-        color: "var(--text-bright)",
+        fontFamily: "var(--font-sans)",
+        fontSize: 40,
+        fontWeight: 600,
+        letterSpacing: "-0.03em",
+        color: "var(--fg)",
         lineHeight: 1,
-        marginBottom: 8,
+        marginBottom: 10,
       }}
     >
       {value}
-      <span style={{ color: "var(--blue-bright)" }}>{suffix}</span>
+      <span style={{ color: "var(--accent)" }}>{suffix}</span>
     </div>
   );
 }
@@ -69,7 +68,7 @@ export default function Stats() {
           observer.disconnect();
         }
       },
-      { threshold: 0.5 }
+      { threshold: 0.4 }
     );
     observer.observe(el);
     return () => observer.disconnect();
@@ -79,15 +78,14 @@ export default function Stats() {
     <div
       ref={ref}
       style={{
-        background: "var(--surface)",
-        borderTop: "1px solid var(--rule)",
-        borderBottom: "1px solid var(--rule)",
+        background: "var(--bg)",
+        borderBottom: "1px solid var(--border)",
       }}
     >
       <div
         className="stats-inner"
         style={{
-          maxWidth: 1200,
+          maxWidth: 1080,
           margin: "0 auto",
           padding: "0 56px",
           display: "grid",
@@ -99,9 +97,9 @@ export default function Stats() {
             key={i}
             className="stat-item"
             style={{
-              padding: "44px 40px",
+              padding: "40px 28px",
               borderRight:
-                i < stats.length - 1 ? "1px solid var(--rule)" : "none",
+                i < stats.length - 1 ? "1px solid var(--border)" : "none",
               ...(i === 0 ? { paddingLeft: 0 } : {}),
             }}
           >
@@ -112,11 +110,9 @@ export default function Stats() {
             />
             <div
               style={{
-                fontFamily: "var(--font-mono)",
-                fontSize: 10,
-                letterSpacing: "0.15em",
-                textTransform: "uppercase",
-                color: "var(--silver)",
+                fontFamily: "var(--font-sans)",
+                fontSize: 13,
+                color: "var(--fg-subtle)",
               }}
             >
               {stat.label}

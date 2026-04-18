@@ -1,20 +1,203 @@
-"use client";
+import Link from "next/link";
+
+const navLinks = [
+  { href: "/about", label: "About" },
+  { href: "/services", label: "Services" },
+  { href: "/work", label: "Work" },
+  { href: "/sectors", label: "Sectors" },
+  { href: "/faq", label: "FAQ" },
+  { href: "/contact", label: "Contact" },
+];
 
 export default function Footer() {
   return (
     <footer
       className="footer-wrap"
       style={{
-        background: "var(--deep)",
-        borderTop: "1px solid var(--rule)",
-        padding: 56,
+        background: "var(--bg-sunken)",
+        borderTop: "1px solid var(--border)",
+        padding: "56px 56px 32px",
       }}
     >
       <div
         className="footer-inner"
         style={{
-          maxWidth: 1200,
+          maxWidth: 1080,
           margin: "0 auto",
+          display: "grid",
+          gridTemplateColumns: "1.5fr 1fr 1fr 1fr",
+          gap: 40,
+        }}
+      >
+        {/* Brand column */}
+        <div>
+          <Link
+            href="/"
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              gap: 10,
+              textDecoration: "none",
+              marginBottom: 16,
+            }}
+          >
+            <div
+              style={{
+                width: 22,
+                height: 22,
+                borderRadius: "var(--r-sm)",
+                background: "var(--accent)",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <svg width="12" height="12" viewBox="0 0 14 14" fill="none">
+                <path d="M7 1L12 4V10L7 13L2 10V4L7 1Z" stroke="#fff" strokeWidth="1.5" />
+                <circle cx="7" cy="7" r="1.8" fill="#fff" />
+              </svg>
+            </div>
+            <span
+              style={{
+                fontFamily: "var(--font-sans)",
+                fontSize: 13,
+                fontWeight: 600,
+                color: "var(--fg)",
+              }}
+            >
+              Spiritus Systems
+            </span>
+          </Link>
+          <p
+            style={{
+              fontSize: 13,
+              lineHeight: 1.6,
+              color: "var(--fg-subtle)",
+              maxWidth: 260,
+            }}
+          >
+            Zimbabwe&rsquo;s SaaS engineering company. We design, build, and
+            deploy intelligent systems for enterprises, government, SMEs, and
+            startups across Zimbabwe.
+          </p>
+        </div>
+
+        {/* Navigation */}
+        <div>
+          <div
+            style={{
+              fontFamily: "var(--font-sans)",
+              fontSize: 11,
+              fontWeight: 500,
+              letterSpacing: "0.04em",
+              textTransform: "uppercase",
+              color: "var(--fg-subtle)",
+              marginBottom: 16,
+            }}
+          >
+            Navigation
+          </div>
+          <ul style={{ listStyle: "none", display: "flex", flexDirection: "column", gap: 10 }}>
+            {navLinks.map((item) => (
+              <li key={item.href}>
+                <Link
+                  href={item.href}
+                  className="footer-link"
+                  style={{
+                    fontFamily: "var(--font-sans)",
+                    fontSize: 13,
+                    color: "var(--fg-muted)",
+                    textDecoration: "none",
+                    transition: "color 0.15s",
+                  }}
+                >
+                  {item.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        {/* Contact */}
+        <div>
+          <div
+            style={{
+              fontFamily: "var(--font-sans)",
+              fontSize: 11,
+              fontWeight: 500,
+              letterSpacing: "0.04em",
+              textTransform: "uppercase",
+              color: "var(--fg-subtle)",
+              marginBottom: 16,
+            }}
+          >
+            Contact
+          </div>
+          <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+            <a
+              href="mailto:create@spiritus.co.zw"
+              className="footer-link"
+              style={{ fontSize: 13, color: "var(--fg-muted)", textDecoration: "none" }}
+            >
+              create@spiritus.co.zw
+            </a>
+            <a
+              href="tel:+2630777816368"
+              className="footer-link"
+              style={{ fontFamily: "var(--font-sans)", fontSize: 13, color: "var(--fg-muted)", textDecoration: "none" }}
+            >
+              0777 816 368
+            </a>
+          </div>
+        </div>
+
+        {/* Location */}
+        <div>
+          <div
+            style={{
+              fontFamily: "var(--font-sans)",
+              fontSize: 11,
+              fontWeight: 500,
+              letterSpacing: "0.04em",
+              textTransform: "uppercase",
+              color: "var(--fg-subtle)",
+              marginBottom: 16,
+            }}
+          >
+            Location
+          </div>
+          <div
+            style={{
+              fontSize: 13,
+              color: "var(--fg-muted)",
+              lineHeight: 1.6,
+            }}
+          >
+            Harare CBD
+            <br />
+            Zimbabwe
+          </div>
+          <div
+            style={{
+              fontFamily: "var(--font-sans)",
+              fontSize: 12,
+              color: "var(--fg-subtle)",
+              marginTop: 10,
+            }}
+          >
+            Zimbabwe-only
+          </div>
+        </div>
+      </div>
+
+      {/* Bottom bar */}
+      <div
+        style={{
+          maxWidth: 1080,
+          margin: "0 auto",
+          borderTop: "1px solid var(--border)",
+          marginTop: 48,
+          paddingTop: 20,
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
@@ -23,58 +206,21 @@ export default function Footer() {
         <div
           style={{
             fontFamily: "var(--font-sans)",
-            fontWeight: 700,
-            fontSize: 13,
-            letterSpacing: "0.15em",
-            textTransform: "uppercase",
-            color: "var(--silver)",
+            fontSize: 12,
+            color: "var(--fg-subtle)",
           }}
         >
-          SPIRITUS
-          <span style={{ color: "var(--blue-bright)" }}> SYSTEMS</span>
+          &copy; 2026 Spiritus Systems
         </div>
         <div
           style={{
-            fontFamily: "var(--font-mono)",
-            fontSize: 10,
-            letterSpacing: "0.1em",
-            color: "var(--silver)",
+            fontFamily: "var(--font-sans)",
+            fontSize: 12,
+            color: "var(--fg-dim)",
           }}
         >
-          &copy; 2026 Spiritus Systems. All rights reserved.
+          All rights reserved
         </div>
-        <ul
-          style={{
-            display: "flex",
-            gap: 32,
-            listStyle: "none",
-          }}
-        >
-          {["About", "Services", "Contact"].map((item) => (
-            <li key={item}>
-              <a
-                href={`#${item.toLowerCase()}`}
-                style={{
-                  fontFamily: "var(--font-mono)",
-                  fontSize: 10,
-                  letterSpacing: "0.12em",
-                  textTransform: "uppercase",
-                  color: "var(--silver)",
-                  textDecoration: "none",
-                  transition: "color 0.2s",
-                }}
-                onMouseEnter={(e) =>
-                  (e.currentTarget.style.color = "var(--text-bright)")
-                }
-                onMouseLeave={(e) =>
-                  (e.currentTarget.style.color = "var(--silver)")
-                }
-              >
-                {item}
-              </a>
-            </li>
-          ))}
-        </ul>
       </div>
     </footer>
   );

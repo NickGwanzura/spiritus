@@ -1,36 +1,30 @@
 import type { Metadata } from "next";
-import { Cormorant_Garamond, DM_Mono, Inter } from "next/font/google";
+import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import CustomCursor from "@/components/CustomCursor";
 
-const cormorant = Cormorant_Garamond({
-  subsets: ["latin"],
-  weight: ["300", "400", "600"],
-  style: ["normal", "italic"],
-  variable: "--font-serif",
-  display: "swap",
-});
-
-const dmMono = DM_Mono({
-  subsets: ["latin"],
-  weight: ["300", "400", "500"],
-  variable: "--font-mono",
-  display: "swap",
-});
-
-const inter = Inter({
+const geistSans = Geist({
   subsets: ["latin"],
   variable: "--font-sans",
   display: "swap",
 });
 
+const geistMono = Geist_Mono({
+  subsets: ["latin"],
+  variable: "--font-mono",
+  display: "swap",
+});
+
 export const metadata: Metadata = {
-  title: "Spiritus Systems",
+  title: "Spiritus Systems | Zimbabwe's SaaS engineering company",
   description:
-    "Spiritus Systems builds the technology infrastructure, software platforms, and AI frameworks that let organisations operate at a level they could not reach before.",
+    "Harare-based SaaS engineering company building software platforms, AI systems, and operational infrastructure for Zimbabwean enterprises, government, SMEs, and startups.",
 };
+
+// Runs before hydration to avoid a flash of the wrong theme
+const themeInitScript = `(function(){try{var s=localStorage.getItem('theme');var m=window.matchMedia('(prefers-color-scheme: light)').matches;var t=s||(m?'light':'dark');document.documentElement.dataset.theme=t;}catch(e){document.documentElement.dataset.theme='dark';}})();`;
 
 export default function RootLayout({
   children,
@@ -40,12 +34,16 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${cormorant.variable} ${dmMono.variable} ${inter.variable}`}
+      className={`${geistSans.variable} ${geistMono.variable}`}
+      suppressHydrationWarning
     >
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
+      </head>
       <body>
         <CustomCursor />
         <Navbar />
-        {children}
+        <main>{children}</main>
         <Footer />
       </body>
     </html>

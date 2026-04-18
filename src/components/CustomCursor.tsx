@@ -1,24 +1,40 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export default function CustomCursor() {
   const cursorRef = useRef<HTMLDivElement>(null);
   const ringRef = useRef<HTMLDivElement>(null);
+  const [hasPointer, setHasPointer] = useState(false);
 
   useEffect(() => {
+    const mq = window.matchMedia("(pointer: fine)");
+    setHasPointer(mq.matches);
+    const onChange = (e: MediaQueryListEvent) => setHasPointer(e.matches);
+    mq.addEventListener("change", onChange);
+    return () => mq.removeEventListener("change", onChange);
+  }, []);
+
+  useEffect(() => {
+    if (!hasPointer) return;
+
     let mx = 0,
       my = 0,
       rx = 0,
       ry = 0;
+    let moving = false;
+    let raf: number;
 
     const onMove = (e: MouseEvent) => {
       mx = e.clientX;
       my = e.clientY;
+      if (!moving) {
+        moving = true;
+        raf = requestAnimationFrame(animate);
+      }
     };
     document.addEventListener("mousemove", onMove);
 
-    let raf: number;
     const animate = () => {
       if (cursorRef.current) {
         cursorRef.current.style.left = mx + "px";
@@ -30,15 +46,23 @@ export default function CustomCursor() {
         ringRef.current.style.left = rx + "px";
         ringRef.current.style.top = ry + "px";
       }
-      raf = requestAnimationFrame(animate);
+
+      const dx = mx - rx;
+      const dy = my - ry;
+      if (Math.abs(dx) > 0.1 || Math.abs(dy) > 0.1) {
+        raf = requestAnimationFrame(animate);
+      } else {
+        moving = false;
+      }
     };
-    raf = requestAnimationFrame(animate);
 
     return () => {
       document.removeEventListener("mousemove", onMove);
       cancelAnimationFrame(raf);
     };
-  }, []);
+  }, [hasPointer]);
+
+  if (!hasPointer) return null;
 
   return (
     <>
@@ -49,7 +73,7 @@ export default function CustomCursor() {
           position: "fixed",
           width: 8,
           height: 8,
-          background: "var(--blue-bright)",
+          background: "var(--accent)",
           borderRadius: "50%",
           pointerEvents: "none",
           zIndex: 9999,
@@ -65,7 +89,7 @@ export default function CustomCursor() {
           position: "fixed",
           width: 36,
           height: 36,
-          border: "1px solid rgba(61,107,255,0.4)",
+          border: "1px solid var(--accent-muted)",
           borderRadius: "50%",
           pointerEvents: "none",
           zIndex: 9998,
