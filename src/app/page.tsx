@@ -1,68 +1,7 @@
 import Link from "next/link";
 import Hero from "@/components/Hero";
 import ScrollReveal from "@/components/ScrollReveal";
-
-const services = [
-  {
-    title: "SaaS & Platforms",
-    desc: "Full-stack software products built for scale.",
-    icon: (
-      <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.5" width={18} height={18}>
-        <rect x="2" y="2" width="16" height="16" rx="2" />
-        <path d="M6 10L9 13L14 7" strokeLinecap="round" strokeLinejoin="round" />
-      </svg>
-    ),
-  },
-  {
-    title: "AI & Automation",
-    desc: "Workflow automation and intelligent agents.",
-    icon: (
-      <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.5" width={18} height={18}>
-        <circle cx="10" cy="10" r="3" />
-        <path d="M10 2V5M10 15V18M2 10H5M15 10H18" strokeLinecap="round" />
-      </svg>
-    ),
-  },
-  {
-    title: "CRM & ERP",
-    desc: "Enterprise systems tailored to operations.",
-    icon: (
-      <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.5" width={18} height={18}>
-        <rect x="2" y="6" width="7" height="12" rx="1" />
-        <rect x="11" y="2" width="7" height="16" rx="1" />
-      </svg>
-    ),
-  },
-  {
-    title: "Systems Integration",
-    desc: "APIs, pipelines, legacy system bridges.",
-    icon: (
-      <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.5" width={18} height={18}>
-        <path d="M3 17L7 11L11 14L15 8L18 11" strokeLinecap="round" strokeLinejoin="round" />
-        <path d="M3 3V17H18" strokeLinecap="round" />
-      </svg>
-    ),
-  },
-  {
-    title: "Digital Strategy",
-    desc: "Roadmaps, audits, and GTM strategy.",
-    icon: (
-      <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.5" width={18} height={18}>
-        <path d="M10 2L3 7V18H8V13H12V18H17V7L10 2Z" strokeLinejoin="round" />
-      </svg>
-    ),
-  },
-  {
-    title: "Product Design",
-    desc: "Brand identity, UI/UX, and experience design.",
-    icon: (
-      <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.5" width={18} height={18}>
-        <circle cx="10" cy="7" r="3.5" />
-        <path d="M3 18C3 14.7 6.1 12 10 12C13.9 12 17 14.7 17 18" strokeLinecap="round" />
-      </svg>
-    ),
-  },
-];
+import { services } from "@/data/services";
 
 const sectionStyle: React.CSSProperties = {
   padding: "120px 56px",
@@ -143,9 +82,9 @@ export default function Home() {
           <div className="section-label">What we build</div>
           <h2 style={h2Style}>Six practice areas.</h2>
           <p style={leadStyle}>
-            From SaaS platforms and AI systems to enterprise integration. Each
-            one built for the conditions Zimbabwean organisations actually
-            operate in.
+            From web development and SaaS platforms to AI systems and
+            enterprise integration. Each one built for the conditions
+            Zimbabwean organisations actually operate in.
           </p>
 
           <div
@@ -158,11 +97,12 @@ export default function Home() {
               marginBottom: 32,
             }}
           >
-            {services.map((s, i) => (
-              <div
-                key={i}
+            {services.map((s) => (
+              <Link
+                key={s.slug}
+                href={`/services/${s.slug}`}
                 className="service-card qcard"
-                style={{ padding: 20, background: "var(--bg)" }}
+                style={{ padding: 20, background: "var(--bg)", color: "inherit", display: "block" }}
               >
                 <div
                   style={{
@@ -199,9 +139,9 @@ export default function Home() {
                     margin: 0,
                   }}
                 >
-                  {s.desc}
+                  {s.tagline}
                 </p>
-              </div>
+              </Link>
             ))}
           </div>
 
