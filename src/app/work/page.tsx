@@ -31,6 +31,7 @@ export const metadata: Metadata = {
 
 const portfolio = [
   { name: "Dreambox Advertising — Billboard CRM", url: "https://crm.dreamboxadvertising.co.zw/" },
+  { name: "Blackivymedia — Billboard CRM", url: "https://blackivymediacrm.live/" },
   { name: "Splash Air — HVAC Services Platform", url: "https://splashaircrmzw.site/" },
   { name: "Affinity Logistics — UK to Zimbabwe Shipping CRM", url: "https://affinitylogistics.site/" },
   { name: "EasyRentals — Property Management ERP", url: "https://easyrentalszw.online/" },

@@ -414,7 +414,7 @@ export const posts: Post[] = [
     title:
       "Offline-first web apps for load-shedding: how Zimbabwean software actually has to work",
     description:
-      "Load-shedding, mobile data caps, and patchy connectivity make &ldquo;always online&rdquo; an unsafe assumption in Zimbabwe. Here is how we build web apps that keep working when the lights and the internet go out.",
+      "Load-shedding, mobile data caps, and patchy connectivity make “always online” an unsafe assumption in Zimbabwe. Here is how we build web apps that keep working when the lights and the internet go out.",
     publishedAt: "2026-02-11",
     updatedAt: "2026-04-19",
     author: "Spiritus Systems",
@@ -508,6 +508,218 @@ export const posts: Post[] = [
           and internet return, and treats data as precious. That
           is the bar for software shipped in Zimbabwe — anything
           less is a liability.
+        </Para>
+      </>
+    ),
+  },
+
+  {
+    slug: "ai-in-zimbabwean-business",
+    title:
+      "AI in Zimbabwean business: what is actually paying off in 2026",
+    description:
+      "AI is everywhere on LinkedIn and nowhere in most Zimbabwean offices. Here is a grounded look at where AI is genuinely earning its keep for local businesses — and where the hype still outruns the value.",
+    publishedAt: "2026-04-18",
+    updatedAt: "2026-04-20",
+    author: "Spiritus Systems",
+    tags: ["AI", "automation", "Zimbabwe", "guide"],
+    readingMinutes: 6,
+    body: (
+      <>
+        <Para>
+          Every second post on LinkedIn says AI is transforming
+          business. Walk into a typical Harare office and you will
+          find a team that still reconciles invoices by hand,
+          copies WhatsApp orders into Excel, and answers the same
+          customer questions thirty times a day. The gap between
+          the noise and the ground is wide.
+        </Para>
+        <Para>
+          This post is a practical inventory of where AI is
+          actually paying off for Zimbabwean businesses in 2026 —
+          based on what we have built and what we have watched
+          other teams build. No slideware, no AGI speculation,
+          just the use cases that return more than they cost.
+        </Para>
+
+        <Note label="The honest framing">
+          AI is useful when it moves a specific operational needle
+          — fewer hours on routine work, faster turnaround on
+          ambiguous tasks, better decisions on messy data. If a
+          proposed use case does not do one of those three things,
+          it is marketing, not engineering.
+        </Note>
+
+        <H2>What language models are actually good at</H2>
+        <Para>
+          Before the use cases, it is worth being precise about
+          what modern AI (primarily large language models) does
+          well:
+        </Para>
+        <UL>
+          <li>
+            <strong>Reading messy text and extracting structure.</strong>{" "}
+            Invoices, CVs, contracts, forms — anything with loose
+            formatting becomes structured data.
+          </li>
+          <li>
+            <strong>Answering questions against a known corpus.</strong>{" "}
+            Point it at your policies, product catalogue, or
+            support history and it will answer questions from it.
+          </li>
+          <li>
+            <strong>Drafting text that follows a template.</strong>{" "}
+            Quotes, proposals, summaries, handover notes.
+          </li>
+          <li>
+            <strong>Classifying and routing.</strong> Is this
+            ticket urgent? Is this lead qualified? Which
+            department should handle this email?
+          </li>
+        </UL>
+        <Para>
+          What it is <em>not</em> good at (yet): reliable
+          arithmetic, real-time facts it was not given, anything
+          where being wrong is expensive and there is no human in
+          the loop.
+        </Para>
+
+        <H2>Use cases earning their keep in Zimbabwe right now</H2>
+
+        <H3>1. Invoice and document understanding</H3>
+        <Para>
+          Finance teams across Harare still type invoice data into
+          Pastel or Sage by hand. A document-understanding pipeline
+          reads the invoice image or PDF, extracts supplier, date,
+          line items, VAT, and totals, and posts them to the
+          accounting system — with a confidence score and a human
+          review queue for edge cases. Typical ROI shows up inside
+          two months for teams processing more than 200 invoices a
+          month.
+        </Para>
+
+        <H3>2. WhatsApp customer service agents</H3>
+        <Para>
+          WhatsApp is the default customer channel in Zimbabwe.
+          Most businesses have one or two people answering the
+          same stock questions all day — pricing, availability,
+          hours, delivery, returns. A well-scoped agent handles
+          the repetitive 70%, hands off the complex 30% to a
+          human, logs every conversation, and never sleeps.
+          Integration with your stock system means it can answer
+          &ldquo;do you have this in Bulawayo?&rdquo; without
+          calling the branch.
+        </Para>
+
+        <H3>3. Sales: lead qualification and proposal drafting</H3>
+        <Para>
+          Sales teams lose time on two things: chasing unqualified
+          leads and rewriting the same proposal every week. AI
+          handles the first by scoring inbound leads against your
+          ideal-customer profile before a rep ever sees them. It
+          handles the second by drafting first-cut proposals from
+          a call transcript or brief, which a rep then edits
+          rather than starts from scratch.
+        </Para>
+
+        <H3>4. Internal copilots over company data</H3>
+        <Para>
+          Every company has knowledge trapped in SharePoint folders,
+          WhatsApp threads, and the head of whoever has been
+          there longest. A private copilot, pointed at your own
+          documents, lets any staff member ask: &ldquo;what is our
+          refund policy for corporate clients?&rdquo; or &ldquo;how
+          did we price the last billboard campaign for a
+          telecom?&rdquo; — and get an answer with sources. No
+          customer data leaves your environment if the setup is
+          done right.
+        </Para>
+
+        <H3>5. Operations: triage, summaries, and handovers</H3>
+        <Para>
+          Support queues, service tickets, incident reports, shift
+          handovers — any pile of unstructured text gets cleaner
+          with a summariser and a classifier in front of it.
+          Service managers read a digest instead of 200 tickets;
+          on-call engineers start the morning with a briefing
+          instead of scrolling Slack.
+        </Para>
+
+        <H2>What AI does not replace (yet)</H2>
+        <UL>
+          <li>
+            Anyone in a role that requires judgment, empathy, or
+            accountability. AI augments those roles; it does not
+            remove them.
+          </li>
+          <li>
+            Hard arithmetic and regulatory calculations. Those
+            stay in deterministic code, with AI as the
+            data-extraction layer in front.
+          </li>
+          <li>
+            Decisions where being wrong costs real money and no
+            one checks the output. That is where guardrails and
+            human-in-the-loop belong.
+          </li>
+        </UL>
+
+        <H2>Cost, and how to control it</H2>
+        <Para>
+          AI cost is usually either invisible or runaway. The trick
+          is to treat it like any other infrastructure line. Route
+          easy cases to cheaper models (Haiku, Gemini Flash),
+          expensive cases to larger ones (Claude Opus, GPT-class),
+          cache anything that repeats, and measure cost per task.
+          A well-instrumented pipeline runs somewhere between
+          $0.001 and $0.10 per action depending on complexity —
+          budgetable and forecastable, not a surprise.
+        </Para>
+
+        <H2>Data, privacy, and sovereignty</H2>
+        <Para>
+          Running client data through foreign APIs is a
+          legitimate concern, especially in regulated sectors. The
+          answer is not to avoid AI — it is to pick the right
+          deployment model. Enterprise API tiers from Anthropic
+          and OpenAI contractually exclude your data from
+          training. For stricter cases, open-weight models
+          (Llama, Mistral, Qwen) run on infrastructure you control,
+          including on-premise. The cost premium has shrunk sharply
+          in the last eighteen months.
+        </Para>
+
+        <H2>How to start (without wasting money)</H2>
+        <UL>
+          <li>
+            Pick one process that burns hours weekly and has a
+            clear success metric. Not five processes, not a
+            platform — one process.
+          </li>
+          <li>
+            Run a two-week pilot with real users and real data.
+            Measure the before-state honestly.
+          </li>
+          <li>
+            Build guardrails and evals before scaling. If your AI
+            system has no tests, it is not a system — it is a
+            prompt and a prayer.
+          </li>
+          <li>
+            Expand after the pilot proves out. Not before.
+          </li>
+        </UL>
+
+        <H2>The Zimbabwean advantage</H2>
+        <Para>
+          Local businesses are often small enough to deploy AI
+          changes in days rather than quarters, and pragmatic
+          enough to cut losses quickly when something does not
+          work. That is a real edge over larger organisations
+          drowning in procurement cycles. The teams that will
+          benefit most from AI in Zimbabwe are not the biggest —
+          they are the ones that pick sharp use cases, ship, and
+          iterate.
         </Para>
       </>
     ),

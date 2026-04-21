@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "export:cpanel": "next build && cd out && zip -r ../spiritus-cpanel.zip . -x '.DS_Store' && cd .. && echo 'Ready: spiritus-cpanel.zip (upload to public_html)'"
   },
   "dependencies": {
     "next": "16.2.4",

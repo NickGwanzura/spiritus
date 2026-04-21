@@ -105,40 +105,21 @@ export default function Navbar() {
       >
         <Link
           href="/"
+          aria-label="Spiritus Systems — Home"
           style={{
             display: "flex",
             alignItems: "center",
-            gap: 10,
             textDecoration: "none",
+            height: 28,
+            fontFamily: "var(--font-sans)",
+            fontSize: 16,
+            fontWeight: 700,
+            letterSpacing: "0.12em",
+            color: "var(--fg)",
+            textTransform: "uppercase",
           }}
         >
-          <div
-            style={{
-              width: 24,
-              height: 24,
-              borderRadius: "var(--r-sm)",
-              background: "var(--accent)",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          >
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-              <path d="M7 1L12 4V10L7 13L2 10V4L7 1Z" stroke="#fff" strokeWidth="1.5" />
-              <circle cx="7" cy="7" r="2" fill="#fff" />
-            </svg>
-          </div>
-          <span
-            style={{
-              fontFamily: "var(--font-sans)",
-              fontWeight: 600,
-              fontSize: 14,
-              letterSpacing: "-0.01em",
-              color: "var(--fg)",
-            }}
-          >
-            Spiritus Systems
-          </span>
+          SPIRITUS
         </Link>
 
         {/* Desktop links */}

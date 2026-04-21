@@ -33,40 +33,22 @@ export default function Footer() {
         <div>
           <Link
             href="/"
+            aria-label="Spiritus Systems — Home"
             style={{
               display: "inline-flex",
               alignItems: "center",
-              gap: 10,
               textDecoration: "none",
               marginBottom: 16,
+              height: 26,
+              fontFamily: "var(--font-sans)",
+              fontSize: 15,
+              fontWeight: 700,
+              letterSpacing: "0.12em",
+              color: "var(--fg)",
+              textTransform: "uppercase",
             }}
           >
-            <div
-              style={{
-                width: 22,
-                height: 22,
-                borderRadius: "var(--r-sm)",
-                background: "var(--accent)",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
-              <svg width="12" height="12" viewBox="0 0 14 14" fill="none">
-                <path d="M7 1L12 4V10L7 13L2 10V4L7 1Z" stroke="#fff" strokeWidth="1.5" />
-                <circle cx="7" cy="7" r="1.8" fill="#fff" />
-              </svg>
-            </div>
-            <span
-              style={{
-                fontFamily: "var(--font-sans)",
-                fontSize: 13,
-                fontWeight: 600,
-                color: "var(--fg)",
-              }}
-            >
-              Spiritus Systems
-            </span>
+            SPIRITUS
           </Link>
           <p
             style={{

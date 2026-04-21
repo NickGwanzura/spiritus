@@ -3,6 +3,8 @@ import { services } from "@/data/services";
 import { posts } from "@/data/posts";
 import { SITE_URL } from "@/lib/seo";
 
+export const dynamic = "force-static";
+
 type Entry = {
   url: string;
   lastModified: Date;
