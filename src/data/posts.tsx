@@ -108,42 +108,375 @@ const Note = ({
 
 export const posts: Post[] = [
   {
-    slug: "how-much-does-custom-software-cost-in-zimbabwe",
+    slug: "real-estate-systems-stand-sales-zimbabwe",
     title:
-      "How much does custom software cost in Zimbabwe? (2026 guide)",
+      "Real estate systems that manage the sale of stands: what actually works in Zimbabwe",
     description:
-      "A practical, no-nonsense pricing guide for custom software development in Zimbabwe — websites, web apps, SaaS, CRM, ERP, and integrations. Real ranges, what drives cost, and how to scope an engagement that fits your budget.",
-    publishedAt: "2026-04-05",
-    updatedAt: "2026-04-19",
+      "Selling residential and commercial stands in Zimbabwe is nothing like selling houses. Here is how we design software for stand sales: inventory by coordinates, instalment plans, title deeds, and the workflows that keep every plot accounted for.",
+    publishedAt: "2026-04-23",
     author: "Spiritus Systems",
-    tags: ["pricing", "custom software", "Zimbabwe", "guide"],
+    tags: ["real estate", "property", "Zimbabwe", "CRM", "ERP"],
     readingMinutes: 7,
     body: (
       <>
         <Para>
-          The question we get more than any other is: <em>how much will this
-          cost?</em> The honest answer is that it depends — but
-          &ldquo;it depends&rdquo; is not useful when you are trying to plan a
-          budget. So this post lays out real ranges for custom software
-          development in Zimbabwe in 2026, what drives the price up or down,
-          and how to scope an engagement that fits what you actually need.
+          Stand sales are one of the most common, and most poorly
+          tooled, workflows in Zimbabwean property. A developer
+          opens up a suburb, divides the land into individual
+          plots, and has to track every stand from survey to title
+          deed across years of instalment payments. Most
+          off-the-shelf property software is built around houses and
+          monthly rentals. Stands behave differently, and the
+          software has to match.
         </Para>
 
-        <Note label="A note on the figures">
-          Every figure below is a <strong>starting point</strong>, expressed
-          in USD, and based on real engagements completed by Spiritus Systems
-          in the last 18 months. Final scope is always quoted individually
-          against a written brief — your project may be cheaper or more
-          expensive depending on integrations, compliance, and the depth of
-          the workflow being modelled. Treat these as a planning tool, not a
-          price list. We refresh this post when ranges change.
+        <Note label="Why stands are different">
+          A stand has coordinates, not an address. It is sold once,
+          not rented monthly. Payment usually spans years of
+          instalments. Title deed transfer lags the final payment by
+          months. And a single development might have hundreds of
+          stands, each at a slightly different stage of the same
+          long workflow. Generic property CRMs miss all of this.
+        </Note>
+
+        <H2>Inventory: the plot is the record</H2>
+        <Para>
+          The core of a stand-sales system is the plot register. Every
+          stand has a unique identifier, a location on the layout
+          plan, a size in square metres, a zoning class, and a status
+          that moves through reserved, sold, fully paid, title
+          transferred, and occupied. The register has to reflect the
+          physical reality on the ground and the legal reality in the
+          deeds office, and the two are rarely in perfect sync.
+        </Para>
+        <Para>
+          We build the inventory as a map-first interface: the sales
+          team sees the layout plan with every stand colour-coded by
+          status, clicks a plot, and sees the buyer, the payment
+          schedule, the outstanding balance, and the next action due.
+          Searching by buyer, by phase, by price band, or by payment
+          state all run off the same underlying record.
+        </Para>
+
+        <H2>Instalment plans and the payment waterfall</H2>
+        <Para>
+          Stand sales in Zimbabwe are almost always on instalment
+          plans, spanning years rather than months. The software has
+          to handle bespoke schedules per buyer,
+          varying deposit sizes, early settlement discounts, late
+          payment penalties, and the occasional currency shift
+          mid-contract. Most clients also allow buyers to restructure
+          a schedule after a missed month, which the system needs to
+          support without breaking audit history.
+        </Para>
+        <Para>
+          We store every payment against the stand, not against a
+          generic invoice, so the balance, the history, and the
+          remaining schedule always belong to a specific plot. A
+          payment waterfall rule applies incoming cash to penalties,
+          then interest, then principal, so finance never has to
+          work out manually where a buyer's money landed.
+        </Para>
+
+        <H2>Title deeds and the handover workflow</H2>
+        <Para>
+          The final payment is not the end of the process. Title
+          deed transfer involves the conveyancer, the deeds office,
+          the city council, and a run of standard documents that
+          have to be generated, signed, and filed. The system has
+          to track each step, flag delays, and surface the buyers
+          who are fully paid but still waiting for transfer. In a
+          mature development this queue is often dozens of
+          files long and is the single biggest source of customer
+          complaints. Automating the tracking cuts the complaints
+          in half even before the conveyancer works faster.
+        </Para>
+
+        <H2>Reporting the board actually reads</H2>
+        <Para>
+          Stand developers want to see three numbers: how many
+          stands are sold versus available, how much cash is
+          committed across active instalment plans, and how much is
+          actually collected this month versus this month last year.
+          We build those three numbers as the top of every
+          dashboard, with drill-downs into phase, sales rep,
+          payment method, and arrears ageing. A healthy system
+          makes the monthly board pack a five minute export rather
+          than a two-day reconciliation project.
+        </Para>
+
+        <H2>WhatsApp, not email, for buyer communication</H2>
+        <Para>
+          Every buyer conversation in Zimbabwean property happens on
+          WhatsApp. The system has to send the welcome pack, the
+          payment confirmations, the reminder for the next
+          instalment, and the fully paid celebration through the
+          same channel, with every message logged against the plot
+          record. Integrating WhatsApp Business properly means the
+          sales team stops copying receipts into a group chat and
+          the audit trail stops depending on someone's phone.
+        </Para>
+
+        <H2>Scope and how to phase it</H2>
+        <Para>
+          A focused stand-sales system for a single development
+          typically covers inventory, instalment schedules, payment
+          tracking, and a WhatsApp channel for buyer communication.
+          A larger, multi-phase platform adds title deed tracking,
+          conveyancer workflows, board reporting, and multi-developer
+          administration. We almost always recommend phasing: ship
+          the inventory and payment engine first, prove it with the
+          sales team and finance team, then layer title deed
+          tracking and board reporting once the core is trusted. A
+          live v1 the sales team actually uses beats a speculative
+          v3 that never ships.
+        </Para>
+
+        <H2>The mistake to avoid</H2>
+        <Para>
+          The biggest trap is trying to force stand sales into a
+          generic property CRM or a rental platform. We have seen
+          developers spend long stretches fighting a tool that was built
+          for letting agents before accepting that the workflow is
+          different. Build the inventory, the schedule engine, and
+          the title tracker for what they actually are: the core of
+          your business, not an add-on to someone else's. That is
+          the system that keeps every stand accounted for, every
+          buyer up to date, and every board meeting free of
+          surprises.
+        </Para>
+      </>
+    ),
+  },
+
+  {
+    slug: "ecocash-paynow-card-payments-zimbabwe-ecommerce",
+    title:
+      "EcoCash, Paynow, and card payments: wiring modern payments into Zimbabwean software",
+    description:
+      "A practical guide to payment rails for Zimbabwean e-commerce and SaaS in 2026. How EcoCash, Paynow, bank transfer, and international card processing actually fit together, what each costs, and how to pick the right mix for your product.",
+    publishedAt: "2026-04-23",
+    author: "Spiritus Systems",
+    tags: ["payments", "EcoCash", "Paynow", "Zimbabwe", "e-commerce"],
+    readingMinutes: 7,
+    body: (
+      <>
+        <Para>
+          Payments are the quiet make-or-break of any Zimbabwean software
+          product. The user journey can be perfect, the design can be
+          stunning, the stock levels can be accurate, and none of it
+          matters if the checkout fails or the settlement takes days
+          to reach your bank account. This post is a practical guide
+          to the rails we use and how we decide which combination
+          fits a given product.
+        </Para>
+
+        <Note label="A quick map">
+          In Zimbabwe today, the practical choices are mobile money
+          (EcoCash, OneMoney, InnBucks), local card and bank rails
+          (Paynow, ZimSwitch, ZIPIT, RTGS), international card
+          processing (Stripe, PayPal, Flutterwave) and direct bank
+          transfer. Most production systems we ship combine at least
+          two of these, sometimes four.
+        </Note>
+
+        <H2>EcoCash: still the default for local consumers</H2>
+        <Para>
+          EcoCash remains the payment rail the widest slice of Zimbabwean
+          consumers actually trust. If your customer base is domestic
+          retail, B2C services, or anything at small-ticket transaction
+          sizes, EcoCash is usually the first rail to wire in.
+          Settlement is near-instant, dispute rates are low, and the
+          user flow is familiar on every feature phone and smartphone.
+        </Para>
+        <Para>
+          The trade-offs are real. Merchant fees are not trivial once
+          volumes scale, the API ecosystem is less mature than
+          international equivalents, and limits can bite for
+          higher-ticket items. We integrate EcoCash either directly
+          through the merchant API or via Paynow as an aggregator,
+          depending on transaction volume and how much operational
+          control the client wants.
+        </Para>
+
+        <H2>Paynow: the aggregator most teams should start with</H2>
+        <Para>
+          For most small and mid-sized merchants, Paynow is the
+          pragmatic first integration. It aggregates EcoCash,
+          OneMoney, Zimswitch debit cards, and Visa/Mastercard under a
+          single API and one settlement relationship. Going live
+          takes days, a clean test environment lets you validate
+          flows without touching real money, and reconciliation is
+          simpler because there is only one account to reason about.
+        </Para>
+
+        <H2>Stripe and international cards: for the diaspora and cross-border</H2>
+        <Para>
+          If any part of your customer base sits outside Zimbabwe, you
+          need an international rail. Diaspora buyers, SaaS customers
+          paying in USD, and foreign donors for NGOs all expect a
+          card flow that works the way it does everywhere else.
+          Stripe remains the gold standard for developer experience
+          where your billing entity can qualify; Flutterwave is a
+          workable alternative for Zimbabwe-incorporated entities.
+          A typical pattern we ship is Paynow for local checkout and
+          Stripe or Flutterwave for international, chosen at the
+          payment step by billing country or currency.
+        </Para>
+
+        <H2>Bank transfer and RTGS: underrated for B2B</H2>
+        <Para>
+          For B2B invoicing, retainers, and anything at larger
+          ticket sizes, direct bank transfer is still the cheapest
+          and most reliable rail in Zimbabwe. Merchant cost
+          is near zero and limits are generous. The real cost is
+          operational: you need someone reconciling against bank
+          statements, ideally automatically. Our preferred setup
+          ingests daily statements, matches incoming references
+          against open invoices, and flags anything that does not
+          match for human review. A multi-hour task becomes a ten
+          minute morning check.
+        </Para>
+
+        <H2>Building resilient checkout flows</H2>
+        <Para>
+          Any rail can fail. EcoCash has network wobbles. Paynow
+          occasionally times out. International processors hit their
+          own patches of turbulence. The question is not whether a
+          failure will happen, but whether your checkout degrades
+          gracefully when it does.
+        </Para>
+        <UL>
+          <li>
+            <strong>Idempotency on every request.</strong> The user
+            taps twice, the network flaps, the retry fires twice.
+            Every charge attempt carries an idempotency key so the
+            second request is a safe no-op.
+          </li>
+          <li>
+            <strong>Webhooks verified and replayable.</strong>{" "}
+            Confirmation comes from the provider's webhook, not from
+            the redirect back to your site. Webhooks are verified
+            against a shared secret and persisted before any business
+            logic runs, so you can replay a missed event.
+          </li>
+          <li>
+            <strong>Order state that survives a crash.</strong> Every
+            transaction lives in a proper state machine (initiated,
+            pending, confirmed, failed, refunded) with timestamps
+            at each transition. Accounts and customer support both
+            read from the same history.
+          </li>
+          <li>
+            <strong>A fallback rail.</strong> If Paynow is down, offer
+            the customer a direct bank transfer with an order
+            reference and an automated reconciliation path. A broken
+            checkout that offers an alternative is a saved sale.
+          </li>
+        </UL>
+
+        <H2>Reconciliation is the part nobody budgets for</H2>
+        <Para>
+          The hardest part of a Zimbabwean payment stack is not
+          accepting money; it is matching every inflow to an order,
+          invoice, or customer in a way finance and operations both
+          trust. Every rail produces a different statement format on
+          a different cadence. We build a reconciliation dashboard
+          alongside the checkout that shows every inflow, its source
+          rail, its matched order, and a queue of unmatched items
+          for finance to investigate, so the merchant's view of cash
+          is always the truth.
+        </Para>
+
+        <H2>Multi-currency in a ZWL and USD economy</H2>
+        <Para>
+          Zimbabwean merchants often need to price in USD, settle
+          partially in ZWL, report to ZIMRA in both, and invoice
+          diaspora buyers in USD only. Handling this cleanly means
+          storing every transaction in its original currency with an
+          explicit FX rate at the moment of capture, never
+          converting on the fly, and treating ZWL and USD as two
+          distinct ledgers that roll up to a consolidated view only
+          at the reporting layer.
+        </Para>
+
+        <H2>How to pick the right starting rail</H2>
+        <UL>
+          <li>
+            Selling to Zimbabwean consumers at small-ticket order
+            values: Paynow first, add EcoCash direct later if volume
+            justifies it.
+          </li>
+          <li>
+            Selling to diaspora or international SaaS customers:
+            Stripe or Flutterwave first, Paynow as a local option
+            alongside.
+          </li>
+          <li>
+            B2B invoicing and retainers at larger ticket sizes: bank
+            transfer with automated reconciliation is the floor,
+            card options added for convenience.
+          </li>
+          <li>
+            NGOs taking donations from multiple countries: Stripe
+            plus a local option, with receipts and tax handling
+            built in.
+          </li>
+        </UL>
+
+        <H2>The rule we keep coming back to</H2>
+        <Para>
+          A payment stack is only as good as the worst rail on its
+          worst day. Build for the failures, not the happy path,
+          instrument everything that touches money, and treat
+          reconciliation as a product surface rather than a
+          spreadsheet. Every Zimbabwean merchant we have shipped for
+          has reported the same thing once the stack is in place:
+          fewer finance headaches, cleaner monthly closes, and a
+          surprising amount of reclaimed revenue that used to fall
+          through the cracks.
+        </Para>
+      </>
+    ),
+  },
+
+  {
+    slug: "how-much-does-custom-software-cost-in-zimbabwe",
+    title:
+      "What drives the cost of custom software in Zimbabwe",
+    description:
+      "A practical guide to how custom software is scoped and priced in Zimbabwe. What actually drives the cost of websites, web apps, SaaS, CRM, ERP, and integrations, and how to shape an engagement that fits your budget.",
+    publishedAt: "2026-04-05",
+    updatedAt: "2026-04-23",
+    author: "Spiritus Systems",
+    tags: ["pricing", "custom software", "Zimbabwe", "guide"],
+    readingMinutes: 6,
+    body: (
+      <>
+        <Para>
+          The question we get more than any other is: <em>how much will this
+          cost?</em> The honest answer is that it depends, but &ldquo;it
+          depends&rdquo; is not useful when you are trying to plan a budget.
+          So this post lays out what actually drives the cost of custom
+          software in Zimbabwe, how we scope engagements, and how to shape
+          a project that fits what you need without burning budget on
+          things you do not.
+        </Para>
+
+        <Note label="Why no price list">
+          Every project is different. A one-page brochure site and a
+          multi-tenant SaaS both count as &ldquo;a website,&rdquo; and
+          their scopes live on different planets. Rather than pretend a
+          public price list is useful, we quote each engagement against
+          a written brief. This article explains the levers that move
+          the quote up or down so you can shape the brief deliberately.
         </Note>
 
         <H2>What &ldquo;custom software&rdquo; actually means</H2>
         <Para>
           Custom software is anything built specifically for your business
-          rather than bought off the shelf. In Zimbabwe that usually means one
-          of these:
+          rather than bought off the shelf. In Zimbabwe that usually means
+          one of these:
         </Para>
         <UL>
           <li>A marketing website or web app for a local SME or corporate</li>
@@ -153,124 +486,102 @@ export const posts: Post[] = [
           <li>An automation, integration, or AI system for internal operations</li>
         </UL>
         <Para>
-          The cost ranges below are USD, fixed-price, scoped against a written
-          brief. Local-currency invoicing is available; ranges assume current
-          USD pricing.
+          Each of these has a different shape, a different risk profile,
+          and a different set of cost drivers. Treating them as one
+          category is why so many software quotes come back feeling
+          arbitrary.
         </Para>
 
-        <H2>Pricing ranges for 2026</H2>
-
-        <H3>Marketing websites — $1,500 to $8,000</H3>
-        <Para>
-          A modern marketing site for a Zimbabwean SME usually lands between
-          $1,500 (single-page, lightly designed, content-managed) and $8,000
-          (multi-page, fully designed, with a CMS, blog, and SEO setup). At
-          the high end, you get bespoke design, structured content, optimised
-          performance, and a setup the team can actually update.
-        </Para>
-
-        <H3>E-commerce stores — $4,000 to $15,000</H3>
-        <Para>
-          E-commerce is more expensive because of payment integration, stock
-          handling, and order management. Expect $4,000 for a small store on
-          a proven platform with EcoCash and Paynow wired in, scaling to
-          $15,000 for a custom Next.js store with multi-currency support,
-          delivery routing, and admin tooling.
-        </Para>
-
-        <H3>Custom CRM and ERP — $6,000 to $25,000</H3>
-        <Para>
-          Custom enterprise systems start at around $6,000 for a
-          single-workflow CRM and reach $25,000 for a multi-module ERP with
-          accounting integration, role-based access, audit trails, and a
-          dashboard layer. The deciding factor is rarely complexity of code —
-          it is the breadth of workflows and the depth of integrations.
-        </Para>
-
-        <H3>SaaS platforms — $12,000 to $60,000+ for v1</H3>
-        <Para>
-          A SaaS product is the longest engagement because it has to be
-          production-grade on day one — auth, billing, multi-tenancy,
-          monitoring, the lot. A focused MVP lands around $12,000. A
-          full-fat v1 with admin tooling, analytics, and payment rails
-          wired in for both Zimbabwe and international customers is
-          $40,000 to $60,000 and up.
-        </Para>
-
-        <H3>AI and automation — $3,000 to $20,000 per use case</H3>
-        <Para>
-          AI engagements are scoped per use case. A document understanding
-          pipeline (invoices, KYC, contracts) starts around $3,000. A
-          customer-facing agent with retrieval, guardrails, and WhatsApp
-          integration is $8,000 to $20,000 depending on volume and the
-          number of edge cases that need handled.
-        </Para>
-
-        <H3>Integrations — $1,500 to $8,000 per integration</H3>
-        <Para>
-          Connecting two systems (say Pastel to a custom CRM, or Shopify to
-          your accounting package) ranges from $1,500 for a one-direction,
-          scheduled sync up to $8,000 for a bidirectional, real-time
-          integration with retries, monitoring, and a dead-letter queue.
-        </Para>
-
-        <H2>What pushes the price up or down</H2>
+        <H2>The levers that move the quote</H2>
         <UL>
           <li>
-            <strong>Scope clarity.</strong> A tight written brief saves
-            money. Discovery happens either before contract or during build;
-            doing it before is cheaper.
+            <strong>Scope clarity.</strong> A tight written brief is the
+            cheapest thing you can bring to a quote. Discovery happens
+            either before contract or during build; doing it before is
+            cheaper and faster.
           </li>
           <li>
-            <strong>Integrations.</strong> Every system that needs to talk
-            to another system adds cost. Off-the-shelf APIs are cheap;
-            legacy databases are not.
+            <strong>Integrations.</strong> Every system that needs to
+            talk to another system adds real work. Off-the-shelf APIs
+            are cheap, legacy databases and paper-based handoffs are
+            not.
           </li>
           <li>
-            <strong>Design fidelity.</strong> Using a clean default design
-            system is cheaper than custom brand work. Both are valid choices.
+            <strong>Design fidelity.</strong> Using a clean default
+            design system is faster than a bespoke brand build. Both
+            are valid choices, but they sit in different scope tiers.
           </li>
           <li>
-            <strong>Compliance and audit.</strong> Regulated sectors (banks,
-            insurers, health) need audit trails, logging, and security
-            review that adds 20–40% to a build.
+            <strong>Compliance and audit.</strong> Regulated sectors
+            (banks, insurers, health) need audit trails, security
+            review, and stricter release processes. That is meaningful
+            additional work.
           </li>
           <li>
-            <strong>Volume and scale.</strong> A platform expecting 50
-            users is built differently to one expecting 50,000. We design
-            for the actual target, not a guess.
+            <strong>Volume and scale.</strong> A platform for a small
+            internal team is built differently to one expecting
+            thousands of concurrent users. We design for the actual
+            target, not a guess.
+          </li>
+          <li>
+            <strong>Content and migration.</strong> Writing copy,
+            photographing products, moving data off an old system, or
+            retraining staff are all real line items that quietly
+            dominate many projects if not planned for.
           </li>
         </UL>
 
-        <H2>How to scope an engagement that fits your budget</H2>
+        <H2>How we scope an engagement</H2>
+        <Para>
+          Every engagement starts with a short discovery: a written
+          brief, one or two workshops, and a list of integrations and
+          constraints. That output becomes a fixed-scope, fixed-price
+          proposal you can take to a board. Changes after that sit in a
+          separate change order so the baseline stays stable.
+        </Para>
         <Para>
           The cheapest project is the one that solves a single, sharp
-          problem. The most expensive is the one that tries to solve every
-          problem at once. We almost always recommend phasing — ship a
-          focused v1, learn what real users actually do, then expand.
+          problem. The most expensive is the one that tries to solve
+          every problem at once. We almost always recommend phasing:
+          ship a focused v1, learn what real users actually do, then
+          expand. A small, well-built tool earns trust and unlocks a
+          follow-on engagement. A large, half-built tool earns neither.
         </Para>
-        <Para>
-          A good rule of thumb: if your budget is tight, cut features
-          before cutting quality. A small, well-built tool earns trust and
-          unlocks a follow-on engagement. A large, half-built tool earns
-          neither.
-        </Para>
+
+        <H2>Signals that a project will come in on the lower end</H2>
+        <UL>
+          <li>A single, well-understood workflow rather than a platform</li>
+          <li>Existing brand assets, content, and data ready to migrate</li>
+          <li>Modern APIs on every system we need to integrate with</li>
+          <li>A decision maker available weekly for review and approval</li>
+          <li>No regulatory or compliance obligations beyond the basics</li>
+        </UL>
+
+        <H2>Signals that a project will come in on the higher end</H2>
+        <UL>
+          <li>Multi-module, multi-tenant, or multi-market scope</li>
+          <li>Legacy systems that need reverse-engineering to integrate</li>
+          <li>Heavy custom design or brand-first expectations</li>
+          <li>Regulated industry with audit and security requirements</li>
+          <li>Large-scale data migration from paper, spreadsheets, or unsupported tools</li>
+        </UL>
 
         <H2>Payment terms in Zimbabwe</H2>
         <Para>
           We invoice in USD and accept USD bank transfer, local bank
-          transfer, EcoCash for smaller retainers, and cross-border wire
-          for diaspora-owned clients. Standard terms are 50% on signature,
-          50% on delivery for fixed-price builds, and monthly in advance
-          for retainers.
+          transfer, EcoCash for smaller retainers, and cross-border
+          wire for diaspora-owned clients. Fixed-price builds are
+          typically billed in milestone instalments tied to delivery.
+          Retainers are billed monthly in advance.
         </Para>
 
         <H2>Want a real number for your project?</H2>
         <Para>
-          Send us a short brief — what you want built, who uses it, what
-          it integrates with — and we will come back with a fixed-price
-          quote within five working days. No surprises, no hourly
-          guesswork, no scope creep.
+          Send us a short brief (what you want built, who uses it,
+          what it integrates with) and we will come back with a
+          fixed-price quote. No hourly guesswork, no scope creep, and
+          no public price list designed to anchor you before we have
+          even heard the problem.
         </Para>
       </>
     ),
@@ -293,7 +604,7 @@ export const posts: Post[] = [
           When a Zimbabwean business outgrows spreadsheets and WhatsApp
           groups, the next decision is what to use as a customer
           relationship management system. The market is dominated by three
-          big names — Salesforce, HubSpot, and Zoho — and they are all
+          big names (Salesforce, HubSpot, and Zoho) and they are all
           competent products. So when does a custom-built CRM actually
           make more sense?
         </Para>
@@ -306,8 +617,9 @@ export const posts: Post[] = [
         </Para>
         <UL>
           <li>
-            Per-seat licensing in USD. For a 20-person team on a mid-tier
-            plan, that is $400–$2,000 per month, every month, forever.
+            Per-seat licensing in USD. For a growing team on a
+            mid-tier plan, that subscription cost compounds every
+            month, for every seat, for as long as you use it.
           </li>
           <li>
             Field, workflow, and report customisation is limited unless
@@ -324,9 +636,9 @@ export const posts: Post[] = [
           </li>
         </UL>
         <Para>
-          For a startup with 1–5 users running standard sales workflows,
-          off-the-shelf is almost always the right answer. Pay the
-          monthly fee, get back to selling.
+          For a small team running standard sales workflows, off-the-shelf
+          is almost always the right answer. Pay the monthly fee, get
+          back to selling.
         </Para>
 
         <H2>When custom starts to make sense</H2>
@@ -339,7 +651,7 @@ export const posts: Post[] = [
             <strong>Your workflow does not fit the SaaS model.</strong>{" "}
             You sell something that does not look like leads-opportunities-deals.
             Property management, billboard advertising, HVAC service
-            scheduling, freight forwarding — none of these map cleanly to
+            scheduling, freight forwarding. None of these map cleanly to
             a generic CRM.
           </li>
           <li>
@@ -369,8 +681,8 @@ export const posts: Post[] = [
           HubSpot or Zoho to clients regularly. Specifically:
         </Para>
         <UL>
-          <li>Teams under 10 with standard sales pipelines</li>
-          <li>Businesses that need a CRM running this week, not in 12 weeks</li>
+          <li>Small teams with standard sales pipelines</li>
+          <li>Businesses that need a CRM running this week, not next quarter</li>
           <li>Companies that intend to run experiments before committing to a workflow</li>
           <li>Anyone who values vendor support over flexibility</li>
         </UL>
@@ -380,20 +692,46 @@ export const posts: Post[] = [
           And we recommend custom when:
         </Para>
         <UL>
-          <li>The team is 15+ and growing, with workflow requirements that vendors cannot model without expensive consultants</li>
-          <li>The business has unique data shapes — billboards, properties, jobs, consignments — that do not behave like contacts and deals</li>
+          <li>The team is mid-sized and growing, with workflow requirements that vendors cannot model without expensive consultants</li>
+          <li>The business has unique data shapes (billboards, properties, jobs, consignments) that do not behave like contacts and deals</li>
           <li>WhatsApp is the primary channel and reps need it inside the CRM, not in a separate tab</li>
           <li>The sector is regulated enough that local hosting and audit logging are non-negotiable</li>
         </UL>
 
         <H2>What a custom CRM build looks like</H2>
         <Para>
-          A typical custom CRM engagement runs 8–16 weeks and includes
-          discovery, data model design, role-based access, dashboards,
-          integrations (WhatsApp, accounting, payments), staff training,
-          and a 90-day post-launch runway. Cost ranges from $6,000 for
-          a focused single-workflow build to $25,000 for a multi-module
-          system with deep integrations.
+          A typical custom CRM engagement includes discovery, data
+          model design, role-based access, dashboards, integrations
+          (WhatsApp, accounting, payments), staff training, and a
+          post-launch support runway. Scope ranges from a focused
+          single-workflow build to a multi-module system with deep
+          integrations into accounting, payments, and messaging
+          platforms.
+        </Para>
+
+        <H2>The hidden costs of both paths</H2>
+        <Para>
+          Off-the-shelf CRMs are cheap to start and get expensive to
+          customise. Every bespoke field, automation, or report beyond
+          the default tier either bumps you into a higher plan, locks
+          you to a consultant, or forces a third-party plugin with
+          its own monthly bill. Custom CRMs are the opposite: a
+          larger up-front cost and a smaller, more predictable
+          monthly spend. The long-run winner depends almost entirely
+          on how unusual your workflow is and how long you plan to
+          run it.
+        </Para>
+
+        <H2>Migration and training, the quiet killers</H2>
+        <Para>
+          The thing that sinks most CRM projects is not the software.
+          It is the switch. Data in Excel, WhatsApp, and the head of
+          your longest-tenured salesperson has to land cleanly in the
+          new system, and the team has to actually adopt it. We
+          always scope migration, training, and a post-launch
+          adoption window explicitly, whether the build is custom or
+          a Salesforce rollout. The tool is half the work; the
+          handover is the other half.
         </Para>
 
         <H2>How to decide</H2>
@@ -401,7 +739,7 @@ export const posts: Post[] = [
           Try the off-the-shelf option first. If you find yourself
           paying for plugins, hiring consultants to bend it into shape,
           or doing critical work outside the CRM because it cannot do it
-          natively — that is your signal that custom would now save you
+          natively. That is your signal that custom would now save you
           money. Until you hit that wall, vendor SaaS is the cheaper
           bet.
         </Para>
@@ -427,7 +765,7 @@ export const posts: Post[] = [
           connection and a desktop on mains power. In Zimbabwe, that
           assumption is wrong about a third of the day. Load-shedding,
           fibre cuts, and metered mobile data are facts of operating
-          life. Software that ignores them generates real losses —
+          life. Software that ignores them generates real losses:
           missed sales, lost data, frustrated staff.
         </Para>
         <Para>
@@ -440,7 +778,7 @@ export const posts: Post[] = [
           Most apps fail in one of two ways when the connection
           drops: they freeze on a spinner, or they accept an action
           and then silently lose it. Both are bad. The fix is to
-          design for queued action — every user action is captured
+          design for queued action. Every user action is captured
           locally, then synced to the server when the network
           returns. The user keeps working; the system catches up.
         </Para>
@@ -459,7 +797,7 @@ export const posts: Post[] = [
         <Para>
           Background sync queues actions while offline and replays
           them when the connection returns. Conflict resolution is
-          the harder problem — what happens when two reps update
+          the harder problem. What happens when two reps update
           the same record offline? We default to last-write-wins
           for low-stakes fields and explicit merge UI for
           high-stakes ones.
@@ -468,10 +806,10 @@ export const posts: Post[] = [
         <H2>4. Optimise for low data</H2>
         <Para>
           Bundle size matters everywhere, but it matters more in
-          Zimbabwe where users pay per megabyte. We aim for under
-          200KB of JavaScript on first load, lazy-load everything
-          else, compress images aggressively, and serve responsive
-          image sizes so phones do not download desktop assets.
+          Zimbabwe where users pay per megabyte. We keep the first
+          load as small as possible, lazy-load everything else,
+          compress images aggressively, and serve responsive image
+          sizes so phones do not download desktop assets.
         </Para>
 
         <H2>5. Handle authentication offline</H2>
@@ -491,6 +829,34 @@ export const posts: Post[] = [
           work is safe.
         </Para>
 
+        <H2>7. Plan for partial failure, not just full outage</H2>
+        <Para>
+          Real connectivity in Zimbabwe is rarely fully on or fully
+          off. More commonly it is slow, intermittent, or high
+          latency. The app needs to behave sensibly across that
+          whole spectrum. We set short, explicit timeouts on every
+          network call, surface loading states quickly instead of a
+          frozen spinner, and give the user a retry control rather
+          than a stuck screen. Anything that writes to the server is
+          optimistic
+          in the UI and pessimistic in the database: the action
+          appears immediately, but the server has final say and
+          rolls back cleanly when it cannot accept the write.
+        </Para>
+
+        <H2>8. Test under real Zimbabwean conditions</H2>
+        <Para>
+          The biggest gap between offline-first in theory and
+          offline-first in practice is the test environment. Chrome
+          DevTools throttling is a starting point, but it does not
+          capture the reality of a 3G signal bouncing between two
+          and no bars in a lift in Eastgate. Every release gets
+          tested on real devices, on real networks, in real
+          locations we know clients will use. The bugs you find on
+          a Huawei Y6 in the Joina City parking garage are not the
+          bugs you find on a Macbook in the office.
+        </Para>
+
         <H2>The toolkit</H2>
         <UL>
           <li>Next.js with PWA support</li>
@@ -503,11 +869,11 @@ export const posts: Post[] = [
 
         <H2>The result</H2>
         <Para>
-          An app that loads in under two seconds on Econet 3G,
-          works during load-shedding, syncs cleanly when the power
-          and internet return, and treats data as precious. That
-          is the bar for software shipped in Zimbabwe — anything
-          less is a liability.
+          An app that loads quickly on a local 3G signal, works
+          during load-shedding, syncs cleanly when the power and
+          internet return, and treats data as precious. That is the
+          bar for software shipped in Zimbabwe. Anything less is a
+          liability.
         </Para>
       </>
     ),
@@ -518,7 +884,7 @@ export const posts: Post[] = [
     title:
       "AI in Zimbabwean business: what is actually paying off in 2026",
     description:
-      "AI is everywhere on LinkedIn and nowhere in most Zimbabwean offices. Here is a grounded look at where AI is genuinely earning its keep for local businesses — and where the hype still outruns the value.",
+      "AI is everywhere on LinkedIn and nowhere in most Zimbabwean offices. Here is a grounded look at where AI is genuinely earning its keep for local businesses, and where the hype still outruns the value.",
     publishedAt: "2026-04-18",
     updatedAt: "2026-04-20",
     author: "Spiritus Systems",
@@ -536,15 +902,15 @@ export const posts: Post[] = [
         </Para>
         <Para>
           This post is a practical inventory of where AI is
-          actually paying off for Zimbabwean businesses in 2026 —
+          actually paying off for Zimbabwean businesses in 2026,
           based on what we have built and what we have watched
           other teams build. No slideware, no AGI speculation,
           just the use cases that return more than they cost.
         </Para>
 
         <Note label="The honest framing">
-          AI is useful when it moves a specific operational needle
-          — fewer hours on routine work, faster turnaround on
+          AI is useful when it moves a specific operational needle:
+          fewer hours on routine work, faster turnaround on
           ambiguous tasks, better decisions on messy data. If a
           proposed use case does not do one of those three things,
           it is marketing, not engineering.
@@ -559,7 +925,7 @@ export const posts: Post[] = [
         <UL>
           <li>
             <strong>Reading messy text and extracting structure.</strong>{" "}
-            Invoices, CVs, contracts, forms — anything with loose
+            Invoices, CVs, contracts, forms, anything with loose
             formatting becomes structured data.
           </li>
           <li>
@@ -592,20 +958,21 @@ export const posts: Post[] = [
           Pastel or Sage by hand. A document-understanding pipeline
           reads the invoice image or PDF, extracts supplier, date,
           line items, VAT, and totals, and posts them to the
-          accounting system — with a confidence score and a human
-          review queue for edge cases. Typical ROI shows up inside
-          two months for teams processing more than 200 invoices a
-          month.
+          accounting system, with a confidence score and a human
+          review queue for edge cases. Typical ROI shows up quickly
+          for any finance team processing a meaningful volume of
+          invoices each month.
         </Para>
 
         <H3>2. WhatsApp customer service agents</H3>
         <Para>
           WhatsApp is the default customer channel in Zimbabwe.
           Most businesses have one or two people answering the
-          same stock questions all day — pricing, availability,
+          same stock questions all day: pricing, availability,
           hours, delivery, returns. A well-scoped agent handles
-          the repetitive 70%, hands off the complex 30% to a
-          human, logs every conversation, and never sleeps.
+          the repetitive majority of queries, hands off anything
+          complex or sensitive to a human, logs every conversation,
+          and never sleeps.
           Integration with your stock system means it can answer
           &ldquo;do you have this in Bulawayo?&rdquo; without
           calling the branch.
@@ -630,7 +997,7 @@ export const posts: Post[] = [
           documents, lets any staff member ask: &ldquo;what is our
           refund policy for corporate clients?&rdquo; or &ldquo;how
           did we price the last billboard campaign for a
-          telecom?&rdquo; — and get an answer with sources. No
+          telecom?&rdquo; and get an answer with sources. No
           customer data leaves your environment if the setup is
           done right.
         </Para>
@@ -638,7 +1005,7 @@ export const posts: Post[] = [
         <H3>5. Operations: triage, summaries, and handovers</H3>
         <Para>
           Support queues, service tickets, incident reports, shift
-          handovers — any pile of unstructured text gets cleaner
+          handovers. Any pile of unstructured text gets cleaner
           with a summariser and a classifier in front of it.
           Service managers read a digest instead of 200 tickets;
           on-call engineers start the morning with a briefing
@@ -670,23 +1037,23 @@ export const posts: Post[] = [
           is to treat it like any other infrastructure line. Route
           easy cases to cheaper models (Haiku, Gemini Flash),
           expensive cases to larger ones (Claude Opus, GPT-class),
-          cache anything that repeats, and measure cost per task.
-          A well-instrumented pipeline runs somewhere between
-          $0.001 and $0.10 per action depending on complexity —
-          budgetable and forecastable, not a surprise.
+          cache anything that repeats, and measure cost per task. A
+          well-instrumented pipeline makes cost per action
+          budgetable and forecastable instead of a surprise at the
+          end of the month.
         </Para>
 
         <H2>Data, privacy, and sovereignty</H2>
         <Para>
           Running client data through foreign APIs is a
           legitimate concern, especially in regulated sectors. The
-          answer is not to avoid AI — it is to pick the right
+          answer is not to avoid AI; it is to pick the right
           deployment model. Enterprise API tiers from Anthropic
           and OpenAI contractually exclude your data from
           training. For stricter cases, open-weight models
           (Llama, Mistral, Qwen) run on infrastructure you control,
-          including on-premise. The cost premium has shrunk sharply
-          in the last eighteen months.
+          including on-premise. The cost premium on that approach
+          has shrunk sharply in the last couple of years.
         </Para>
 
         <H2>How to start (without wasting money)</H2>
@@ -694,15 +1061,15 @@ export const posts: Post[] = [
           <li>
             Pick one process that burns hours weekly and has a
             clear success metric. Not five processes, not a
-            platform — one process.
+            platform. One process.
           </li>
           <li>
-            Run a two-week pilot with real users and real data.
+            Run a short pilot with real users and real data.
             Measure the before-state honestly.
           </li>
           <li>
             Build guardrails and evals before scaling. If your AI
-            system has no tests, it is not a system — it is a
+            system has no tests, it is not a system; it is a
             prompt and a prayer.
           </li>
           <li>
@@ -717,7 +1084,7 @@ export const posts: Post[] = [
           enough to cut losses quickly when something does not
           work. That is a real edge over larger organisations
           drowning in procurement cycles. The teams that will
-          benefit most from AI in Zimbabwe are not the biggest —
+          benefit most from AI in Zimbabwe are not the biggest;
           they are the ones that pick sharp use cases, ship, and
           iterate.
         </Para>

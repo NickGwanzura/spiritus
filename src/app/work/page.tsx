@@ -3,7 +3,7 @@ import Work from "@/components/Work";
 import JsonLd from "@/components/JsonLd";
 import { breadcrumbJsonLd, SITE_NAME, SITE_URL } from "@/lib/seo";
 
-const title = "Our Work — Live platforms shipped in Zimbabwe";
+const title = "Our Work: Live platforms shipped in Zimbabwe";
 const description =
   "Platforms we have designed, built, and deployed for Zimbabwean clients across advertising, logistics, property, retail, e-commerce, and field services.";
 
@@ -30,19 +30,19 @@ export const metadata: Metadata = {
 };
 
 const portfolio = [
-  { name: "Dreambox Advertising — Billboard CRM", url: "https://crm.dreamboxadvertising.co.zw/" },
-  { name: "Blackivymedia — Billboard CRM", url: "https://blackivymediacrm.live/" },
-  { name: "Splash Air — HVAC Services Platform", url: "https://splashaircrmzw.site/" },
-  { name: "Affinity Logistics — UK to Zimbabwe Shipping CRM", url: "https://affinitylogistics.site/" },
-  { name: "EasyRentals — Property Management ERP", url: "https://easyrentalszw.online/" },
-  { name: "Cansan Solutions — Online Shop & CRM Backend", url: "https://cansansolutions.shop/" },
+  { name: "Dreambox Advertising: Billboard CRM", url: "https://crm.dreamboxadvertising.co.zw/" },
+  { name: "Blackivymedia: Billboard CRM", url: "https://blackivymediacrm.live/" },
+  { name: "Splash Air: HVAC Services Platform", url: "https://splashaircrmzw.site/" },
+  { name: "Affinity Logistics: UK to Zimbabwe Shipping CRM", url: "https://affinitylogistics.site/" },
+  { name: "EasyRentals: Property Management ERP", url: "https://easyrentalszw.online/" },
+  { name: "Cansan Solutions: Online Shop & CRM Backend", url: "https://cansansolutions.shop/" },
 ];
 
 export default function WorkPage() {
   const itemList = {
     "@context": "https://schema.org",
     "@type": "ItemList",
-    name: "Spiritus Systems — Selected work",
+    name: "Spiritus Systems: Selected work",
     itemListElement: portfolio.map((p, i) => ({
       "@type": "ListItem",
       position: i + 1,

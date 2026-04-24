@@ -37,9 +37,9 @@ export default function FAQ() {
           question is not here, send us a note. We respond within 24 hours.
         </p>
 
-        <div style={{ display: "flex", flexDirection: "column", gap: 48 }}>
+        <div className="reveal-stagger" style={{ display: "flex", flexDirection: "column", gap: 48 }}>
           {sections.map((section) => (
-            <div key={section.title}>
+            <div key={section.title} className="reveal-child">
               <h3
                 style={{
                   fontFamily: "var(--font-mono)",

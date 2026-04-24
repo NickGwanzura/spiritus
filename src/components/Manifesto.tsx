@@ -80,7 +80,7 @@ export default function Manifesto() {
         </p>
 
         <div
-          className="manifesto-stats"
+          className="manifesto-stats reveal-stagger"
           style={{
             display: "grid",
             gridTemplateColumns: "repeat(3, 1fr)",
@@ -90,7 +90,7 @@ export default function Manifesto() {
           {stats.map((s, i) => (
             <div
               key={i}
-              className="qcard"
+              className="qcard reveal-child"
               style={{ padding: "28px 24px", background: "var(--bg)" }}
             >
               <div

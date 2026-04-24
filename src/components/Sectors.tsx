@@ -46,7 +46,7 @@ export default function Sectors() {
         </p>
 
         <div
-          className="sectors-grid"
+          className="sectors-grid reveal-stagger"
           style={{
             display: "grid",
             gridTemplateColumns: "repeat(4, 1fr)",
@@ -56,7 +56,7 @@ export default function Sectors() {
           {sectors.map((s, i) => (
             <div
               key={i}
-              className="sector-card qcard"
+              className="sector-card qcard reveal-child"
               style={{ padding: 20 }}
             >
               <div

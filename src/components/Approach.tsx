@@ -55,11 +55,11 @@ export default function Approach() {
           of scope, industry, or team size.
         </p>
 
-        <div style={{ display: "flex", flexDirection: "column" }}>
+        <div className="reveal-stagger" style={{ display: "flex", flexDirection: "column" }}>
           {steps.map((step, i) => (
             <div
               key={i}
-              className="approach-item"
+              className="approach-item reveal-child"
               style={{
                 display: "grid",
                 gridTemplateColumns: "60px 1fr 1.5fr",

@@ -37,6 +37,7 @@ const arrowLinkStyle: React.CSSProperties = {
   fontWeight: 500,
   color: "var(--accent)",
   textDecoration: "none",
+  transition: "gap 0.2s ease",
 };
 
 const aboutPillars = [
@@ -58,7 +59,7 @@ const trustedClients = [
 const outcomes = [
   {
     label: "Live on day one",
-    body: "Every platform ships paying-user-ready — monitoring, backups, SSL, and auth wired in before launch, not after.",
+    body: "Every platform ships paying-user-ready, with monitoring, backups, SSL, and auth wired in before launch, not after.",
   },
   {
     label: "One source of truth",
@@ -143,7 +144,7 @@ export default function Home() {
             ))}
           </ul>
 
-          <Link href="/about" style={arrowLinkStyle}>
+          <Link href="/about" className="arrow-link" style={arrowLinkStyle}>
             Learn more about us
             <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
               <path d="M3 6H9M6 3L9 6L6 9" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" />
@@ -223,7 +224,7 @@ export default function Home() {
           </p>
 
           <div
-            className="services-grid"
+            className="services-grid reveal-stagger"
             style={{
               display: "grid",
               gridTemplateColumns: "repeat(3, 1fr)",
@@ -236,7 +237,7 @@ export default function Home() {
               <Link
                 key={s.slug}
                 href={`/services/${s.slug}`}
-                className="service-card qcard"
+                className="service-card qcard reveal-child"
                 style={{ padding: 20, background: "var(--bg)", color: "inherit", display: "block" }}
               >
                 <div
@@ -280,7 +281,7 @@ export default function Home() {
             ))}
           </div>
 
-          <Link href="/services" style={arrowLinkStyle}>
+          <Link href="/services" className="arrow-link" style={arrowLinkStyle}>
             Explore all services
             <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
               <path d="M3 6H9M6 3L9 6L6 9" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" />
@@ -290,7 +291,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Outcomes — why teams choose Spiritus */}
+      {/* Outcomes: why teams choose Spiritus */}
       <section
         className="section-responsive"
         style={{ ...sectionStyle, borderBottom: "1px solid var(--border)" }}
@@ -299,13 +300,13 @@ export default function Home() {
           <div className="section-label">Why teams choose us</div>
           <h2 style={h2Style}>Systems measured by what they change.</h2>
           <p style={leadStyle}>
-            Every engagement is judged on the operational difference it makes —
+            Every engagement is judged on the operational difference it makes:
             revenue visible, staff hours back, the month-end close that happens
             without a WhatsApp thread.
           </p>
 
           <div
-            className="outcomes-grid"
+            className="outcomes-grid reveal-stagger"
             style={{
               display: "grid",
               gridTemplateColumns: "repeat(2, 1fr)",
@@ -317,6 +318,7 @@ export default function Home() {
             {outcomes.map((o, i) => (
               <div
                 key={o.label}
+                className="reveal-child"
                 style={{
                   padding: "28px 28px 28px 0",
                   borderBottom: "1px solid var(--border)",
@@ -380,7 +382,7 @@ export default function Home() {
             </p>
 
             <div
-              className="work-highlights"
+              className="work-highlights reveal-stagger"
               style={{
                 display: "grid",
                 gridTemplateColumns: "repeat(3, 1fr)",
@@ -392,7 +394,7 @@ export default function Home() {
               {workHighlights.map((h) => (
                 <div
                   key={h.label}
-                  className="qcard"
+                  className="qcard reveal-child"
                   style={{ padding: 22, background: "var(--bg)" }}
                 >
                   <div

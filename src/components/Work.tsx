@@ -356,7 +356,7 @@ function ProjectCard({ project }: { project: Project }) {
 
       {open && (
         <div
-          className="work-scope-grid"
+          className="work-scope-grid work-scope-enter"
           style={{
             display: "grid",
             gridTemplateColumns: "repeat(2, 1fr)",
@@ -464,7 +464,7 @@ export default function Work() {
         </p>
 
         <div
-          className="work-grid"
+          className="work-grid reveal-stagger"
           style={{
             display: "grid",
             gridTemplateColumns: "repeat(2, 1fr)",

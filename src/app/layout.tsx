@@ -5,6 +5,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import CustomCursor from "@/components/CustomCursor";
 import JsonLd from "@/components/JsonLd";
+import PageLoadHandler from "@/components/PageLoadHandler";
 import {
   KEYWORDS,
   SITE_DESCRIPTION,
@@ -56,7 +57,7 @@ export const metadata: Metadata = {
         url: "/opengraph-image",
         width: 1200,
         height: 630,
-        alt: `${SITE_NAME} — ${SITE_TAGLINE}`,
+        alt: `${SITE_NAME}: ${SITE_TAGLINE}`,
       },
     ],
   },
@@ -100,9 +101,8 @@ export default function RootLayout({
     >
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
-        <link rel="canonical" href={SITE_URL} />
       </head>
-      <body>
+      <body className="page-loading">
         <JsonLd id="ld-organization" data={organizationJsonLd()} />
         <JsonLd id="ld-website" data={websiteJsonLd()} />
         <JsonLd id="ld-localbusiness" data={localBusinessJsonLd()} />
@@ -110,6 +110,7 @@ export default function RootLayout({
         <Navbar />
         <main>{children}</main>
         <Footer />
+        <PageLoadHandler />
       </body>
     </html>
   );

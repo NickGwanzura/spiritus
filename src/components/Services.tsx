@@ -54,14 +54,14 @@ export default function Services() {
           }}
         >
           Spiritus Systems is your custom software development partner in
-          Zimbabwe — websites, web apps, SaaS platforms, AI systems, CRM,
-          ERP, and integrations under one roof. Six practice areas, one
+          Zimbabwe, delivering websites, web apps, SaaS platforms, AI systems,
+          CRM, ERP, and integrations under one roof. Six practice areas, one
           standard. Each engagement is scoped to fit the problem, not the
           product.
         </p>
 
         <div
-          className="services-grid"
+          className="services-grid reveal-stagger"
           style={{
             display: "grid",
             gridTemplateColumns: "repeat(3, 1fr)",
@@ -72,7 +72,7 @@ export default function Services() {
             <Link
               key={s.slug}
               href={`/services/${s.slug}`}
-              className="service-card qcard"
+              className="service-card qcard reveal-child"
               style={{ padding: 24, color: "inherit", display: "block" }}
             >
               <div

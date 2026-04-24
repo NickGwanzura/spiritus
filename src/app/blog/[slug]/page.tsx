@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import JsonLd from "@/components/JsonLd";
+import ScrollReveal from "@/components/ScrollReveal";
 import {
   blogPostingJsonLd,
   breadcrumbJsonLd,
@@ -198,15 +199,16 @@ export default async function BlogPostPage({
           {post.description}
         </p>
 
-        <div>{post.body}</div>
+        <ScrollReveal>
+          <div>{post.body}</div>
+        </ScrollReveal>
 
+        <ScrollReveal>
         <div
+          className="qcard"
           style={{
             marginTop: 64,
             padding: "32px 28px",
-            border: "1px solid var(--border)",
-            borderRadius: "var(--r-md)",
-            background: "var(--bg-raised)",
             display: "flex",
             justifyContent: "space-between",
             alignItems: "center",
@@ -243,7 +245,9 @@ export default async function BlogPostPage({
             </svg>
           </Link>
         </div>
+        </ScrollReveal>
 
+        <ScrollReveal>
         <div
           style={{
             marginTop: 32,
@@ -266,6 +270,7 @@ export default async function BlogPostPage({
             </>
           )}
         </div>
+        </ScrollReveal>
       </article>
     </div>
   );

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import ScrollReveal from "@/components/ScrollReveal";
 
 const fields = [
   { id: "fullname", label: "Full name", type: "text", placeholder: "Your name", required: true },
@@ -20,7 +21,7 @@ export default function Contact() {
     fontFamily: "var(--font-sans)",
     fontSize: 14,
     padding: "11px 14px",
-    transition: "border-color 0.15s, box-shadow 0.15s",
+    transition: "border-color 0.2s ease, box-shadow 0.2s ease, transform 0.15s ease",
     width: "100%",
   };
 
@@ -51,6 +52,7 @@ export default function Contact() {
         className="section-wrap"
         style={{ padding: "120px 56px", maxWidth: 1080, margin: "0 auto" }}
       >
+        <ScrollReveal>
         <div className="section-label">Contact</div>
         <h2
           style={{
@@ -77,6 +79,7 @@ export default function Contact() {
           We take on a limited number of new engagements each quarter. Tell us
           what you are working on.
         </p>
+        </ScrollReveal>
 
         <div
           className="contact-grid"

@@ -6,6 +6,7 @@ export default function CustomCursor() {
   const cursorRef = useRef<HTMLDivElement>(null);
   const ringRef = useRef<HTMLDivElement>(null);
   const [hasPointer, setHasPointer] = useState(false);
+  const isHovering = useRef(false);
 
   useEffect(() => {
     const mq = window.matchMedia("(pointer: fine)");
@@ -56,8 +57,40 @@ export default function CustomCursor() {
       }
     };
 
+    const hoverables =
+      'a, button, [role="button"], input, textarea, select, label, .service-card, .sector-card, .qcard, .nav-link, .footer-link, .theme-toggle';
+
+    const setHover = (hovering: boolean) => {
+      if (isHovering.current === hovering) return;
+      isHovering.current = hovering;
+      if (cursorRef.current) {
+        cursorRef.current.style.transform = `translate(-50%, -50%) scale(${hovering ? 2.5 : 1})`;
+        cursorRef.current.style.opacity = hovering ? "0.5" : "1";
+      }
+      if (ringRef.current) {
+        ringRef.current.style.transform = `translate(-50%, -50%) scale(${hovering ? 1.6 : 1})`;
+        ringRef.current.style.borderColor = hovering ? "var(--accent)" : "var(--accent-muted)";
+        ringRef.current.style.opacity = hovering ? "0.6" : "1";
+      }
+    };
+
+    const onOver = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      if (target.closest(hoverables)) setHover(true);
+    };
+
+    const onOut = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      if (target.closest(hoverables)) setHover(false);
+    };
+
+    document.addEventListener("mouseover", onOver, { passive: true });
+    document.addEventListener("mouseout", onOut, { passive: true });
+
     return () => {
       document.removeEventListener("mousemove", onMove);
+      document.removeEventListener("mouseover", onOver);
+      document.removeEventListener("mouseout", onOut);
       cancelAnimationFrame(raf);
     };
   }, [hasPointer]);
@@ -79,7 +112,8 @@ export default function CustomCursor() {
           zIndex: 9999,
           transform: "translate(-50%, -50%)",
           transition:
-            "transform 0.1s, width 0.2s, height 0.2s, background 0.2s",
+            "transform 0.18s cubic-bezier(0.22,1,0.36,1), width 0.2s, height 0.2s, background 0.2s, opacity 0.2s",
+          mixBlendMode: "difference",
         }}
       />
       <div
@@ -95,7 +129,7 @@ export default function CustomCursor() {
           zIndex: 9998,
           transform: "translate(-50%, -50%)",
           transition:
-            "transform 0.12s ease-out, width 0.25s, height 0.25s, border-color 0.2s",
+            "transform 0.25s cubic-bezier(0.22,1,0.36,1), width 0.25s, height 0.25s, border-color 0.2s, opacity 0.2s",
         }}
       />
     </>

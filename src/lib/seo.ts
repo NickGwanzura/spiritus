@@ -210,9 +210,9 @@ export function blogJsonLd(
     "@type": "Blog",
     "@id": `${SITE_URL}/blog#blog`,
     url: `${SITE_URL}/blog`,
-    name: `${SITE_NAME} — Insights`,
+    name: `${SITE_NAME}: Insights`,
     description:
-      "Practical writing on custom software development in Zimbabwe — pricing, technology choices, local context, and engineering patterns that ship.",
+      "Practical writing on custom software development in Zimbabwe. Pricing, technology choices, local context, and engineering patterns that ship.",
     publisher: { "@id": `${SITE_URL}/#organization` },
     inLanguage: "en-ZW",
     blogPost: posts.map((p) => ({

@@ -83,7 +83,7 @@ export default function Stats() {
       }}
     >
       <div
-        className="stats-inner"
+        className="stats-inner reveal-stagger"
         style={{
           maxWidth: 1080,
           margin: "0 auto",
@@ -95,7 +95,7 @@ export default function Stats() {
         {stats.map((stat, i) => (
           <div
             key={i}
-            className="stat-item"
+            className="stat-item reveal-child"
             style={{
               padding: "40px 28px",
               borderRight:

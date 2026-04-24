@@ -35,7 +35,7 @@ export const services: Service[] = [
     summary:
       "Marketing sites, e-commerce stores, and web apps. Fast, responsive, accessible, SEO-ready, built on Next.js and deployed on edge infrastructure.",
     lede:
-      "The website is often the first thing a Zimbabwean customer sees. We build sites that load fast on local networks, rank well on Google, and convert — without the bloat of page builders or template clones.",
+      "The website is often the first thing a Zimbabwean customer sees. We build sites that load fast on local networks, rank well on Google, and convert, without the bloat of page builders or template clones.",
     overview: [
       "Every site we ship is built from the ground up in Next.js and TypeScript. No drag-and-drop builders, no jQuery soup, no generic WordPress themes. The result is code you own, a site that loads in under two seconds on a Zimbabwean 3G connection, and an admin experience that actually makes sense.",
       "We cover the full arc: design, development, CMS, analytics, and deployment to Vercel or Cloudflare edge. Content editors get a clean dashboard. Developers get a codebase they can extend. You get a site that performs in Lighthouse audits and in the real world.",
@@ -62,7 +62,7 @@ export const services: Service[] = [
       "Corporates replacing outdated or slow WordPress sites",
       "NGOs, schools, and institutions that need accessibility and compliance",
     ],
-    engagement: "4–8 weeks · fixed scope",
+    engagement: "4 to 8 weeks · fixed scope",
     faq: [
       {
         q: "Will I own the code?",
@@ -98,14 +98,14 @@ export const services: Service[] = [
     summary:
       "Full-stack software products built for scale. We architect and ship multi-tenant platforms that handle real load and complex workflows.",
     lede:
-      "A SaaS platform is a long-term commitment — auth, billing, data models, infrastructure, and ongoing feature velocity all compound over years. We build platforms that are shippable on day one and still maintainable on day one thousand.",
+      "A SaaS platform is a long-term commitment, covering auth, billing, data models, infrastructure, and ongoing feature velocity that all compound over years. We build platforms that are shippable on day one and still maintainable on day one thousand.",
     overview: [
       "We start with a product architecture that accounts for multi-tenancy, row-level security, background jobs, webhooks, and observability from the first commit. These are not features you bolt on later. They are assumptions the entire codebase needs to be built around.",
       "Billing, authentication, email, queues, and feature flags are all wired up before shipping. Stripe for international customers, Paynow and EcoCash for local. You get a platform that can take a paying customer the day it goes live.",
       "Post-launch, we stay involved. Monitoring, alerting, incident response, and feature iteration are covered under a retainer. A SaaS platform that is not actively maintained is a liability.",
     ],
     outcomes: [
-      { label: "Production on day one", body: "Live, paying-user-ready infrastructure at launch — not a prototype you need to re-platform in six months." },
+      { label: "Production on day one", body: "Live, paying-user-ready infrastructure at launch, not a prototype you need to re-platform in six months." },
       { label: "Built to scale", body: "Postgres with proper indexing, caching layers, background jobs, and autoscaling infrastructure." },
       { label: "Multi-tenant secure", body: "Row-level security, tenant-scoped queries, audit logs, and RBAC wired in from the start." },
       { label: "Monitored & observable", body: "Error tracking, uptime monitoring, structured logs, and performance dashboards included." },
@@ -114,7 +114,7 @@ export const services: Service[] = [
       "Product discovery, user flows, and technical architecture doc",
       "Figma designs and a production design system",
       "Full-stack application with auth, billing, admin, and multi-tenancy",
-      "Payment integration — Stripe, Paynow, EcoCash, or bank rails",
+      "Payment integration across Stripe, Paynow, EcoCash, or bank rails",
       "CI/CD pipeline, staging environment, error tracking",
       "Launch support, monitoring, and a 90-day runway for iteration",
     ],
@@ -125,7 +125,7 @@ export const services: Service[] = [
       "Agencies and consultancies adding a software arm",
       "Corporates spinning out a digital product line",
     ],
-    engagement: "10–20 weeks to v1 · ongoing retainer",
+    engagement: "10 to 20 weeks to v1 · ongoing retainer",
     faq: [
       {
         q: "Do you take equity?",
@@ -133,7 +133,7 @@ export const services: Service[] = [
       },
       {
         q: "Can I start with an MVP and scale?",
-        a: "Yes. We scope MVPs deliberately — production-grade on day one, but focused on core user flows. Scale comes through iteration, not rebuild.",
+        a: "Yes. We scope MVPs deliberately: production-grade on day one, but focused on core user flows. Scale comes through iteration, not rebuild.",
       },
       {
         q: "What if I already have a product?",
@@ -159,11 +159,11 @@ export const services: Service[] = [
     summary:
       "Workflow automation, intelligent agents, and AI-augmented operations integrated into processes that actually need them.",
     lede:
-      "AI is only useful when it moves a real operational needle — fewer hours on routine work, faster turnaround on ambiguous tasks, better decisions on unstructured data. We build systems that do those things and stay out of the way.",
+      "AI is only useful when it moves a real operational needle: fewer hours on routine work, faster turnaround on ambiguous tasks, better decisions on unstructured data. We build systems that do those things and stay out of the way.",
     overview: [
       "We do not retrofit AI into places it does not belong. Before writing any code we map the process, identify where a language model genuinely outperforms a rule, and measure the before-state. If the math does not work, we say so.",
       "Typical engagements include document understanding (invoices, KYC, contracts), customer-facing chat and support agents, internal copilots against company data, and automation pipelines that reduce manual triage. We build on Anthropic, OpenAI, and open-weight models depending on the use case.",
-      "Retrieval, guardrails, evaluation, and fallback behaviour are all part of the build. Prompt quality is necessary but not sufficient — what keeps an AI system useful in production is the plumbing around it.",
+      "Retrieval, guardrails, evaluation, and fallback behaviour are all part of the build. Prompt quality is necessary but not sufficient; what keeps an AI system useful in production is the plumbing around it.",
     ],
     outcomes: [
       { label: "Hours back per week", body: "Automation of the routine manual work that burns staff time and causes burnout." },
@@ -176,7 +176,7 @@ export const services: Service[] = [
       "Custom agent, copilot, or pipeline built for your use case",
       "Retrieval system against your documents and data where relevant",
       "Evaluation harness, usage logging, and safety guardrails",
-      "Integration with existing tools — Slack, WhatsApp, email, CRM, ERP",
+      "Integration with existing tools including Slack, WhatsApp, email, CRM, ERP",
       "Training for staff and an iteration loop on real usage data",
     ],
     stack: ["Anthropic Claude", "OpenAI", "Embeddings + pgvector", "LangGraph / custom orchestration", "n8n / Temporal", "WhatsApp Cloud API"],
@@ -186,7 +186,7 @@ export const services: Service[] = [
       "Finance teams processing invoices and reconciliation manually",
       "Sales teams needing faster proposal and quote generation",
     ],
-    engagement: "4–12 weeks per use case · iteration retainer",
+    engagement: "4 to 12 weeks per use case · iteration retainer",
     faq: [
       {
         q: "Will my data be used to train models?",
@@ -202,7 +202,7 @@ export const services: Service[] = [
       },
       {
         q: "What about cost?",
-        a: "We cap spend with model routing — cheap models for easy cases, expensive models for hard ones — and build usage dashboards so you see cost per task in real time.",
+        a: "We cap spend with model routing (cheap models for easy cases, expensive models for hard ones) and build usage dashboards so you see cost per task in real time.",
       },
     ],
     icon: (
@@ -222,13 +222,13 @@ export const services: Service[] = [
     lede:
       "Off-the-shelf CRM and ERP software makes you bend your workflow to fit the product. Every Zimbabwean business we have worked with has workflows that do not fit. We build systems that match your operation, not the other way around.",
     overview: [
-      "A custom CRM or ERP is justified when your processes are specific enough that Salesforce, HubSpot, Zoho, or SAP would require so much customisation that you may as well start from the data model up. That is more companies than people realise — especially in Zimbabwe, where the operating environment drives unusual process shapes.",
+      "A custom CRM or ERP is justified when your processes are specific enough that Salesforce, HubSpot, Zoho, or SAP would require so much customisation that you may as well start from the data model up. That is more companies than people realise, especially in Zimbabwe, where the operating environment drives unusual process shapes.",
       "We begin every engagement by mapping your actual workflow. Who enters what data, when, and why. Which fields are mandatory, which are optional, which are currently stored on paper or in WhatsApp. The resulting system is built around those realities, not against them.",
       "Implementations typically include migration from existing tools (Excel, Pastel, Sage, Salesforce, homegrown systems), role-based permissions, audit trails, WhatsApp and email integration, reporting dashboards, and a staff-training programme. Post-launch we stay on a retainer for ongoing feature work.",
     ],
     outcomes: [
       { label: "One source of truth", body: "No more duplicate records across Excel, WhatsApp, Pastel, and sticky notes. One system, one version of the data." },
-      { label: "Operational visibility", body: "Live dashboards showing pipeline, stock, revenue, and operations in real time — for you and for the team." },
+      { label: "Operational visibility", body: "Live dashboards showing pipeline, stock, revenue, and operations in real time, for you and for the team." },
       { label: "Workflow fit", body: "Fields, forms, and processes shaped around your business, not a generic SaaS template." },
       { label: "Local integration", body: "WhatsApp Business, EcoCash, Paynow, Pastel, and bank statement import built in where relevant." },
     ],
@@ -247,7 +247,7 @@ export const services: Service[] = [
       "Operations teams currently running on Excel, paper, or WhatsApp",
       "Growing businesses outgrowing their first CRM or ERP",
     ],
-    engagement: "8–16 weeks to v1 · ongoing retainer",
+    engagement: "8 to 16 weeks to v1 · ongoing retainer",
     faq: [
       {
         q: "Why custom instead of Salesforce, HubSpot, or Zoho?",
@@ -281,7 +281,7 @@ export const services: Service[] = [
     summary:
       "Connecting disparate technology stacks into coherent infrastructure. APIs, data pipelines, legacy bridges, real-time sync across platforms.",
     lede:
-      "Most operational pain in Zimbabwean businesses is not a missing tool — it is tools that do not talk to each other. The sales team is in HubSpot, finance is in Pastel, stock is in Excel, and the WhatsApp orders are in someone's phone. We connect those islands.",
+      "Most operational pain in Zimbabwean businesses is not a missing tool; it is tools that do not talk to each other. The sales team is in HubSpot, finance is in Pastel, stock is in Excel, and the WhatsApp orders are in someone's phone. We connect those islands.",
     overview: [
       "A good integration is invisible. Data flows where it needs to, in the format the receiving system expects, at the cadence the business requires. A bad integration is a ticking time bomb of silent failures, duplicate records, and out-of-sync ledgers.",
       "We design integrations with retries, backoff, idempotency, monitoring, and alerting as first-class concerns. Every sync logs what it did and what it skipped. Every failure raises an alert. When something breaks, you know about it before your customers do.",
@@ -291,7 +291,7 @@ export const services: Service[] = [
       { label: "Eliminated double entry", body: "Data flows automatically between systems that used to require manual re-keying." },
       { label: "Real-time sync", body: "Stock levels, customer records, and financials stay consistent across every system that touches them." },
       { label: "Monitored reliability", body: "Every sync is logged and alerted on. Silent failures become visible failures, which become fixed failures." },
-      { label: "Auditable trails", body: "Full history of what synced, when, and what broke — critical for regulated sectors and clean audits." },
+      { label: "Auditable trails", body: "Full history of what synced, when, and what broke, critical for regulated sectors and clean audits." },
     ],
     deliverables: [
       "Systems inventory and integration map",
@@ -308,7 +308,7 @@ export const services: Service[] = [
       "E-commerce businesses needing stock, order, and payment alignment",
       "Operations teams tired of WhatsApp-based handoffs between departments",
     ],
-    engagement: "3–10 weeks per integration · retainer for ongoing",
+    engagement: "3 to 10 weeks per integration · retainer for ongoing",
     faq: [
       {
         q: "What if the system has no API?",
@@ -342,25 +342,25 @@ export const services: Service[] = [
     summary:
       "Technology audits, transformation roadmaps, and go-to-market strategy paired with brand identity, UI, and UX.",
     lede:
-      "Building the wrong thing beautifully is still failure. We spend the time up front to figure out what to build, who it is for, and how it will go to market — then we design it so it looks as credible as it is.",
+      "Building the wrong thing beautifully is still failure. We spend the time up front to figure out what to build, who it is for, and how it will go to market, then we design it so it looks as credible as it is.",
     overview: [
       "Strategy engagements produce a written artefact you can act on. That might be a 12-month technology roadmap, a go-to-market plan, a buy-versus-build decision document, or a due-diligence-style audit of your existing stack. Not a 60-slide deck of hedges.",
       "Design engagements cover the range from brand identity (logo system, colour, type, voice) through product UI (design system, component library, flows) to marketing assets (pitch decks, one-pagers, launch collateral). Everything ships in Figma, ready for the engineering team to pick up.",
       "The two practices intertwine on most engagements. A roadmap without design is theory; a design without strategy is decoration. We run them as one workstream with one team.",
     ],
     outcomes: [
-      { label: "Clarity on what to build", body: "A written roadmap with priorities, costs, and dependencies — something a board can review and a team can execute on." },
-      { label: "Brand system", body: "Logo, colour, type, voice, and usage rules — consistent across every customer touchpoint." },
-      { label: "Ship-ready designs", body: "Figma files with a design system, components, and flows — engineers can start Monday with no ambiguity." },
+      { label: "Clarity on what to build", body: "A written roadmap with priorities, costs, and dependencies, something a board can review and a team can execute on." },
+      { label: "Brand system", body: "Logo, colour, type, voice, and usage rules, consistent across every customer touchpoint." },
+      { label: "Ship-ready designs", body: "Figma files with a design system, components, and flows so engineers can start Monday with no ambiguity." },
       { label: "Launch support", body: "GTM plan, messaging, and marketing collateral that gets the product in front of the right buyers." },
     ],
     deliverables: [
       "Discovery workshops with founders and key stakeholders",
       "Technology audit or roadmap document",
-      "Brand identity — logo, palette, typography, voice",
+      "Brand identity: logo, palette, typography, voice",
       "Design system and component library in Figma",
       "Product flows and high-fidelity UI",
-      "Marketing collateral — pitch deck, one-pager, landing page",
+      "Marketing collateral: pitch deck, one-pager, landing page",
     ],
     stack: ["Figma", "FigJam", "Framer for marketing", "Written strategy in Notion or Google Docs", "Handoff-ready component specs"],
     whoFor: [
@@ -369,7 +369,7 @@ export const services: Service[] = [
       "Corporates running buy-vs-build decisions",
       "Startups preparing for fundraising or launch",
     ],
-    engagement: "2–6 weeks · fixed scope",
+    engagement: "2 to 6 weeks · fixed scope",
     faq: [
       {
         q: "Can I just get the strategy without the build?",

@@ -9,7 +9,7 @@ import {
   SITE_URL,
 } from "@/lib/seo";
 
-const title = "Contact — Start a project with Spiritus Systems";
+const title = "Contact: Start a project with Spiritus Systems";
 const description =
   "Start a software project with Spiritus Systems. Based in Harare CBD, Zimbabwe. Email create@spiritus.co.zw or call 0777 816 368.";
 

@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
 const WHATSAPP_NUMBER = "263777816368";
 const EMAIL_TO = "create@spiritus.co.zw";
@@ -24,7 +24,7 @@ const scopes = [
 const timelines = [
   { id: "asap", label: "ASAP" },
   { id: "1m", label: "Within 1 month" },
-  { id: "3m", label: "1–3 months" },
+  { id: "3m", label: "1 to 3 months" },
   { id: "flex", label: "Flexible" },
 ];
 
@@ -62,9 +62,9 @@ const initialState: FormState = {
 const MIN_ANSWER_LEN = 12;
 
 function composeMessage(f: FormState) {
-  const typeLabel = projectTypes.find((p) => p.id === f.projectType)?.label || "—";
-  const scopeLabel = scopes.find((s) => s.id === f.scope)?.label || "—";
-  const timelineLabel = timelines.find((t) => t.id === f.timeline)?.label || "—";
+  const typeLabel = projectTypes.find((p) => p.id === f.projectType)?.label || "(not specified)";
+  const scopeLabel = scopes.find((s) => s.id === f.scope)?.label || "(not specified)";
+  const timelineLabel = timelines.find((t) => t.id === f.timeline)?.label || "(not specified)";
 
   return [
     "Hi Spiritus Systems,",
@@ -106,6 +106,8 @@ export default function StartProjectModal({ open, onClose }: Props) {
   const [form, setForm] = useState<FormState>(initialState);
   const [submitted, setSubmitted] = useState(false);
   const [errors, setErrors] = useState<Partial<Record<keyof FormState, string>>>({});
+  const modalRef = useRef<HTMLDivElement>(null);
+  const previousFocusRef = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
     if (!open) {
@@ -121,15 +123,48 @@ export default function StartProjectModal({ open, onClose }: Props) {
 
   useEffect(() => {
     if (!open) return;
+    previousFocusRef.current = document.activeElement as HTMLElement | null;
     const prev = document.body.style.overflow;
     document.body.style.overflow = "hidden";
+
+    // Focus trap + Escape
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") onClose();
+      if (e.key === "Escape") {
+        onClose();
+        return;
+      }
+      if (e.key !== "Tab" || !modalRef.current) return;
+
+      const focusable = modalRef.current.querySelectorAll<HTMLElement>(
+        'a[href], button, textarea, input, select, [tabindex]:not([tabindex="-1"])'
+      );
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last?.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first?.focus();
+      }
     };
+
     window.addEventListener("keydown", onKey);
+
+    // Move focus into modal after a tick so DOM is ready
+    const t = setTimeout(() => {
+      const focusable = modalRef.current?.querySelectorAll<HTMLElement>(
+        'a[href], button, textarea, input, select, [tabindex]:not([tabindex="-1"])'
+      );
+      focusable?.[0]?.focus();
+    }, 50);
+
     return () => {
+      clearTimeout(t);
       document.body.style.overflow = prev;
       window.removeEventListener("keydown", onKey);
+      previousFocusRef.current?.focus();
     };
   }, [open, onClose]);
 
@@ -147,7 +182,7 @@ export default function StartProjectModal({ open, onClose }: Props) {
       if (s === 1) {
         if (!form.projectType) e.projectType = "Please choose a project type";
         if (form.buildDesc.trim().length < MIN_ANSWER_LEN)
-          e.buildDesc = "Give us a sentence or two — we need the substance";
+          e.buildDesc = "Give us a sentence or two, we need the substance";
       }
       if (s === 2) {
         if (form.problem.trim().length < MIN_ANSWER_LEN)
@@ -220,6 +255,7 @@ export default function StartProjectModal({ open, onClose }: Props) {
       }}
     >
       <div
+        ref={modalRef}
         className="start-modal"
         onClick={(e) => e.stopPropagation()}
         style={{
@@ -318,7 +354,7 @@ export default function StartProjectModal({ open, onClose }: Props) {
 
             {/* === STEP 1: Project type + what === */}
             {step === 1 && (
-              <div style={{ display: "flex", flexDirection: "column", gap: 18 }}>
+              <div className="anim-up d1" style={{ display: "flex", flexDirection: "column", gap: 18 }}>
                 <div>
                   <Label>Which of these best describes your project?</Label>
                   <OptionGrid
@@ -341,9 +377,9 @@ export default function StartProjectModal({ open, onClose }: Props) {
               </div>
             )}
 
-            {/* === STEP 2: Context — why / users / current === */}
+            {/* === STEP 2: Context, why / users / current === */}
             {step === 2 && (
-              <div style={{ display: "flex", flexDirection: "column", gap: 18 }}>
+              <div className="anim-up d1" style={{ display: "flex", flexDirection: "column", gap: 18 }}>
                 <TextareaField
                   label="What problem are you trying to solve?"
                   placeholder="e.g. Sales team is missing follow-ups, we don't know which campaigns convert, invoicing takes 3 hours per week."
@@ -374,7 +410,7 @@ export default function StartProjectModal({ open, onClose }: Props) {
 
             {/* === STEP 3: Scope, timeline, contact === */}
             {step === 3 && (
-              <div style={{ display: "flex", flexDirection: "column", gap: 18 }}>
+              <div className="anim-up d1" style={{ display: "flex", flexDirection: "column", gap: 18 }}>
                 <div>
                   <Label>Rough scope</Label>
                   <OptionGrid
@@ -495,6 +531,7 @@ function SubmittedView({
   return (
     <div style={{ textAlign: "center", padding: "12px 0" }}>
       <div
+        className="success-check"
         style={{
           width: 48,
           height: 48,
@@ -535,8 +572,8 @@ function SubmittedView({
           marginRight: "auto",
         }}
       >
-        We&rsquo;ve packaged your answers into a message. Pick how to send it —
-        we reply within 24 hours.
+        We&rsquo;ve packaged your answers into a message. Pick how to send it
+        and we reply within 24 hours.
       </p>
       <div
         style={{
@@ -620,7 +657,9 @@ function OptionGrid({
               cursor: "pointer",
               fontFamily: "var(--font-sans)",
               transition:
-                "border-color var(--t-fast), background var(--t-fast), transform var(--t-fast)",
+                "border-color 0.2s ease, background 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease",
+              boxShadow: active ? "0 0 20px -4px var(--accent-muted)" : "none",
+              transform: active ? "translateY(-1px)" : "translateY(0)",
             }}
           >
             <div
@@ -785,5 +824,5 @@ const inputStyle: React.CSSProperties = {
   padding: "11px 14px",
   width: "100%",
   outline: "none",
-  transition: "border-color var(--t-fast)",
+  transition: "border-color 0.2s ease, box-shadow 0.2s ease, transform 0.15s ease",
 };

@@ -4,9 +4,9 @@ import JsonLd from "@/components/JsonLd";
 import { blogJsonLd, breadcrumbJsonLd, SITE_NAME } from "@/lib/seo";
 import { getPostsSorted } from "@/data/posts";
 
-const title = "Insights — Custom software development in Zimbabwe";
+const title = "Insights: Custom software development in Zimbabwe";
 const description =
-  "Practical writing on custom software development in Zimbabwe — pricing, CRM and ERP choices, AI use cases, offline-first engineering, and the local context that shapes what we build.";
+  "Practical writing on custom software development in Zimbabwe. Pricing, CRM and ERP choices, AI use cases, offline-first engineering, and the local context that shapes what we build.";
 
 export const metadata: Metadata = {
   title,

@@ -12,8 +12,11 @@ type Entry = {
   priority: number;
 };
 
+// Static build date so sitemap doesn't change on every rebuild
+const BUILD_DATE = new Date("2026-04-21T00:00:00.000Z");
+
 export default function sitemap(): MetadataRoute.Sitemap {
-  const now = new Date();
+  const now = BUILD_DATE;
 
   const staticRoutes: Entry[] = [
     { url: `${SITE_URL}/`, lastModified: now, changeFrequency: "weekly", priority: 1.0 },

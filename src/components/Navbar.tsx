@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import ThemeToggle from "./ThemeToggle";
 
 const links = [
@@ -17,6 +17,31 @@ const links = [
 export default function Navbar() {
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [hidden, setHidden] = useState(false);
+  const lastScrollY = useRef(0);
+  const navRef = useRef<HTMLElement>(null);
+
+  // Scroll-aware hide/show, throttled with rAF
+  useEffect(() => {
+    let ticking = false;
+    const onScroll = () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        const y = window.scrollY;
+        const dy = y - lastScrollY.current;
+        if (y > 200 && dy > 6) {
+          setHidden(true);
+        } else if (dy < -4 || y <= 200) {
+          setHidden(false);
+        }
+        lastScrollY.current = y;
+        ticking = false;
+      });
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   // Lock body scroll while drawer is open + close on Escape
   useEffect(() => {
@@ -40,7 +65,7 @@ export default function Navbar() {
 
   return (
     <>
-      {/* Slim top bar — hidden below 600px via CSS */}
+      {/* Slim top bar, hidden below 600px via CSS */}
       <div
         className="top-bar"
         style={{
@@ -69,7 +94,7 @@ export default function Navbar() {
           create@spiritus.co.zw
         </a>
         <span style={{ width: 1, height: 10, background: "var(--border)" }} />
-        <a href="tel:+2630777816368" className="top-bar-link" style={linkStyle}>
+        <a href="tel:+263777816368" className="top-bar-link" style={linkStyle}>
           <svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5">
             <path d="M3 2H6L7.5 5.5L5.5 6.5C6.5 8.5 7.5 9.5 9.5 10.5L10.5 8.5L14 10V13C14 13.5 13.5 14 13 14C7 14 2 9 2 3C2 2.5 2.5 2 3 2Z" />
           </svg>
@@ -87,6 +112,8 @@ export default function Navbar() {
 
       {/* Main nav */}
       <nav
+        ref={navRef}
+        className={hidden ? "nav-hidden" : "nav-visible"}
         style={{
           position: "fixed",
           top: 32,
@@ -101,11 +128,13 @@ export default function Navbar() {
           backdropFilter: "blur(12px)",
           WebkitBackdropFilter: "blur(12px)",
           borderBottom: "1px solid var(--border)",
+          transform: hidden ? "translateY(-120%)" : "translateY(0)",
+          transition: "transform 0.35s var(--ease), background 0.2s ease, border-color 0.2s ease",
         }}
       >
         <Link
           href="/"
-          aria-label="Spiritus Systems — Home"
+          aria-label="Spiritus Systems Home"
           style={{
             display: "flex",
             alignItems: "center",
@@ -226,7 +255,7 @@ export default function Navbar() {
           style={{
             position: "fixed",
             inset: 0,
-            top: 86,
+            top: navRef.current ? navRef.current.getBoundingClientRect().bottom + window.scrollY : 86,
             zIndex: 499,
             background: "var(--drawer-bg)",
             backdropFilter: "blur(12px)",

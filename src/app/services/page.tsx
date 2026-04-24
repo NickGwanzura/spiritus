@@ -4,9 +4,9 @@ import Approach from "@/components/Approach";
 import JsonLd from "@/components/JsonLd";
 import { breadcrumbJsonLd, serviceJsonLd, SITE_NAME } from "@/lib/seo";
 
-const title = "Services — Web Development, SaaS, AI, CRM, ERP & Integration";
+const title = "Services: Web Development, SaaS, AI, CRM, ERP & Integration";
 const description =
-  "Web development, SaaS platforms, AI systems, CRM/ERP, systems integration, digital strategy, and product design — built in Harare for Zimbabwean enterprises, government, SMEs, and startups.";
+  "Web development, SaaS platforms, AI systems, CRM/ERP, systems integration, digital strategy, and product design, built in Harare for Zimbabwean enterprises, government, SMEs, and startups.";
 
 export const metadata: Metadata = {
   title,
@@ -39,7 +39,7 @@ const serviceList = [
   { name: "AI & Automation", desc: "Workflow automation and intelligent agents for operational efficiency." },
   { name: "CRM & ERP", desc: "Enterprise CRM and ERP systems tailored to Zimbabwean operations." },
   { name: "Systems Integration", desc: "APIs, data pipelines, and bridges to legacy systems." },
-  { name: "Strategy & Design", desc: "Technology audits, transformation roadmaps, go-to-market strategy, brand identity, UI, and UX — bundled into one engagement." },
+  { name: "Strategy & Design", desc: "Technology audits, transformation roadmaps, go-to-market strategy, brand identity, UI, and UX, bundled into one engagement." },
 ];
 
 export default function ServicesPage() {

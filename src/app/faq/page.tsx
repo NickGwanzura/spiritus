@@ -4,7 +4,7 @@ import JsonLd from "@/components/JsonLd";
 import { breadcrumbJsonLd, faqPageJsonLd, SITE_NAME } from "@/lib/seo";
 import { faqFlat } from "@/data/faq";
 
-const title = "FAQ — Pricing, process & technology";
+const title = "FAQ: Pricing, process & technology";
 const description =
   "Common questions about working with Spiritus Systems: pricing, project timelines, technology stack, EcoCash and multi-currency support, maintenance, and Zimbabwe-specific considerations.";
 

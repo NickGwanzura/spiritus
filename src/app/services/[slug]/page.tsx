@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import JsonLd from "@/components/JsonLd";
+import ScrollReveal from "@/components/ScrollReveal";
 import StartProjectButton from "@/components/StartProjectButton";
 import { services, getService } from "@/data/services";
 import {
@@ -25,7 +26,7 @@ export async function generateMetadata(
   const service = getService(slug);
   if (!service) return {};
 
-  const title = `${service.title} — Spiritus Systems, Harare`;
+  const title = `${service.title}: Spiritus Systems, Harare`;
   const description = service.summary;
 
   return {
@@ -217,15 +218,17 @@ export default async function ServiceDetailPage(
 
       {/* Overview */}
       <section style={section}>
-        <div className="section-label">How we approach it</div>
-        <h2 style={h2}>The approach.</h2>
-        <div style={{ display: "flex", flexDirection: "column", gap: 20, maxWidth: 680 }}>
-          {service.overview.map((para, i) => (
-            <p key={i} style={{ fontSize: 16, lineHeight: 1.7, color: "var(--fg-muted)" }}>
-              {para}
-            </p>
-          ))}
-        </div>
+        <ScrollReveal>
+          <div className="section-label">How we approach it</div>
+          <h2 style={h2}>The approach.</h2>
+          <div style={{ display: "flex", flexDirection: "column", gap: 20, maxWidth: 680 }}>
+            {service.overview.map((para, i) => (
+              <p key={i} style={{ fontSize: 16, lineHeight: 1.7, color: "var(--fg-muted)" }}>
+                {para}
+              </p>
+            ))}
+          </div>
+        </ScrollReveal>
       </section>
 
       {/* Outcomes */}
@@ -237,10 +240,12 @@ export default async function ServiceDetailPage(
         }}
       >
         <div style={section}>
-          <div className="section-label">Outcomes</div>
-          <h2 style={h2}>What you end up with.</h2>
+          <ScrollReveal>
+            <div className="section-label">Outcomes</div>
+            <h2 style={h2}>What you end up with.</h2>
+          </ScrollReveal>
           <div
-            className="services-grid"
+            className="services-grid reveal-stagger"
             style={{
               display: "grid",
               gridTemplateColumns: "repeat(2, 1fr)",
@@ -249,7 +254,7 @@ export default async function ServiceDetailPage(
             }}
           >
             {service.outcomes.map((o, i) => (
-              <div key={i} className="qcard" style={{ padding: 24 }}>
+              <div key={i} className="qcard reveal-child" style={{ padding: 24 }}>
                 <div
                   style={{
                     fontFamily: "var(--font-mono)",
@@ -285,6 +290,7 @@ export default async function ServiceDetailPage(
 
       {/* Deliverables + Stack */}
       <section style={section}>
+        <ScrollReveal>
         <div
           className="about-grid"
           style={{
@@ -358,6 +364,7 @@ export default async function ServiceDetailPage(
             </div>
           </div>
         </div>
+        </ScrollReveal>
       </section>
 
       {/* Who it's for */}
@@ -369,10 +376,12 @@ export default async function ServiceDetailPage(
         }}
       >
         <div style={section}>
-          <div className="section-label">Who it's for</div>
-          <h2 style={h2}>Typical clients.</h2>
+          <ScrollReveal>
+            <div className="section-label">Who it's for</div>
+            <h2 style={h2}>Typical clients.</h2>
+          </ScrollReveal>
           <div
-            className="services-grid"
+            className="services-grid reveal-stagger"
             style={{
               display: "grid",
               gridTemplateColumns: "repeat(2, 1fr)",
@@ -382,7 +391,7 @@ export default async function ServiceDetailPage(
             {service.whoFor.map((w, i) => (
               <div
                 key={i}
-                className="qcard"
+                className="qcard reveal-child"
                 style={{
                   padding: 20,
                   display: "flex",
@@ -420,13 +429,15 @@ export default async function ServiceDetailPage(
 
       {/* FAQ */}
       <section style={section}>
-        <div className="section-label">FAQ</div>
-        <h2 style={h2}>Common questions.</h2>
-        <div style={{ display: "flex", flexDirection: "column", gap: 8, maxWidth: 820 }}>
+        <ScrollReveal>
+          <div className="section-label">FAQ</div>
+          <h2 style={h2}>Common questions.</h2>
+        </ScrollReveal>
+        <div className="reveal-stagger" style={{ display: "flex", flexDirection: "column", gap: 8, maxWidth: 820 }}>
           {service.faq.map((item, i) => (
             <details
               key={i}
-              className="faq-item qcard"
+              className="faq-item qcard reveal-child"
               style={{ padding: "18px 20px" }}
             >
               <summary
@@ -481,10 +492,12 @@ export default async function ServiceDetailPage(
         }}
       >
         <div style={section}>
-          <div className="section-label">Also explore</div>
-          <h2 style={h2}>Related services.</h2>
+          <ScrollReveal>
+            <div className="section-label">Also explore</div>
+            <h2 style={h2}>Related services.</h2>
+          </ScrollReveal>
           <div
-            className="services-grid"
+            className="services-grid reveal-stagger"
             style={{
               display: "grid",
               gridTemplateColumns: "repeat(3, 1fr)",
@@ -495,7 +508,7 @@ export default async function ServiceDetailPage(
               <Link
                 key={r.slug}
                 href={`/services/${r.slug}`}
-                className="service-card qcard"
+                className="service-card qcard reveal-child"
                 style={{ padding: 20, display: "block", color: "inherit" }}
               >
                 <div

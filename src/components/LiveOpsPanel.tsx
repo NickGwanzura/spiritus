@@ -147,6 +147,18 @@ export default function LiveOpsPanel() {
           zIndex: 0,
         }}
       />
+      {/* Subtle scanline effect */}
+      <div
+        aria-hidden
+        style={{
+          position: "absolute",
+          inset: 0,
+          background: "repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.03) 2px, rgba(0,0,0,0.03) 4px)",
+          pointerEvents: "none",
+          zIndex: 2,
+          opacity: 0.5,
+        }}
+      />
 
       <div
         style={{
@@ -174,7 +186,7 @@ export default function LiveOpsPanel() {
             color: "var(--fg-subtle)",
           }}
         >
-          spiritus — ops — 80×24
+          spiritus : ops : 80×24
         </span>
         <span
           style={{

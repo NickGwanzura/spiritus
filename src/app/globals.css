@@ -41,7 +41,7 @@
   --shadow-btn:   0 1px 2px rgba(0,0,0,0.25), inset 0 1px 0 rgba(255,255,255,0.12);
   --shadow-btn-hover: 0 4px 14px rgba(249,115,22,0.32), 0 1px 2px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.18);
 
-  /* Durations — harmonized */
+  /* Durations (harmonized) */
   --t-fast:  0.15s;
   --t:       0.2s;
   --t-slow:  0.3s;
@@ -87,9 +87,9 @@
   --border-hover:  rgba(0,0,0,0.22);
 
   --fg:           #0a0a0b;
-  --fg-muted:     #0a0a0b;
-  --fg-subtle:    #2a2a30;
-  --fg-dim:       #6b6b75;
+  --fg-muted:     #3a3a42;
+  --fg-subtle:    #5a5a64;
+  --fg-dim:       #8a8a94;
 
   --accent:        #ea580c;
   --accent-hover:  #c2410c;
@@ -142,7 +142,7 @@ body {
   border-radius: var(--r-sm);
 }
 
-/* Type ramp — tighter only on larger display sizes */
+/* Type ramp (tighter only on larger display sizes) */
 h1 { letter-spacing: -0.04em; }
 h2 { letter-spacing: -0.025em; }
 h3 { letter-spacing: -0.02em; }
@@ -167,7 +167,7 @@ a { color: inherit; text-decoration: none; }
 }
 .qcard::before { content: none; }
 
-/* Primary button — flat accent with subtle inner highlight + hover lift */
+/* Primary button: flat accent with subtle inner highlight plus hover lift */
 .btn-amber {
   display: inline-flex;
   align-items: center;
@@ -221,7 +221,7 @@ a { color: inherit; text-decoration: none; }
 }
 .btn-ghost:active { transform: translateY(0); }
 
-/* Icon buttons — 40×40 on mobile for touch, 34 on desktop */
+/* Icon buttons (40×40 on mobile for touch, 34 on desktop) */
 .theme-toggle {
   display: inline-flex;
   align-items: center;
@@ -290,35 +290,65 @@ a { color: inherit; text-decoration: none; }
 @keyframes spinSlow { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 @keyframes spinReverse { from { transform: rotate(360deg); } to { transform: rotate(0deg); } }
 @keyframes lineGrow { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+@keyframes shimmerSlide { from { background-position: 200% 0; } to { background-position: -200% 0; } }
+@keyframes scaleIn { from { opacity: 0; transform: scale(0.96); } to { opacity: 1; transform: scale(1); } }
 
-.anim-up { animation: fadeUp 0.5s var(--ease) both; }
-.d1 { animation-delay: 0.05s; }
-.d2 { animation-delay: 0.1s; }
-.d3 { animation-delay: 0.15s; }
-.d4 { animation-delay: 0.2s; }
-.d5 { animation-delay: 0.25s; }
+.anim-up { animation: fadeUp 0.6s var(--ease) both; }
+.d1 { animation-delay: 0.06s; }
+.d2 { animation-delay: 0.12s; }
+.d3 { animation-delay: 0.18s; }
+.d4 { animation-delay: 0.24s; }
+.d5 { animation-delay: 0.30s; }
 
-/* Scroll reveal — triggered by IntersectionObserver */
-.reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.6s var(--ease), transform 0.6s var(--ease); }
+/* Scroll reveal: triggered by IntersectionObserver */
+.reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.7s var(--ease), transform 0.7s var(--ease); }
 .reveal.is-visible { opacity: 1; transform: translateY(0); }
 
-/* --- CARD HOVER (elevation + lift) --- */
+/* Stagger children within revealed containers */
+.reveal-stagger .reveal-child {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.5s var(--ease), transform 0.5s var(--ease);
+}
+.reveal-stagger.is-visible .reveal-child:nth-child(1) { transition-delay: 0s; }
+.reveal-stagger.is-visible .reveal-child:nth-child(2) { transition-delay: 0.06s; }
+.reveal-stagger.is-visible .reveal-child:nth-child(3) { transition-delay: 0.12s; }
+.reveal-stagger.is-visible .reveal-child:nth-child(4) { transition-delay: 0.18s; }
+.reveal-stagger.is-visible .reveal-child:nth-child(5) { transition-delay: 0.24s; }
+.reveal-stagger.is-visible .reveal-child:nth-child(6) { transition-delay: 0.30s; }
+.reveal-stagger.is-visible .reveal-child:nth-child(7) { transition-delay: 0.36s; }
+.reveal-stagger.is-visible .reveal-child:nth-child(8) { transition-delay: 0.42s; }
+.reveal-stagger.is-visible .reveal-child {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Page load: body starts subtle */
+body.page-loading { opacity: 0; }
+body.page-loaded { animation: fadeIn 0.4s var(--ease) both; }
+
+/* --- CARD HOVER (elevation + lift + glow) --- */
 
 @media (hover: hover) {
   .service-card:hover {
     border-color: var(--border-hover) !important;
     background: var(--surface) !important;
-    transform: translateY(-2px);
-    box-shadow: var(--shadow);
+    transform: translateY(-3px);
+    box-shadow: var(--shadow), 0 0 40px -8px var(--accent-muted);
   }
   .sector-card:hover {
     border-color: var(--border-hover) !important;
     background: var(--surface) !important;
-    transform: translateY(-1px);
-    box-shadow: var(--shadow-sm);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-sm), 0 0 30px -6px var(--accent-muted);
   }
   .work-link:hover { color: var(--fg) !important; }
   .stat-cell:hover .stat-num { color: var(--accent) !important; }
+  .qcard:hover {
+    border-color: var(--border-hover);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow), 0 0 40px -10px var(--accent-muted);
+  }
 }
 
 /* --- FAQ accordion with native animation --- */
@@ -329,7 +359,7 @@ a { color: inherit; text-decoration: none; }
 .faq-item summary:hover { color: var(--accent) !important; background: var(--accent-subtle); }
 .faq-item[open] summary { color: var(--accent); }
 
-/* Height transition — Chrome 129+, Safari 18+; graceful fallback */
+/* Height transition (Chrome 129+, Safari 18+; graceful fallback) */
 @supports (interpolate-size: allow-keywords) {
   .faq-item { interpolate-size: allow-keywords; }
   .faq-item::details-content { transition: block-size var(--t-slow) var(--ease), content-visibility var(--t-slow) allow-discrete; block-size: 0; overflow: clip; }
@@ -358,7 +388,7 @@ a { color: inherit; text-decoration: none; }
   background: var(--accent);
 }
 
-/* Section hairline — subtle gradient divider */
+/* Section hairline: subtle gradient divider */
 .section-divider {
   position: relative;
   border-top: 0 !important;
@@ -525,6 +555,154 @@ a { color: inherit; text-decoration: none; }
 
 @media (prefers-reduced-motion: reduce) {
   .hero-shimmer { animation: none; background-position: 0% 50%; }
+}
+
+/* --- FORM INPUT FOCUS --- */
+input:focus, textarea:focus, select:focus {
+  border-color: var(--accent) !important;
+  box-shadow: 0 0 0 3px var(--accent-subtle);
+}
+/* Keep outline for keyboard users on browsers without :focus-visible */
+@supports not selector(:focus-visible) {
+  input:focus, textarea:focus, select:focus {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+}
+
+/* --- WORK SCOPE EXPAND --- */
+.work-scope-enter {
+  animation: fadeUp 0.35s var(--ease) both;
+}
+
+/* --- SUCCESS CHECK ANIMATION --- */
+.success-check {
+  animation: scaleIn 0.4s var(--ease) both;
+}
+
+/* --- FOOTER SOCIAL --- */
+@media (hover: hover) {
+  .footer-social:hover {
+    color: var(--accent) !important;
+    border-color: var(--accent) !important;
+    background: var(--accent-subtle);
+    transform: translateY(-2px);
+  }
+}
+
+/* --- AMBIENT GLOW SECTIONS --- */
+.section-glow {
+  position: relative;
+}
+.section-glow::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(800px circle at 20% 50%, var(--accent-subtle), transparent 60%),
+    radial-gradient(600px circle at 80% 20%, var(--glow-color), transparent 55%);
+  opacity: 0.5;
+  z-index: 0;
+}
+.section-glow > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* spinSlow already defined in animation keyframes section */
+
+/* --- ARROW LINK HOVER --- */
+.arrow-link {
+  position: relative;
+  transition: gap 0.2s ease;
+}
+.arrow-link:hover {
+  gap: 10px;
+}
+
+
+
+/* --- HERO AMBIENT GLOW --- */
+.hero-section {
+  position: relative;
+}
+.hero-section::after {
+  content: '';
+  position: absolute;
+  top: -10%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 800px;
+  height: 600px;
+  background: radial-gradient(ellipse, var(--accent-subtle), transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.6;
+}
+
+/* --- TOUCH FEEDBACK --- */
+@media (hover: none) {
+  .btn-amber:active,
+  .btn-ghost:active,
+  .service-card:active,
+  .sector-card:active,
+  .qcard:active {
+    transform: scale(0.98);
+    transition-duration: 0.05s;
+  }
+}
+
+/* --- THEME TRANSITION --- */
+html {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* --- SECTION LABEL ENHANCEMENT --- */
+.section-label {
+  transition: opacity 0.3s ease;
+  text-shadow: 0 0 20px var(--accent-subtle);
+}
+
+/* --- MOBILE DRAWER ANIMATION --- */
+.mobile-drawer {
+  animation: fadeIn 0.25s var(--ease) both;
+}
+.mobile-drawer > div {
+  animation: modalIn 0.3s var(--ease) 0.05s both;
+}
+
+/* --- NAV STATES --- */
+.nav-visible {
+  transform: translateY(0);
+}
+.nav-hidden {
+  transform: translateY(-120%);
+}
+
+/* --- SMOOTH SCROLL REVEAL OVERRIDES --- */
+.reveal.is-visible .reveal-child {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* --- LINK UNDERLINE REVEAL --- */
+.link-underline {
+  position: relative;
+}
+.link-underline::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: currentColor;
+  transition: width 0.3s var(--ease);
+}
+.link-underline:hover::after,
+.link-underline:focus-visible::after {
+  width: 100%;
 }
 
 /* --- RESPONSIVE --- */

@@ -1,3 +1,5 @@
+import ScrollReveal from "@/components/ScrollReveal";
+
 const values = [
   {
     idx: "01",
@@ -28,6 +30,7 @@ export default function About() {
         className="section-wrap"
         style={{ padding: "120px 56px", maxWidth: 1080, margin: "0 auto" }}
       >
+        <ScrollReveal>
         <div className="section-label">About</div>
         <h2
           style={{
@@ -46,6 +49,7 @@ export default function About() {
           <span style={{ color: "var(--fg-subtle)" }}>Built to last.</span>
         </h2>
 
+        </ScrollReveal>
         <div
           className="about-grid"
           style={{
@@ -75,10 +79,11 @@ export default function About() {
             ))}
           </div>
 
-          <div style={{ display: "flex", flexDirection: "column", gap: 0 }}>
+          <div className="reveal-stagger" style={{ display: "flex", flexDirection: "column", gap: 0 }}>
             {values.map((v, i) => (
               <div
                 key={i}
+                className="reveal-child"
                 style={{
                   display: "grid",
                   gridTemplateColumns: "36px 1fr",
