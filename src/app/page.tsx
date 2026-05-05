@@ -48,6 +48,7 @@ const aboutPillars = [
 ];
 
 const trustedClients = [
+  "NOU & HEVACRAZ",
   "Dreambox",
   "Blackivymedia",
   "Splash Air",
@@ -88,8 +89,9 @@ export default function Home() {
 
       {/* About teaser */}
       <section
+        id="about"
         className="section-responsive"
-        style={{ ...sectionStyle, borderBottom: "1px solid var(--border)" }}
+        style={{ ...sectionStyle, borderBottom: "1px solid var(--border)", scrollMarginTop: 96 }}
       >
         <ScrollReveal>
           <div className="section-label">About</div>
@@ -228,7 +230,7 @@ export default function Home() {
             style={{
               display: "grid",
               gridTemplateColumns: "repeat(3, 1fr)",
-              gap: 12,
+              gap: 16,
               marginTop: 32,
               marginBottom: 32,
             }}
@@ -238,45 +240,83 @@ export default function Home() {
                 key={s.slug}
                 href={`/services/${s.slug}`}
                 className="service-card qcard reveal-child"
-                style={{ padding: 20, background: "var(--bg)", color: "inherit", display: "block" }}
+                style={{
+                  position: "relative",
+                  padding: 24,
+                  background: "var(--bg)",
+                  color: "inherit",
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: 14,
+                  overflow: "hidden",
+                  isolation: "isolate",
+                }}
               >
+                <span aria-hidden className="service-card-stroke" />
+                <span aria-hidden className="service-card-glow" />
+
                 <div
                   style={{
-                    width: 30,
-                    height: 30,
-                    borderRadius: "var(--r-sm)",
-                    background: "var(--accent-muted)",
-                    color: "var(--accent)",
                     display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    marginBottom: 14,
+                    alignItems: "flex-start",
+                    justifyContent: "space-between",
+                    gap: 12,
                   }}
                 >
-                  {s.icon}
+                  <div className="service-card-icon">{s.icon}</div>
+                  <span
+                    className="service-card-arrow"
+                    aria-hidden
+                  >
+                    <svg width="13" height="13" viewBox="0 0 13 13" fill="none">
+                      <path
+                        d="M3 6.5h7M6.5 3l3.5 3.5L6.5 10"
+                        stroke="currentColor"
+                        strokeWidth="1.4"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+                  </span>
                 </div>
-                <h3
-                  style={{
-                    fontFamily: "var(--font-sans)",
-                    fontSize: 14,
-                    fontWeight: 600,
-                    letterSpacing: "-0.01em",
-                    color: "var(--fg)",
-                    marginBottom: 4,
-                  }}
-                >
-                  {s.title}
-                </h3>
-                <p
-                  style={{
-                    fontSize: 13,
-                    color: "var(--fg-muted)",
-                    lineHeight: 1.5,
-                    margin: 0,
-                  }}
-                >
-                  {s.tagline}
-                </p>
+
+                <div>
+                  <h3
+                    style={{
+                      fontFamily: "var(--font-sans)",
+                      fontSize: 17,
+                      fontWeight: 600,
+                      letterSpacing: "-0.015em",
+                      color: "var(--fg)",
+                      marginBottom: 6,
+                      lineHeight: 1.25,
+                    }}
+                  >
+                    {s.title}
+                  </h3>
+                  <div
+                    style={{
+                      fontFamily: "var(--font-mono)",
+                      fontSize: 11,
+                      letterSpacing: "0.04em",
+                      textTransform: "uppercase",
+                      color: "var(--fg-dim)",
+                      marginBottom: 10,
+                    }}
+                  >
+                    {s.tag}
+                  </div>
+                  <p
+                    style={{
+                      fontSize: 14,
+                      color: "var(--fg-muted)",
+                      lineHeight: 1.55,
+                      margin: 0,
+                    }}
+                  >
+                    {s.tagline}
+                  </p>
+                </div>
               </Link>
             ))}
           </div>

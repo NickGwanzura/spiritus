@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import JsonLd from "@/components/JsonLd";
 import ScrollReveal from "@/components/ScrollReveal";
+import SharePost from "@/components/SharePost";
 import {
   blogPostingJsonLd,
   breadcrumbJsonLd,
@@ -80,6 +81,7 @@ export default async function BlogPostPage({
           publishedAt: post.publishedAt,
           updatedAt: post.updatedAt,
           author: post.author,
+          image: `${SITE_URL}/blog/${post.slug}/opengraph-image`,
         })}
       />
 
@@ -201,6 +203,10 @@ export default async function BlogPostPage({
 
         <ScrollReveal>
           <div>{post.body}</div>
+          <SharePost
+            url={SITE_URL + "/blog/" + post.slug + "/"}
+            title={post.title}
+          />
         </ScrollReveal>
 
         <ScrollReveal>

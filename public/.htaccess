@@ -64,6 +64,20 @@ ErrorDocument 404 /404.html
   Header set Permissions-Policy "camera=(), microphone=(), geolocation=()"
 </IfModule>
 
+# Force correct MIME type for extensionless Next.js metadata routes
+<Files "opengraph-image">
+  ForceType image/png
+  <IfModule mod_headers.c>
+    Header set Cache-Control "public, max-age=2592000, immutable"
+  </IfModule>
+</Files>
+<Files "icon">
+  ForceType image/png
+</Files>
+<Files "apple-icon">
+  ForceType image/png
+</Files>
+
 # Block access to dotfiles except .well-known
 <FilesMatch "^\.(?!well-known)">
   Require all denied

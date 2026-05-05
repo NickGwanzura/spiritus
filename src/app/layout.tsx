@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -7,7 +7,6 @@ import CustomCursor from "@/components/CustomCursor";
 import JsonLd from "@/components/JsonLd";
 import PageLoadHandler from "@/components/PageLoadHandler";
 import {
-  KEYWORDS,
   SITE_DESCRIPTION,
   SITE_NAME,
   SITE_TAGLINE,
@@ -17,11 +16,8 @@ import {
   websiteJsonLd,
 } from "@/lib/seo";
 
-const geistSans = Geist({
-  subsets: ["latin"],
-  variable: "--font-sans",
-  display: "swap",
-});
+const FONTSHARE_URL =
+  "https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600&display=swap";
 
 const geistMono = Geist_Mono({
   subsets: ["latin"],
@@ -37,7 +33,6 @@ export const metadata: Metadata = {
   },
   description: SITE_DESCRIPTION,
   applicationName: SITE_NAME,
-  keywords: KEYWORDS,
   authors: [{ name: SITE_NAME, url: SITE_URL }],
   creator: SITE_NAME,
   publisher: SITE_NAME,
@@ -86,8 +81,6 @@ export const metadata: Metadata = {
   },
 };
 
-const themeInitScript = `(function(){try{var s=localStorage.getItem('theme');var t=s||'light';document.documentElement.dataset.theme=t;}catch(e){document.documentElement.dataset.theme='light';}})();`;
-
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -96,13 +89,31 @@ export default function RootLayout({
   return (
     <html
       lang="en-ZW"
-      className={`${geistSans.variable} ${geistMono.variable}`}
-      suppressHydrationWarning
+      className={`${geistMono.variable}`}
+      data-scroll-behavior="smooth"
     >
       <head>
-        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
+        <link rel="preconnect" href="https://api.fontshare.com" crossOrigin="" />
+        <link rel="dns-prefetch" href="https://api.fontshare.com" />
+        <link rel="preload" as="style" href={FONTSHARE_URL} />
+        <link
+          rel="stylesheet"
+          href={FONTSHARE_URL}
+          media="print"
+          data-fontshare=""
+        />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){var l=document.querySelector('link[data-fontshare]');if(!l)return;var swap=function(){l.media='all';};if(l.sheet){swap();}else{l.addEventListener('load',swap,{once:true});}})();`,
+          }}
+        />
+        <noscript
+          dangerouslySetInnerHTML={{
+            __html: `<link rel="stylesheet" href="${FONTSHARE_URL}" />`,
+          }}
+        />
       </head>
-      <body className="page-loading">
+      <body>
         <JsonLd id="ld-organization" data={organizationJsonLd()} />
         <JsonLd id="ld-website" data={websiteJsonLd()} />
         <JsonLd id="ld-localbusiness" data={localBusinessJsonLd()} />

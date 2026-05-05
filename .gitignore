@@ -39,3 +39,12 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# build artifacts
+/spiritus-cpanel.zip
+
+# local tooling
+/.agents/
+/.claude/
+/.qwen/
+/skills-lock.json

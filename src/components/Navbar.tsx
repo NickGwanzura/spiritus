@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-import ThemeToggle from "./ThemeToggle";
 
 const links = [
   { href: "/about", label: "About" },
@@ -18,10 +17,11 @@ export default function Navbar() {
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [hidden, setHidden] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const lastScrollY = useRef(0);
   const navRef = useRef<HTMLElement>(null);
 
-  // Scroll-aware hide/show, throttled with rAF
+  // Scroll-aware hide/show + elevation, throttled with rAF
   useEffect(() => {
     let ticking = false;
     const onScroll = () => {
@@ -30,6 +30,7 @@ export default function Navbar() {
       requestAnimationFrame(() => {
         const y = window.scrollY;
         const dy = y - lastScrollY.current;
+        setScrolled(y > 8);
         if (y > 200 && dy > 6) {
           setHidden(true);
         } else if (dy < -4 || y <= 200) {
@@ -39,6 +40,7 @@ export default function Navbar() {
         ticking = false;
       });
     };
+    onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
@@ -62,6 +64,9 @@ export default function Navbar() {
   useEffect(() => {
     setMobileOpen(false);
   }, [pathname]);
+
+  // Home page renders its own integrated nav inside the fullscreen hero
+  if (pathname === "/") return null;
 
   return (
     <>
@@ -113,7 +118,7 @@ export default function Navbar() {
       {/* Main nav */}
       <nav
         ref={navRef}
-        className={hidden ? "nav-hidden" : "nav-visible"}
+        className={`${hidden ? "nav-hidden" : "nav-visible"}${scrolled ? " nav-scrolled" : ""}`}
         style={{
           position: "fixed",
           top: 32,
@@ -125,11 +130,11 @@ export default function Navbar() {
           justifyContent: "space-between",
           padding: "14px 32px",
           background: "var(--nav-bg)",
-          backdropFilter: "blur(12px)",
-          WebkitBackdropFilter: "blur(12px)",
+          backdropFilter: "saturate(180%) blur(14px)",
+          WebkitBackdropFilter: "saturate(180%) blur(14px)",
           borderBottom: "1px solid var(--border)",
           transform: hidden ? "translateY(-120%)" : "translateY(0)",
-          transition: "transform 0.35s var(--ease), background 0.2s ease, border-color 0.2s ease",
+          transition: "transform 0.35s var(--ease), background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease",
         }}
       >
         <Link
@@ -139,16 +144,16 @@ export default function Navbar() {
             display: "flex",
             alignItems: "center",
             textDecoration: "none",
-            height: 28,
-            fontFamily: "var(--font-sans)",
-            fontSize: 16,
-            fontWeight: 700,
-            letterSpacing: "0.12em",
-            color: "var(--fg)",
-            textTransform: "uppercase",
+            height: 38,
           }}
         >
-          SPIRITUS
+          <img
+            src="/spiritus-logo-light.svg"
+            alt="Spiritus Systems"
+            width={127}
+            height={38}
+            style={{ height: 38, width: "auto", display: "block" }}
+          />
         </Link>
 
         {/* Desktop links */}
@@ -186,7 +191,6 @@ export default function Navbar() {
             );
           })}
           <li style={{ marginLeft: 12, display: "flex", alignItems: "center", gap: 8 }}>
-            <ThemeToggle />
             <Link
               href="/contact"
               className="nav-cta-link"
@@ -215,7 +219,6 @@ export default function Navbar() {
 
         {/* Mobile controls */}
         <div className="mobile-menu-btn" style={{ display: "none", alignItems: "center", gap: 8 }}>
-          <ThemeToggle />
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
             aria-label={mobileOpen ? "Close menu" : "Open menu"}

@@ -58,16 +58,36 @@ const H3 = ({ children }: { children: ReactNode }) => (
 
 const UL = ({ children }: { children: ReactNode }) => (
   <ul
+    className="post-list"
     style={{
       margin: "0 0 22px",
-      paddingLeft: 22,
+      paddingLeft: 24,
       color: "var(--fg-muted)",
       fontSize: 16,
       lineHeight: 1.75,
+      listStyleType: "disc",
+      listStylePosition: "outside",
     }}
   >
     {children}
   </ul>
+);
+
+const OL = ({ children }: { children: ReactNode }) => (
+  <ol
+    className="post-list post-list-ordered"
+    style={{
+      margin: "0 0 22px",
+      paddingLeft: 30,
+      color: "var(--fg-muted)",
+      fontSize: 16,
+      lineHeight: 1.75,
+      listStyleType: "decimal",
+      listStylePosition: "outside",
+    }}
+  >
+    {children}
+  </ol>
 );
 
 const Note = ({
@@ -107,6 +127,305 @@ const Note = ({
 );
 
 export const posts: Post[] = [
+  {
+    slug: "why-your-zimbabwean-business-needs-a-website-2026",
+    title:
+      "Why your Zimbabwean business needs a real website in 2026",
+    description:
+      "A Facebook page is not a website, and a WhatsApp catalogue is not a search result. Here is why a proper site is now the cheapest sales hire a Zimbabwean business can make, and what it actually has to do to earn its keep.",
+    publishedAt: "2026-05-05",
+    author: "Spiritus Systems",
+    tags: ["websites", "SEO", "Zimbabwe", "marketing", "business"],
+    readingMinutes: 7,
+    body: (
+      <>
+        <Para>
+          For a long time, Zimbabwean small and medium businesses got
+          away without a proper website. A Facebook page, a WhatsApp
+          number on the back of a business card, and a Google
+          Business Profile were enough to keep the phone ringing. In
+          2026, that arithmetic has flipped. The first place a
+          customer goes when they want to buy from you is no longer
+          your storefront, your reception, or even your social page.
+          It is a Google search on the phone in their hand.
+        </Para>
+
+        <Note label="What changed">
+          Cheaper data bundles, faster networks, and a generation of
+          buyers who research everything before paying for anything
+          have moved purchase decisions online, even when the actual
+          transaction still happens in cash. Skipping the website is
+          not a saving any more; it is a leak.
+        </Note>
+
+        <H2>Where buyers actually look for you now</H2>
+        <Para>
+          When someone in Harare needs an HVAC installer, a property
+          valuer, a lawyer, a printer, or a fabric supplier, the
+          search engine is the first stop. They type &ldquo;air
+          conditioning company harare&rdquo; or &ldquo;lawyers
+          borrowdale&rdquo; and they pick from the top three results
+          that show prices, photos, contact details, and a legitimate
+          website on a custom domain. If you are not in that list,
+          you do not exist for them. The phone-book mentality is
+          over.
+        </Para>
+        <Para>
+          A website is the only asset you control that can rank on
+          Google, hold credible content, and route traffic to
+          whichever channel you prefer. Compare what each surface
+          actually does for a buyer who has not heard of you yet:
+        </Para>
+        <UL>
+          <li>
+            <strong>Facebook page.</strong> Posts disappear into the
+            feed. The page itself rarely ranks for the searches your
+            customer is actually running.
+          </li>
+          <li>
+            <strong>WhatsApp catalogue.</strong> Convenient for
+            repeat buyers, but it assumes the customer already has
+            your number. It is invisible to discovery.
+          </li>
+          <li>
+            <strong>Google Business Profile.</strong> Helpful, but
+            on its own it points to a phone number with no story
+            behind it. It works hardest when it points to a real
+            website.
+          </li>
+          <li>
+            <strong>Custom website.</strong> Indexed by Google,
+            ranks for the suburb-and-service queries your buyers
+            type, and acts as the destination every other channel
+            sends traffic to.
+          </li>
+        </UL>
+
+        <H2>A Facebook page is not a website</H2>
+        <Para>
+          It is worth being clear about why a social page cannot do
+          the job:
+        </Para>
+        <UL>
+          <li>
+            <strong>You do not own it.</strong> Meta owns the URL,
+            the layout, and the audience, and changes the rules
+            whenever it likes.
+          </li>
+          <li>
+            <strong>You do not control what runs against it.</strong>{" "}
+            Competitor ads can appear on your own page.
+          </li>
+          <li>
+            <strong>Reach is throttled.</strong> Posts are hidden
+            from your own followers unless you pay to boost.
+          </li>
+          <li>
+            <strong>It does not rank.</strong> Search engines do not
+            crawl Facebook posts the way they crawl real websites,
+            so customers searching for what you do never see you.
+          </li>
+        </UL>
+        <Para>
+          The same applies, in different shapes, to Instagram,
+          LinkedIn, TikTok, and any other rented audience. Use them,
+          but rent them on top of an asset you actually own.
+        </Para>
+
+        <H2>The Google search a Zimbabwean customer is running right now</H2>
+        <Para>
+          Local search behaviour in Zimbabwe is intensely
+          &ldquo;near-me&rdquo; oriented. Customers add a suburb
+          (Borrowdale, Avondale, Bulawayo CBD, Mutare) or the
+          country itself to almost every commercial query. They want
+          to know that you operate where they operate, that you have
+          done the work before, and that you will pick up when they
+          call.
+        </Para>
+        <Para>
+          A website is what gives the search engine something to
+          rank. Structured pages on every service, every location,
+          and every product category, with proper page titles, meta
+          descriptions, and schema markup, mean Google can
+          understand what you offer and surface it when someone
+          searches. Without that scaffolding, you are competing for
+          nobody.
+        </Para>
+
+        <H2>Trust signals that make a Zimbabwean visitor stay</H2>
+        <Para>
+          A first-time visitor in Zimbabwe is making a credibility
+          check in seconds. They look for a few things, and missing
+          any of them shortens the visit:
+        </Para>
+        <UL>
+          <li>
+            A working contact section with a real address, a phone
+            number that uses the country code, and an email on your
+            own domain.
+          </li>
+          <li>
+            Photos of actual work, actual premises, or actual staff.
+            Stock images are read instantly as a generic template.
+          </li>
+          <li>
+            Prices, ranges, or a clear way to ask for a quote. Hidden
+            pricing scares away serious buyers.
+          </li>
+          <li>
+            An About page with a founder name, the year you started,
+            and the kind of clients you serve. Anonymity reads as
+            fly-by-night.
+          </li>
+          <li>
+            A clear next step on every page: &ldquo;Book a
+            consultation&rdquo;, &ldquo;Request a quote&rdquo;, or
+            &ldquo;Order on WhatsApp&rdquo; with a deep link.
+          </li>
+        </UL>
+
+        <H2>Mobile, 3G, and load shedding: speed is a feature</H2>
+        <Para>
+          Most of your traffic is on a phone, often on a 3G or 4G
+          connection that fluctuates by neighbourhood. Many of your
+          visitors are reading you during a power cut, on the
+          back-up data of a router, with a battery percentage they
+          are watching closely. A site that takes ten seconds to
+          load loses them before the hero image even appears.
+        </Para>
+        <Para>
+          Sub-two-second load times are no longer a nice-to-have;
+          they are the floor for not getting closed. That floor is
+          built from a few specific moves:
+        </Para>
+        <UL>
+          <li>Sensible image sizes, served in modern formats and lazy-loaded.</li>
+          <li>Minimal third-party scripts; every analytics tag and chat widget pays for itself or comes off.</li>
+          <li>Edge-rendered pages so the first byte arrives quickly even on a slow connection.</li>
+          <li>Builds tested on actual Zimbabwean networks, not fibre in a Cape Town office.</li>
+        </UL>
+        <Para>
+          Stripe-grade speed wins business in Harare for the same
+          reasons it wins business in San Francisco.
+        </Para>
+
+        <H2>Local SEO that actually moves the needle</H2>
+        <Para>
+          SEO for a Zimbabwean business is mostly about being
+          honest, clear, and complete. The wins come from four
+          places:
+        </Para>
+        <OL>
+          <li>
+            A Google Business Profile that is fully filled in,
+            verified, with current photos, hours, and the same name
+            and phone number as the website.
+          </li>
+          <li>
+            Pages on the site for each service, each location, and
+            each product category, written in the language a
+            customer would actually search.
+          </li>
+          <li>
+            Real customer reviews collected over time, on Google,
+            on Facebook, and where relevant on industry-specific
+            sites.
+          </li>
+          <li>
+            A small flow of useful content (case studies, guides,
+            FAQs) that answers the questions your customers are
+            actually typing.
+          </li>
+        </OL>
+        <Para>
+          Tricks, link farms, and keyword stuffing are not necessary
+          and tend to backfire. A clean site, properly structured,
+          with real content, will outrank thirty competitors who
+          cut corners.
+        </Para>
+
+        <H2>Payments are part of the website now</H2>
+        <Para>
+          For any business selling something online, the payment
+          integration is part of the experience. Zimbabwean
+          customers want to pay how they actually pay: EcoCash,
+          OneMoney, Paynow, ZIPIT, Mastercard for diaspora buyers,
+          and bank transfer for corporate clients. The site that
+          accepts the payment method the customer has in front of
+          them wins; the site that asks for a wire to a foreign
+          account loses, every time.
+        </Para>
+        <Para>
+          This is not exotic any more. Paynow integrates cleanly
+          into modern websites. EcoCash USSD callbacks are a solved
+          problem. Multi-currency pricing, rounding, and
+          reconciliation are off-the-shelf for any team that has
+          built two or three of these systems. The friction is
+          institutional, not technical.
+        </Para>
+
+        <H2>What a working business website actually needs</H2>
+        <Para>
+          A short, opinionated brief. If you are scoping a website
+          in 2026, this is the floor:
+        </Para>
+        <UL>
+          <li>Custom domain, not a free subdomain, and an email on that domain.</li>
+          <li>A homepage that says, in one sentence, what you do and who for.</li>
+          <li>Service or product pages, each one a proper page that can be shared and indexed.</li>
+          <li>A real contact page with a phone number, a WhatsApp deep link, an address, and a map.</li>
+          <li>A short About page with the founder, the team, and the story.</li>
+          <li>A blog or insights area, even if you only post once a quarter, for SEO and credibility.</li>
+          <li>Analytics you actually look at, not just install.</li>
+          <li>Page speed on mobile, tested on real local networks.</li>
+          <li>Cookie and privacy notices that match the law.</li>
+          <li>Backups, monitoring, SSL, and a 24-hour recovery plan.</li>
+        </UL>
+
+        <H2>The cost of not having one</H2>
+        <Para>
+          The argument that a website is expensive misses the
+          comparison. A salesperson in Harare costs more per month
+          than most websites cost in total. A website works every
+          hour, in every time zone, never gets sick, never quits,
+          and can be improved by changing a couple of files. The
+          right comparison is not &ldquo;the cost of a website&rdquo;
+          against zero; it is &ldquo;the cost of a website&rdquo;
+          against the leads, the credibility, and the reach you
+          currently lose every week without one.
+        </Para>
+        <Para>
+          A surprising number of the Zimbabwean businesses we work
+          with discover, six months after launch, that the website
+          is now the source of the majority of their qualified
+          inbound. Not because it is doing anything magic; just
+          because it is meeting customers where they are already
+          looking.
+        </Para>
+
+        <H2>Build once, compound</H2>
+        <Para>
+          A good website is the lowest-maintenance, highest-leverage
+          asset a small or medium Zimbabwean business can own.
+          Built well, it pays for itself in a single quarter and
+          then keeps paying for years. Built badly, it becomes
+          another running cost that does not move the dial. The
+          difference is almost entirely a matter of who builds it,
+          what they understand about the local market, and whether
+          they treat the website as a serious commercial asset or
+          a brochure.
+        </Para>
+        <Para>
+          If your current site is a static brochure, a half-finished
+          template, or a Facebook page pretending to be a homepage,
+          your business is being judged by it whether you like it or
+          not. The 2026 question is not whether to invest in a
+          website. It is whether to invest in one that earns its
+          keep.
+        </Para>
+      </>
+    ),
+  },
   {
     slug: "real-estate-systems-stand-sales-zimbabwe",
     title:

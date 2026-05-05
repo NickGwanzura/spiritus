@@ -10,11 +10,25 @@ type Project = {
   location: string;
   metric: { value: string; label: string };
   desc: string;
-  scope: string[];
+  caseStudy: string[];
   tags: string[];
 };
 
 const projects: Project[] = [
+  {
+    client: "National Ozone Unit & HEVACRAZ",
+    title: "RAC Technician National Registry",
+    url: "https://web-production-e408d.up.railway.app/",
+    status: "Deployed",
+    location: "Zimbabwe",
+    metric: { value: "Montreal Protocol", label: "Compliance Registry" },
+    desc: "A national self-registration platform for refrigeration and air conditioning technicians in Zimbabwe. Captures credentials, equipment handled, and training history to support regulatory oversight and Montreal Protocol reporting obligations.",
+    caseStudy: [
+      "Zimbabwe's National Ozone Unit and HEVACRAZ are the bodies responsible for tracking who is allowed to handle refrigerants in the country, a question that matters for both worker safety and the country's standing under the Montreal Protocol and Kigali Amendment. The challenge they came to us with was that nobody actually had a complete list of the technicians doing this work. Records lived in workshop ledgers, training-provider spreadsheets, and the memories of long-serving inspectors. Designing vocational programmes or proving compliance to international partners on the back of that was effectively impossible.",
+      "We built a public-facing registry that lets every RAC technician in the country self-register in fifteen minutes. The form captures professional credentials, the equipment they service, training history, and consent for inclusion in a public directory, and it works offline so technicians on rural sites can complete it on a phone with intermittent connectivity. Behind the registry sits an admin workspace restricted to NOU and HEVACRAZ staff, where the data feeds straight into training programme design, regulatory frameworks, and the country's reporting obligations. For the first time, the regulator has a single source of truth for the workforce it is supposed to oversee.",
+    ],
+    tags: ["REGISTRY", "COMPLIANCE", "HVAC-R", "GOVERNMENT"],
+  },
   {
     client: "Dreambox Advertising",
     title: "Billboard CRM",
@@ -23,11 +37,9 @@ const projects: Project[] = [
     location: "Zimbabwe",
     metric: { value: "Multi-Site", label: "Billboard Portfolio" },
     desc: "A custom CRM for Zimbabwe's leading billboard advertising company. Manages inventory across locations, tracks campaigns booking-through-completion, and reports live revenue and occupancy.",
-    scope: [
-      "Billboard inventory management",
-      "Client & campaign tracking",
-      "Booking & scheduling system",
-      "Revenue reporting & analytics",
+    caseStudy: [
+      "Dreambox came to us running one of the largest billboard networks in the country on a tangle of spreadsheets, WhatsApp threads, and half-remembered bookings. The commercial team could tell you a given site was occupied but nobody could tell you by whom, for how long, or at what rate without opening three different files. Pricing conversations with agencies were stretching into days, and double bookings were becoming frequent enough to threaten the reputation that had taken the business a decade to build.",
+      "We rebuilt their operation around a single CRM designed for outdoor media. Every billboard is now its own asset record with location, size, lighting class, rate card, and a live calendar of bookings. The sales team quotes agencies in real time from the same screen that finance uses to invoice, operations uses to schedule installations, and management uses to look at revenue by region. Double bookings have disappeared, proposal turnaround is measured in minutes rather than days, and the board finally sees a single number for portfolio occupancy that everyone agrees on.",
     ],
     tags: ["CRM", "ADVERTISING", "INVENTORY", "SCHEDULING"],
   },
@@ -39,11 +51,9 @@ const projects: Project[] = [
     location: "Zimbabwe",
     metric: { value: "Multi-Site", label: "Billboard Portfolio" },
     desc: "A custom CRM for Blackivymedia's outdoor advertising operations. Manages billboard inventory across locations, tracks client campaigns booking-through-completion, and reports live revenue and occupancy.",
-    scope: [
-      "Billboard inventory management",
-      "Client & campaign tracking",
-      "Booking & scheduling system",
-      "Revenue reporting & analytics",
+    caseStudy: [
+      "Blackivymedia had grown from a handful of premium sites into a national outdoor portfolio, and the systems had not kept up. Campaign records lived in the account managers' heads, invoicing depended on one finance lead's spreadsheets, and reporting to shareholders required a full week of manual reconciliation every month. The business was profitable in spite of the tooling, not because of it.",
+      "Our engagement delivered a purpose-built CRM that mirrors how the team actually sells outdoor media. Account managers book campaigns against a live inventory map, finance pulls invoices with one click, and operations see an installation queue that flags conflicts before they reach the street. The board now gets a live dashboard showing campaign revenue, site occupancy, and pipeline by segment. Month-end reconciliation has collapsed from a week of manual work to a short review, and the team can focus on selling instead of stitching reports together.",
     ],
     tags: ["CRM", "ADVERTISING", "INVENTORY", "SCHEDULING"],
   },
@@ -55,11 +65,9 @@ const projects: Project[] = [
     location: "Zimbabwe",
     metric: { value: "Full Lifecycle", label: "Service Operations" },
     desc: "A full-service operations platform for an HVAC installation and maintenance company. Handles the complete service lifecycle from client enquiry through job completion, with dispatch, scheduling, service history, and integrated invoicing.",
-    scope: [
-      "Job scheduling & dispatch",
-      "Technician management",
-      "Client service history",
-      "Invoicing & payment tracking",
+    caseStudy: [
+      "Splash Air is a busy HVAC installation and maintenance business working across commercial and residential clients in Harare and beyond. The operational rhythm of that work is relentless: enquiries come in at all hours, technicians need to be dispatched quickly, parts have to be matched to jobs, and invoices cannot wait until the end of the month if cashflow is going to hold. The team was running that rhythm on WhatsApp, handwritten job cards, and a shared spreadsheet, and the cracks were starting to show.",
+      "We built a platform that handles the entire service lifecycle in one place. A new enquiry becomes a job record, a technician is dispatched with the right parts, service history is captured on site, and an invoice is raised the same day. Management sees a live view of open jobs, outstanding balances, and technician utilisation. Response times are down, repeat client rates are up, and the leadership team has the visibility they need to scale the operation without losing the quality that got them here.",
     ],
     tags: ["OPERATIONS", "HVAC", "DISPATCH", "INVOICING"],
   },
@@ -71,11 +79,9 @@ const projects: Project[] = [
     location: "UK → Zimbabwe",
     metric: { value: "Cross-Border", label: "UK → Zim Corridor" },
     desc: "A logistics CRM purpose-built for cross-border shipping between the UK and Zimbabwe. Tracks shipments end-to-end, manages customs documentation, and provides real-time status updates across the full corridor.",
-    scope: [
-      "Shipment tracking & status updates",
-      "Cross-border documentation",
-      "Client cargo management",
-      "Route & consignment scheduling",
+    caseStudy: [
+      "Affinity Logistics runs one of the most demanding shipping corridors we have worked on, moving consignments between the United Kingdom and Zimbabwe for a diaspora customer base that expects supermarket-grade tracking from a cross-border operation. Before our engagement, a typical shipment lived simultaneously in a UK warehouse spreadsheet, a broker's email thread, a WhatsApp status update to the customer, and a Zimbabwean clearing agent's paper file. Any question about where a consignment was took a phone call and a best guess.",
+      "We replaced that with a single CRM that treats the shipment as the unit of truth. A customer books online, the system issues a reference, the UK warehouse scans the cargo in, customs documentation is generated, and every transition along the corridor updates a live status the customer can see. Clearing agents in Harare pick up handover from the same record. The business now moves more consignments with the same team, customers stop asking where their cargo is, and the operation finally runs on data instead of goodwill.",
     ],
     tags: ["LOGISTICS", "SHIPPING", "TRACKING", "CUSTOMS"],
   },
@@ -87,11 +93,9 @@ const projects: Project[] = [
     location: "Zimbabwe",
     metric: { value: "USD · ZiG", label: "Multi-Currency Payments" },
     desc: "A cloud-based property management ERP for Zimbabwe's rental market. Handles malls, boarding houses, residential estates, and individual homes in a unified workspace with role-based access and multi-currency support.",
-    scope: [
-      "Multi-property portfolio management",
-      "Offline payment tracking (cash, EcoCash, bank)",
-      "Multi-currency support (USD, ZiG)",
-      "Landlord portal with scoped access",
+    caseStudy: [
+      "EasyRentals operates across a uniquely Zimbabwean property mix: shopping mall tenants, boarding house residents, residential estate owners, and individually managed homes, all in the same portfolio. Every tenant type has a different rent cycle, a different payment channel, and a different way of being difficult to reconcile at month end. When the team came to us, every landlord was essentially being served by a separate informal workflow, and a meaningful share of collected rent was going missing somewhere between the tenant's payment and the landlord's statement.",
+      "We built a property management ERP designed for exactly that mix. Each property type has its own workflow but rolls up into a unified ledger. Tenants pay in USD, ZiG, cash, EcoCash, or bank transfer, and every payment is attributed to the right unit with the correct exchange rate at the moment it landed. Landlords log into a scoped portal to see only their properties, in real time. Reconciliation that used to take a full week is now a short morning review, disputes have dropped sharply, and the business can now take on new property types without rebuilding the operation each time.",
     ],
     tags: ["ERP", "PROPERTY", "MULTI-CURRENCY", "LANDLORD PORTAL"],
   },
@@ -103,11 +107,9 @@ const projects: Project[] = [
     location: "Zimbabwe",
     metric: { value: "Storefront + CRM", label: "Unified Commerce" },
     desc: "A full-stack e-commerce platform and CRM backend for a Zimbabwean technology retailer. Public storefront handles listings, guides, and local delivery; the admin CRM manages inventory, orders, clients, and supplier procurement.",
-    scope: [
-      "E-commerce storefront with product catalog",
-      "Multi-payment support (USD, EcoCash, bank transfer)",
-      "Admin CRM for orders, inventory & clients",
-      "Bulk pricing & corporate orders",
+    caseStudy: [
+      "Cansan Solutions is a Zimbabwean technology retailer selling into a market where a stockout in Harare, a supplier delay from South Africa, and a corporate client calling for a bulk price can all land on the same morning. The founders were running a public storefront on one platform, tracking inventory on another, and managing corporate clients from yet another workspace. Orders were being missed, stock counts were drifting from reality, and the time needed to quote a corporate deal was costing them business.",
+      "We shipped a unified platform covering both the public-facing storefront and the admin CRM behind it. Customers browse a fast, SEO-tuned catalogue, pay in USD, EcoCash, or bank transfer, and receive delivery updates end-to-end. Behind the scenes, the admin CRM handles inventory, supplier procurement, corporate bulk pricing, and client accounts in one workflow. Stock is now trustworthy, corporate quotes go out within the hour, and the business has the operational headroom to pursue growth instead of firefighting the day.",
     ],
     tags: ["E-COMMERCE", "RETAIL", "CRM", "PAYMENTS"],
   },
@@ -356,28 +358,28 @@ function ProjectCard({ project }: { project: Project }) {
 
       {open && (
         <div
-          className="work-scope-grid work-scope-enter"
+          className="work-scope-enter"
           style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(2, 1fr)",
-            gap: "6px 20px",
-            paddingTop: 4,
+            display: "flex",
+            flexDirection: "column",
+            gap: 14,
+            paddingTop: 8,
+            borderTop: "1px dashed var(--border)",
+            marginTop: 6,
           }}
         >
-          {project.scope.map((item) => (
-            <div
-              key={item}
+          {project.caseStudy.map((para, i) => (
+            <p
+              key={i}
               style={{
-                fontSize: 12.5,
+                fontSize: 13.5,
+                lineHeight: 1.65,
                 color: "var(--fg-muted)",
-                display: "flex",
-                alignItems: "center",
-                gap: 8,
+                margin: 0,
               }}
             >
-              <span style={{ width: 3, height: 3, borderRadius: "50%", background: "var(--accent)", flexShrink: 0 }} />
-              {item}
-            </div>
+              {para}
+            </p>
           ))}
         </div>
       )}

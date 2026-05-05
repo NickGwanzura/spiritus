@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { services } from "@/data/services";
+import ScrollReveal from "@/components/ScrollReveal";
 
 export default function Services() {
   return (
@@ -60,7 +61,7 @@ export default function Services() {
           product.
         </p>
 
-        <div
+        <ScrollReveal
           className="services-grid reveal-stagger"
           style={{
             display: "grid",
@@ -73,84 +74,172 @@ export default function Services() {
               key={s.slug}
               href={`/services/${s.slug}`}
               className="service-card qcard reveal-child"
-              style={{ padding: 24, color: "inherit", display: "block" }}
+              style={{
+                position: "relative",
+                padding: 26,
+                color: "inherit",
+                display: "flex",
+                flexDirection: "column",
+                overflow: "hidden",
+                isolation: "isolate",
+              }}
             >
-              <div
-                style={{
-                  width: 32,
-                  height: 32,
-                  borderRadius: "var(--r-sm)",
-                  background: "var(--accent-muted)",
-                  color: "var(--accent)",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  marginBottom: 20,
-                }}
-              >
+              <span aria-hidden className="service-card-stroke" />
+              <span aria-hidden className="service-card-glow" />
+
+              <div className="service-card-icon" style={{ marginBottom: 20 }}>
                 {s.icon}
               </div>
               <h3
                 style={{
                   fontFamily: "var(--font-sans)",
-                  fontSize: 15,
+                  fontSize: 17,
                   fontWeight: 600,
-                  letterSpacing: "-0.01em",
+                  letterSpacing: "-0.015em",
                   color: "var(--fg)",
-                  marginBottom: 8,
+                  marginBottom: 4,
+                  lineHeight: 1.25,
                 }}
               >
                 {s.title}
               </h3>
+              <div
+                style={{
+                  fontFamily: "var(--font-mono)",
+                  fontSize: 11,
+                  letterSpacing: "0.04em",
+                  textTransform: "uppercase",
+                  color: "var(--fg-dim)",
+                  marginBottom: 12,
+                }}
+              >
+                {s.tag}
+              </div>
               <p
                 style={{
                   fontSize: 14,
                   color: "var(--fg-muted)",
                   lineHeight: 1.55,
-                  marginBottom: 16,
+                  marginBottom: 14,
                 }}
               >
                 {s.summary}
               </p>
+
+              <ul
+                style={{
+                  listStyle: "none",
+                  padding: 0,
+                  margin: "0 0 16px",
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: 6,
+                }}
+              >
+                {s.outcomes.slice(0, 3).map((o) => (
+                  <li
+                    key={o.label}
+                    style={{
+                      display: "grid",
+                      gridTemplateColumns: "14px 1fr",
+                      gap: 8,
+                      fontSize: 12.5,
+                      color: "var(--fg-muted)",
+                      lineHeight: 1.45,
+                    }}
+                  >
+                    <span
+                      style={{
+                        marginTop: 4,
+                        width: 10,
+                        height: 10,
+                        borderRadius: "50%",
+                        background: "var(--accent-muted)",
+                        color: "var(--accent)",
+                        display: "inline-flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                      }}
+                    >
+                      <svg viewBox="0 0 10 10" width={7} height={7} fill="none" stroke="currentColor" strokeWidth="2">
+                        <path d="M2 5L4 7L8 3" strokeLinecap="round" strokeLinejoin="round" />
+                      </svg>
+                    </span>
+                    <span>{o.label}</span>
+                  </li>
+                ))}
+              </ul>
+
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 8,
+                  flexWrap: "wrap",
+                  marginBottom: 14,
+                }}
+              >
+                {s.stack.slice(0, 3).map((t) => (
+                  <span
+                    key={t}
+                    style={{
+                      fontFamily: "var(--font-mono)",
+                      fontSize: 10.5,
+                      padding: "3px 8px",
+                      borderRadius: "var(--r-pill)",
+                      border: "1px solid var(--border)",
+                      color: "var(--fg-subtle)",
+                    }}
+                  >
+                    {t}
+                  </span>
+                ))}
+              </div>
+
               <div
                 style={{
                   display: "flex",
                   justifyContent: "space-between",
                   alignItems: "center",
                   gap: 12,
-                  paddingTop: 16,
+                  paddingTop: 14,
+                  marginTop: "auto",
                   borderTop: "1px solid var(--border)",
                 }}
               >
                 <span
                   style={{
                     fontFamily: "var(--font-mono)",
-                    fontSize: 11,
-                    color: "var(--fg-subtle)",
+                    fontSize: 10.5,
+                    letterSpacing: "0.08em",
+                    textTransform: "uppercase",
+                    color: "var(--fg-dim)",
                   }}
                 >
-                  {s.tag}
+                  {s.engagement?.split(/[,.;]/)[0]?.trim() || "Engagement"}
                 </span>
                 <span
+                  className="service-card-cta"
                   style={{
                     display: "inline-flex",
                     alignItems: "center",
-                    gap: 4,
+                    gap: 6,
                     fontFamily: "var(--font-sans)",
-                    fontSize: 12,
+                    fontSize: 13,
                     fontWeight: 500,
                     color: "var(--accent)",
+                    transition: "gap 0.2s var(--ease)",
                   }}
                 >
                   Learn more
-                  <svg width="11" height="11" viewBox="0 0 12 12" fill="none">
-                    <path d="M3 6H9M6 3L9 6L6 9" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
+                  <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                    <path d="M3 6H9M6 3L9 6L6 9" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
                 </span>
               </div>
             </Link>
           ))}
-        </div>
+        </ScrollReveal>
       </div>
     </div>
   );

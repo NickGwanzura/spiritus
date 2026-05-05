@@ -1,3 +1,5 @@
+import ScrollReveal from "@/components/ScrollReveal";
+
 const steps = [
   {
     num: "01",
@@ -55,7 +57,7 @@ export default function Approach() {
           of scope, industry, or team size.
         </p>
 
-        <div className="reveal-stagger" style={{ display: "flex", flexDirection: "column" }}>
+        <ScrollReveal className="reveal-stagger" style={{ display: "flex", flexDirection: "column" }}>
           {steps.map((step, i) => (
             <div
               key={i}
@@ -104,7 +106,7 @@ export default function Approach() {
               </p>
             </div>
           ))}
-        </div>
+        </ScrollReveal>
       </div>
     </div>
   );

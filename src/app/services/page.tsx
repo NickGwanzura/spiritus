@@ -1,8 +1,11 @@
 import type { Metadata } from "next";
 import Services from "@/components/Services";
 import Approach from "@/components/Approach";
+import Sectors from "@/components/Sectors";
+import FAQ from "@/components/FAQ";
 import JsonLd from "@/components/JsonLd";
-import { breadcrumbJsonLd, serviceJsonLd, SITE_NAME } from "@/lib/seo";
+import { breadcrumbJsonLd, faqPageJsonLd, serviceJsonLd, SITE_NAME } from "@/lib/seo";
+import { faqFlat } from "@/data/faq";
 
 const title = "Services: Web Development, SaaS, AI, CRM, ERP & Integration";
 const description =
@@ -59,8 +62,11 @@ export default function ServicesPage() {
           data={serviceJsonLd(s.name, s.desc)}
         />
       ))}
+      <JsonLd id="ld-services-faq" data={faqPageJsonLd(faqFlat)} />
       <Services />
+      <Sectors />
       <Approach />
+      <FAQ />
     </div>
   );
 }

@@ -152,7 +152,7 @@ export function breadcrumbJsonLd(
       "@type": "ListItem",
       position: i + 1,
       name: item.name,
-      item: `${SITE_URL}${item.path}`,
+      item: `${SITE_URL}${item.path === "/" ? "/" : item.path.replace(/\/?$/, "/")}`,
     })),
   };
 }

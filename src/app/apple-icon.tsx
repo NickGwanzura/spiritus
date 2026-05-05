@@ -28,13 +28,13 @@ export default function AppleIcon() {
             justifyContent: "center",
             width: 116,
             height: 116,
-            background: "#f97316",
+            background: "#1e3a8a",
             borderRadius: 28,
             fontSize: 88,
             fontWeight: 700,
             letterSpacing: "-0.05em",
             boxShadow:
-              "0 12px 36px rgba(249,115,22,0.35), inset 0 2px 0 rgba(255,255,255,0.18)",
+              "0 12px 36px rgba(30,58,138,0.40), inset 0 2px 0 rgba(255,255,255,0.18)",
           }}
         >
           S
